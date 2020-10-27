@@ -1,0 +1,19 @@
+# 各个环境的公共配置放在这里
+
+# 制定多环境配置文件（Maven 动态切换）#spring.profiles.active#
+spring:
+  profiles:
+    active: dev-local
+
+mybatis:
+  config-location:
+    # mybatis打印sql(配合MyBatis Log Plugin插件可以在控制台查看格式化并且填充了占位符的SQL语句)
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# log configuration
+logging:
+  file:
+    name: logs/api-hu.log
+
+server:
+  port: 9090
