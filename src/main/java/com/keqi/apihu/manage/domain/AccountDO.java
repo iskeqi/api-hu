@@ -1,27 +1,25 @@
 package com.keqi.apihu.manage.domain;
 
-import java.io.Serializable;
-import java.util.Date;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 /**
     * 用户表
     */
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountDO implements Serializable {
+public class AccountDO {
     /**
     * 主键
     */
     private Long id;
 
     /**
-    * 账号
+    * 用户名
     */
     private String account;
 
@@ -43,12 +41,10 @@ public class AccountDO implements Serializable {
     /**
     * 创建时间
     */
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
     * 修改时间
     */
-    private Date updateTime;
-
-    private static final long serialVersionUID = 1L;
+    private LocalDateTime updateTime;
 }
