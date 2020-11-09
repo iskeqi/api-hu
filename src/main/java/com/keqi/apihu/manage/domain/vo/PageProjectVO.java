@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PageAccountVO {
+public class PageProjectVO {
 
     /**
      * 主键
@@ -18,19 +18,14 @@ public class PageAccountVO {
     private Long id;
 
     /**
-     * 用户名
+     * 项目名称
      */
-    private String account;
+    private String projectName;
 
     /**
-     * 姓名
+     * 项目描述信息
      */
-    private String nickName;
-
-    /**
-     * 岗位
-     */
-    private String post;
+    private String projectNote;
 
     /**
      * 创建时间
@@ -39,7 +34,13 @@ public class PageAccountVO {
     private LocalDateTime createTime;
 
     /**
-     * 用户拥有项目数量
+     * 协作人员数量
      */
-    private Integer numberOfProjectsOwned;
+    private Integer numberOfCollaborators;
+
+    /**
+     * API 总数
+     */
+    private Integer apiTotal;
+
 }
