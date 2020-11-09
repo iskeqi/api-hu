@@ -1,4 +1,4 @@
-package com.keqi.apihu.manage.domain.enums;
+package com.keqi.apihu.core.common;
 
 /**
  * 用户类型枚举

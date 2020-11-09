@@ -72,7 +72,7 @@ public class AjaxEntityBuilder {
 	 *
 	 * @return ajaxEntity
 	 */
-	public static AjaxEntity successList(long total, List<Object> list) {
+	public static AjaxEntity successList(int total, List<Object> list) {
 		AjaxEntity ajaxEntity = new AjaxEntity();
 		ajaxEntity.setMsg(successMsg);
 		ajaxEntity.setStatus(successCode);
@@ -97,7 +97,11 @@ public class AjaxEntityBuilder {
 		ajaxEntity.setStatus(successCode);
 
 		List<?> list = pageVO.getList();
-		pageVO.setList(list == null ? Collections.emptyList() : list);
+		if (list == null || list.size() <= 0) {
+			pageVO.setTotal(0);
+			pageVO.setList(Collections.emptyList());
+		}
+
 		ajaxEntity.setBody(pageVO);
 
 		return ajaxEntity;

@@ -69,6 +69,9 @@ public class QueryBaseParam {
 	 */
 	protected OrderTypeEnum orderType;
 
+	public QueryBaseParam() {
+	}
+
 	public String getOrderFiled() {
 		return orderFiled;
 	}

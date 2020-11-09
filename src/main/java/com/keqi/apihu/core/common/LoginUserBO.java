@@ -1,6 +1,5 @@
 package com.keqi.apihu.core.common;
 
-import com.keqi.apihu.manage.domain.enums.UserTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -43,4 +42,9 @@ public class LoginUserBO {
 	 * 用户类型
 	 */
 	private UserTypeEnum userType;
+
+	/**
+	 * 当前操作项目ID
+	 */
+	private Long projectId;
 }

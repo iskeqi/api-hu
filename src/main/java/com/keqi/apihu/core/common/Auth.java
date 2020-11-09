@@ -30,6 +30,9 @@ public class Auth {
 		return getLoginUserBO() == null ? null : getLoginUserBO().getId();
 	}
 
+	public static Long currentOperationProjectId() {
+		return getLoginUserBO() == null ? null : getLoginUserBO().getProjectId();
+	}
 
 	/**
 	 * 获取当前登录用户登录信息

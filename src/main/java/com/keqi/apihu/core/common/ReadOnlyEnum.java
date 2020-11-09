@@ -1,4 +1,4 @@
-package com.keqi.apihu.manage.domain.enums;
+package com.keqi.apihu.core.common;
 
 /**
  * 是否只读（Y 只读，N 读写）

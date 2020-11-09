@@ -3,7 +3,8 @@ package com.keqi.apihu.core.exception;
 import com.keqi.apihu.core.common.AjaxEntity;
 import com.keqi.apihu.core.common.AjaxEntityBuilder;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.PostConstruct;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
@@ -25,8 +27,16 @@ import javax.validation.ValidationException;
 @ResponseBody
 public class GlobalExceptionHandler {
 
-	@Value("${spring.profiles.active}")
-	private String profile;
+	public static String profile;
+
+	@Autowired
+	private Environment environment;
+
+	@PostConstruct
+	public void getSpringProfilesActive() {
+		// 通过 Environment 对象获取 spring.profiles.active 的值
+		GlobalExceptionHandler.profile = this.environment.getProperty("spring.profiles.active");
+	}
 
 	/**
 	 * 专治表单以及GET方式提交参数进行校验时的异常
@@ -101,7 +111,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(Throwable.class)
 	public AjaxEntity handleException(Throwable exception) {
 		exception.printStackTrace();
-		if ("prod".equals(profile)) {
+		if ("prod".equals(GlobalExceptionHandler.profile)) {
 			return AjaxEntityBuilder.failure("系统繁忙，请稍后再试");
 		}
 		return AjaxEntityBuilder.failure(exception.getStackTrace());

@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class PageVO {
 
-	private long total;
+	private int total;
 
 	private List<?> list;
 
 	public PageVO() {
 	}
 
-	public PageVO(long total, List<?> list) {
+	public PageVO(int total, List<?> list) {
 		this.total = total;
 		this.list = list;
 	}
@@ -24,7 +24,7 @@ public class PageVO {
 		return total;
 	}
 
-	public void setTotal(long total) {
+	public void setTotal(int total) {
 		this.total = total;
 	}
 
