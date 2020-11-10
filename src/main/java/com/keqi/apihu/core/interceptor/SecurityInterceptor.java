@@ -1,7 +1,7 @@
 package com.keqi.apihu.core.interceptor;
 
 import com.keqi.apihu.core.common.Auth;
-import com.keqi.apihu.core.common.CommonConstant;
+import com.keqi.apihu.core.pojo.CommonConstant;
 import com.keqi.apihu.core.common.LoginUserBO;
 import com.keqi.apihu.core.exception.BusinessException;
 import com.keqi.apihu.core.util.JWTUtil;
@@ -41,6 +41,7 @@ public class SecurityInterceptor implements HandlerInterceptor {
 			if (StringUtils.isEmpty(accessToken) || loginUserBO == null) {
 				throw new BusinessException("当前操作用户未登录");
 			}
+
 			loginUserBO.setProjectId(StringUtils.isEmpty(projectIdStr) ? null : Long.valueOf(projectIdStr));
 
 			// 设置当前操作用户信息到当前线程对象中

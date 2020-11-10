@@ -1,4 +1,4 @@
-package com.keqi.apihu.core.common;
+package com.keqi.apihu.core.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;

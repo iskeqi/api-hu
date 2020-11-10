@@ -1,4 +1,4 @@
-package com.keqi.apihu.core.common;
+package com.keqi.apihu.core.pojo;
 
 /**
  * 系统公共常量类

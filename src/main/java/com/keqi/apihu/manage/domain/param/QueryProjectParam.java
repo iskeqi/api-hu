@@ -1,6 +1,6 @@
 package com.keqi.apihu.manage.domain.param;
 
-import com.keqi.apihu.core.common.QueryBaseParam;
+import com.keqi.apihu.core.pojo.QueryBaseParam;
 import lombok.NoArgsConstructor;
 
 

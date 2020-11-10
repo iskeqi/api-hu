@@ -1,5 +1,6 @@
 package com.keqi.apihu.core.common;
 
+import com.keqi.apihu.core.pojo.UserTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,9 +1,11 @@
-package com.keqi.apihu.manage.service;
+package com.keqi.apihu.manage.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateUtil;
 import com.keqi.apihu.core.common.*;
 import com.keqi.apihu.core.exception.BusinessException;
+import com.keqi.apihu.core.pojo.CommonConstant;
+import com.keqi.apihu.core.pojo.UserTypeEnum;
 import com.keqi.apihu.core.util.CommonUtil;
 import com.keqi.apihu.core.util.JWTUtil;
 import com.keqi.apihu.manage.domain.db.AccountDO;
@@ -14,7 +16,8 @@ import com.keqi.apihu.manage.domain.param.UpdateAccountParam;
 import com.keqi.apihu.manage.domain.vo.LoginVO;
 import com.keqi.apihu.manage.domain.vo.PageAccountVO;
 import com.keqi.apihu.manage.mapper.AccountMapper;
-import com.keqi.apihu.manage.service.impl.AccountService;
+import com.keqi.apihu.manage.mapper.AccountProjectMapper;
+import com.keqi.apihu.manage.service.AccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +33,7 @@ import java.util.Objects;
 public class AccountServiceImpl implements AccountService {
 
     private final AccountMapper accountMapper;
+    private final AccountProjectMapper accountProjectMapper;
 
     /**
      * 根据主键删除用户
@@ -40,7 +44,8 @@ public class AccountServiceImpl implements AccountService {
     public void deleteByPrimaryKey(Long id) {
         // 删除用户表的用户记录
         this.accountMapper.deleteByPrimaryKey(id);
-        // 删除用户项目关联表的关联记录 todo
+        // 删除用户项目关联表的关联记录
+        this.accountProjectMapper.deleteByAccountId(id);
     }
 
     /**

@@ -5,7 +5,7 @@ import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.keqi.apihu.core.common.AjaxEntity;
 import com.keqi.apihu.core.common.AjaxEntityBuilder;
 import com.keqi.apihu.core.common.AjaxPageEntity;
-import com.keqi.apihu.manage.DictItemService;
+import com.keqi.apihu.manage.service.DictItemService;
 import com.keqi.apihu.manage.domain.param.CreateDictItemParam;
 import com.keqi.apihu.manage.domain.param.UpdateDictItemParam;
 import com.keqi.apihu.manage.domain.vo.DictItemVO;

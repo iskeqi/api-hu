@@ -1,6 +1,6 @@
 package com.keqi.apihu.manage.domain.vo;
 
-import com.keqi.apihu.core.common.UserTypeEnum;
+import com.keqi.apihu.core.pojo.UserTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

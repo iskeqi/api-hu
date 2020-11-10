@@ -1,8 +1,9 @@
-package com.keqi.apihu.manage;
+package com.keqi.apihu.manage.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.keqi.apihu.core.common.AjaxPageEntity;
 import com.keqi.apihu.core.exception.BusinessException;
+import com.keqi.apihu.manage.service.DictItemService;
 import com.keqi.apihu.manage.domain.db.DictItemDO;
 import com.keqi.apihu.manage.domain.param.CreateDictItemParam;
 import com.keqi.apihu.manage.domain.param.UpdateDictItemParam;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Service
-public class DictItemServiceImpl implements DictItemService{
+public class DictItemServiceImpl implements DictItemService {
 
     private final DictItemMapper dictItemMapper;
 
@@ -73,6 +74,8 @@ public class DictItemServiceImpl implements DictItemService{
         ajaxPageEntity.setList(dictItemVOList);
         return ajaxPageEntity;
     }
+
+    //================================私有方法================================//
 
     /**
      * 判断是否存在同名 itemCode

@@ -11,11 +11,63 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 10/11/2020 16:28:45
+ Date: 10/11/2020 18:26:13
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for pj_datasource
+-- ----------------------------
+DROP TABLE IF EXISTS `pj_datasource`;
+CREATE TABLE `pj_datasource`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '数据源ID',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据源名称',
+  `url` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据源连接url',
+  `driver_class_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据源驱动名',
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据源用户名',
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据源密码',
+  `projectId` bigint UNSIGNED NULL DEFAULT NULL COMMENT '项目ID',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '数据源表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pj_datasource
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for pj_datasource_table
+-- ----------------------------
+DROP TABLE IF EXISTS `pj_datasource_table`;
+CREATE TABLE `pj_datasource_table`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '表结构ID',
+  `datasource_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '数据源ID',
+  `table_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '表名称',
+  `table_comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '表备注',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '数据源表结构表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pj_datasource_table
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for pj_datasource_table_column
+-- ----------------------------
+DROP TABLE IF EXISTS `pj_datasource_table_column`;
+CREATE TABLE `pj_datasource_table_column`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '表字段ID',
+  `datasource_table_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '所属表ID',
+  `column_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '列名',
+  `column_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '列类型',
+  `column_comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '列描述',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '表结构字段列表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pj_datasource_table_column
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for sys_account

@@ -9,7 +9,7 @@ import com.keqi.apihu.manage.domain.param.CreateAccountParam;
 import com.keqi.apihu.manage.domain.param.QueryAccountParam;
 import com.keqi.apihu.manage.domain.param.UpdateAccountParam;
 import com.keqi.apihu.manage.domain.vo.PageAccountVO;
-import com.keqi.apihu.manage.service.impl.AccountService;
+import com.keqi.apihu.manage.service.AccountService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;

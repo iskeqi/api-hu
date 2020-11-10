@@ -1,4 +1,4 @@
-package com.keqi.apihu.core.common;
+package com.keqi.apihu.core.pojo;
 
 /**
  * 用户类型枚举

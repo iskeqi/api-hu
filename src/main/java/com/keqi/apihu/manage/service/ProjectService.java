@@ -1,4 +1,4 @@
-package com.keqi.apihu.manage.service.impl;
+package com.keqi.apihu.manage.service;
 
 import com.keqi.apihu.core.common.AjaxPageEntity;
 import com.keqi.apihu.manage.domain.param.CreateProjectParam;

@@ -1,4 +1,4 @@
-package com.keqi.apihu.manage.service;
+package com.keqi.apihu.manage.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.keqi.apihu.core.common.AjaxPageEntity;
@@ -12,7 +12,7 @@ import com.keqi.apihu.manage.domain.param.UpdateProjectParam;
 import com.keqi.apihu.manage.domain.vo.PageProjectVO;
 import com.keqi.apihu.manage.mapper.AccountProjectMapper;
 import com.keqi.apihu.manage.mapper.ProjectMapper;
-import com.keqi.apihu.manage.service.impl.ProjectService;
+import com.keqi.apihu.manage.service.ProjectService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +22,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class ProjectServiceImpl implements ProjectService{
+public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectMapper projectMapper;
     private final AccountProjectMapper accountProjectMapper;

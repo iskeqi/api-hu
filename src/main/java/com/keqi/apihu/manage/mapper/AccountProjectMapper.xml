@@ -39,4 +39,8 @@
   <delete id="deleteByProjectId">
     delete from sys_account_project where project_id = #{projectId,jdbcType=BIGINT}
   </delete>
+
+  <delete id="deleteByAccountId">
+    delete from sys_account_project where account_id = #{id,jdbcType=BIGINT}
+  </delete>
 </mapper>

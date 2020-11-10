@@ -22,4 +22,10 @@ public interface AccountProjectMapper {
      * @param projectId projectId
      */
     void deleteByProjectId(Long projectId);
+
+    /**
+     * 删除指定人员ID关联的项目列表
+     * @param id
+     */
+    void deleteByAccountId(Long id);
 }

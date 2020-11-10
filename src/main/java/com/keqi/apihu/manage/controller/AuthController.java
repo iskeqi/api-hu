@@ -5,7 +5,7 @@ import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.keqi.apihu.core.common.AjaxEntity;
 import com.keqi.apihu.core.common.AjaxEntityBuilder;
 import com.keqi.apihu.manage.domain.param.LoginParam;
-import com.keqi.apihu.manage.service.impl.AccountService;
+import com.keqi.apihu.manage.service.AccountService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

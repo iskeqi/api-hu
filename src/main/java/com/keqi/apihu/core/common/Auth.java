@@ -1,5 +1,6 @@
 package com.keqi.apihu.core.common;
 
+import com.keqi.apihu.core.pojo.CommonConstant;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -30,7 +31,7 @@ public class Auth {
 		return getLoginUserBO() == null ? null : getLoginUserBO().getId();
 	}
 
-	public static Long currentOperationProjectId() {
+	public static Long getProjectId() {
 		return getLoginUserBO() == null ? null : getLoginUserBO().getProjectId();
 	}
 
