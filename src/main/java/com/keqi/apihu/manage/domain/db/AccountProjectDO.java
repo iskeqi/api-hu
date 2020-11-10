@@ -1,4 +1,4 @@
-package com.keqi.apihu.manage.domain;
+package com.keqi.apihu.manage.domain.db;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

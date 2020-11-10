@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.keqi.apihu.manage.mapper.AccountMapper">
 
-  <resultMap id="BaseResultMap" type="com.keqi.apihu.manage.domain.AccountDO">
+  <resultMap id="BaseResultMap" type="com.keqi.apihu.manage.domain.db.AccountDO">
     <!--@mbg.generated-->
     <!--@Table sys_account-->
     <id column="id" jdbcType="BIGINT" property="id" />
@@ -44,7 +44,7 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.manage.domain.AccountDO" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.manage.domain.db.AccountDO" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into sys_account (account, nick_name, post, 
       `password`, create_time, update_time
@@ -54,7 +54,7 @@
       )
   </insert>
 
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.manage.domain.AccountDO" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.manage.domain.db.AccountDO" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into sys_account
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -99,7 +99,7 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="com.keqi.apihu.manage.domain.AccountDO">
+  <update id="updateByPrimaryKey" parameterType="com.keqi.apihu.manage.domain.db.AccountDO">
     <!--@mbg.generated-->
     update sys_account
     set nick_name = #{nickName,jdbcType=VARCHAR},

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.keqi.apihu.manage.mapper.ProjectMapper">
 
-  <resultMap id="BaseResultMap" type="com.keqi.apihu.manage.domain.ProjectDO">
+  <resultMap id="BaseResultMap" type="com.keqi.apihu.manage.domain.db.ProjectDO">
     <!--@mbg.generated-->
     <!--@Table sys_project-->
     <id column="id" jdbcType="BIGINT" property="id" />
@@ -43,7 +43,7 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.manage.domain.ProjectDO" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.manage.domain.db.ProjectDO" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into sys_project (project_name, project_note, delete_flag, 
       create_time, update_time)
@@ -51,7 +51,7 @@
       now(), now())
   </insert>
 
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.manage.domain.ProjectDO" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.manage.domain.db.ProjectDO" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into sys_project
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -90,7 +90,7 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.keqi.apihu.manage.domain.ProjectDO">
+  <update id="updateByPrimaryKeySelective" parameterType="com.keqi.apihu.manage.domain.db.ProjectDO">
     <!--@mbg.generated-->
     update sys_project
     <set>
@@ -108,7 +108,7 @@
     where id = #{id,jdbcType=BIGINT} and delete_flag = 'Y'
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.keqi.apihu.manage.domain.ProjectDO">
+  <update id="updateByPrimaryKey" parameterType="com.keqi.apihu.manage.domain.db.ProjectDO">
     <!--@mbg.generated-->
     update sys_project
     set project_name = #{projectName,jdbcType=VARCHAR},

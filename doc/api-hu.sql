@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 10/11/2020 14:28:00
+ Date: 10/11/2020 16:28:45
 */
 
 SET NAMES utf8mb4;
@@ -60,6 +60,35 @@ INSERT INTO `sys_account_project` VALUES (4, 2);
 INSERT INTO `sys_account_project` VALUES (5, 2);
 INSERT INTO `sys_account_project` VALUES (6, 2);
 INSERT INTO `sys_account_project` VALUES (7, 2);
+
+-- ----------------------------
+-- Table structure for sys_dict_item
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_dict_item`;
+CREATE TABLE `sys_dict_item`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '字典记录主键',
+  `type_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典类型编码',
+  `type_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典类型名称',
+  `item_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典项编码',
+  `item_value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典项值',
+  `item_sort` int UNSIGNED NULL DEFAULT NULL COMMENT '字典项排序',
+  `item_remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典项备注字段',
+  `item_css` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '字典项样式属性(备用字段)',
+  `delete_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '逻辑删除字段（Y 未删除，N 已删除）',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统管理-字典表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_dict_item
+-- ----------------------------
+INSERT INTO `sys_dict_item` VALUES (1, 'gender', '性别', 'man', '男', 1, '男性', '备用字段', 'Y');
+INSERT INTO `sys_dict_item` VALUES (3, 'gender', '性别', 'women', '女', 2, '女性', '备用字段', 'Y');
+INSERT INTO `sys_dict_item` VALUES (4, 'post', '岗位', 'web', 'WEB前端开发工程师', 1, 'WEB前端开发工程师', 'WEB前端开发工程师', 'Y');
+INSERT INTO `sys_dict_item` VALUES (5, 'post', '岗位', 'java', 'JAVA开发工程师', 2, 'JAVA开发工程师', 'JAVA开发工程师', 'Y');
+INSERT INTO `sys_dict_item` VALUES (6, 'post', '岗位', 'test', '测试工程师', 3, '测试工程师', '测试工程师', 'Y');
+INSERT INTO `sys_dict_item` VALUES (7, 'post', '岗位', 'android', 'android开发工程师', 4, 'android开发工程师', 'android开发工程师', 'Y');
+INSERT INTO `sys_dict_item` VALUES (8, 'post', '岗位', 'ios', 'IOS开发工程师', 5, 'IOS开发工程师', 'IOS开发工程师', 'Y');
+INSERT INTO `sys_dict_item` VALUES (9, 'post', '岗位', 'product', '产品经理', 6, '产品经理', '产品经理', 'Y');
 
 -- ----------------------------
 -- Table structure for sys_project

@@ -20,16 +20,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 
-/**
- * 用户管理
- */
-@RestController
-@RequestMapping("/sys/account")
-@AllArgsConstructor
-@Validated
-@Slf4j
+
 @Api(tags = "2. 用户管理")
 @ApiSupport(author = "keqi", order = 2)
+@Slf4j
+@Validated
+@AllArgsConstructor
+@RestController
+@RequestMapping("/sys/account")
 public class AccountController {
 
     private final AccountService accountService;

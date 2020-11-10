@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/sys/auth")
-@AllArgsConstructor
+
 @Api(tags = "1. 登录相关接口管理")
 @ApiSupport(author = "keqi", order = 1)
+@AllArgsConstructor
+@RestController
+@RequestMapping("/sys/auth")
 public class AuthController {
 
     private final AccountService accountService;

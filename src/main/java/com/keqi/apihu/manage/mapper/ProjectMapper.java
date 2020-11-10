@@ -1,6 +1,6 @@
 package com.keqi.apihu.manage.mapper;
 
-import com.keqi.apihu.manage.domain.ProjectDO;
+import com.keqi.apihu.manage.domain.db.ProjectDO;
 import com.keqi.apihu.manage.domain.param.QueryProjectParam;
 import com.keqi.apihu.manage.domain.vo.PageProjectVO;
 

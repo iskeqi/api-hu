@@ -20,12 +20,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 
-@RestController
-@AllArgsConstructor
-@Validated
-@RequestMapping("/sys/project")
+
 @Api(tags = "3. 项目管理")
 @ApiSupport(author = "keqi", order = 3)
+@Validated
+@AllArgsConstructor
+@RestController
+@RequestMapping("/sys/project")
 public class ProjectController {
 
     private final ProjectService projectService;

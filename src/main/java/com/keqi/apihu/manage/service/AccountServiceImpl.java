@@ -6,7 +6,7 @@ import com.keqi.apihu.core.common.*;
 import com.keqi.apihu.core.exception.BusinessException;
 import com.keqi.apihu.core.util.CommonUtil;
 import com.keqi.apihu.core.util.JWTUtil;
-import com.keqi.apihu.manage.domain.AccountDO;
+import com.keqi.apihu.manage.domain.db.AccountDO;
 import com.keqi.apihu.manage.domain.param.CreateAccountParam;
 import com.keqi.apihu.manage.domain.param.LoginParam;
 import com.keqi.apihu.manage.domain.param.QueryAccountParam;

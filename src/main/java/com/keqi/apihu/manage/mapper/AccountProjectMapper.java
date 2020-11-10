@@ -1,6 +1,6 @@
 package com.keqi.apihu.manage.mapper;
 
-import com.keqi.apihu.manage.domain.AccountProjectDO;
+import com.keqi.apihu.manage.domain.db.AccountProjectDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

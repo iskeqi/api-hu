@@ -1,6 +1,6 @@
 package com.keqi.apihu.manage.mapper;
 
-import com.keqi.apihu.manage.domain.AccountDO;
+import com.keqi.apihu.manage.domain.db.AccountDO;
 import com.keqi.apihu.manage.domain.param.QueryAccountParam;
 import com.keqi.apihu.manage.domain.vo.PageAccountVO;
 
