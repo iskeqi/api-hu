@@ -99,30 +99,12 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.keqi.apihu.manage.domain.AccountDO">
-    <!--@mbg.generated-->
-    update sys_account
-    <set>
-      <if test="nickName != null">
-        nick_name = #{nickName,jdbcType=VARCHAR},
-      </if>
-      <if test="post != null">
-        post = #{post,jdbcType=VARCHAR},
-      </if>
-        update_time = now(),
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-
   <update id="updateByPrimaryKey" parameterType="com.keqi.apihu.manage.domain.AccountDO">
     <!--@mbg.generated-->
     update sys_account
-    set account = #{account,jdbcType=VARCHAR},
-      nick_name = #{nickName,jdbcType=VARCHAR},
+    set nick_name = #{nickName,jdbcType=VARCHAR},
       post = #{post,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = now()
     where id = #{id,jdbcType=BIGINT}
   </update>
 

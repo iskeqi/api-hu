@@ -32,12 +32,10 @@ public interface AccountMapper {
     AccountDO selectByPrimaryKey(Long id);
 
     /**
-     * 根据主键选择性修改用户字段
+     * 根据主键修改用户信息
      * @param record record
      * @return r
      */
-    int updateByPrimaryKeySelective(AccountDO record);
-
     int updateByPrimaryKey(AccountDO record);
 
     /**

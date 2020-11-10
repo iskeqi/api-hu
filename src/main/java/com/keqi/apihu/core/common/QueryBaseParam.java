@@ -1,6 +1,7 @@
 package com.keqi.apihu.core.common;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -14,26 +15,31 @@ public class QueryBaseParam {
 	/**
 	 * 当前页数（最小为1）
 	 */
+	@ApiModelProperty(value = "当前页数", example = "1", required = true)
 	protected int pageNum = 1;
 
 	/**
 	 * 每页大小（最大为50）
 	 */
+	@ApiModelProperty(value = "每页大小", example = "10", required = true)
 	protected int pageSize = 10;
 
 	/**
 	 * 搜索字段名称
 	 */
+	@ApiModelProperty(value = "搜索字段名称", example = "null")
 	protected String searchName;
 
 	/**
 	 * 搜索字段值
 	 */
+	@ApiModelProperty(value = "搜索字段值", example = "null")
 	protected String searchValue;
 
 	/**
 	 * 开始日期
 	 */
+	@ApiModelProperty(value = "开始日期", example = "1000-01-01")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	protected LocalDate beginDate;
@@ -41,6 +47,7 @@ public class QueryBaseParam {
 	/**
 	 * 结束日期
 	 */
+	@ApiModelProperty(value = "结束日期", example = "9999-12-12")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	protected LocalDate endDate;
@@ -48,6 +55,7 @@ public class QueryBaseParam {
 	/**
 	 * 开始时间
 	 */
+	@ApiModelProperty(value = "开始时间", example = "1000-01-01 00:00:00")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	protected LocalDateTime beginTime;
@@ -55,6 +63,7 @@ public class QueryBaseParam {
 	/**
 	 * 结束时间
 	 */
+	@ApiModelProperty(value = "结束时间", example = "9999-12-12 23:59:59")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	protected LocalDateTime endTime;
@@ -62,11 +71,13 @@ public class QueryBaseParam {
 	/**
 	 * 排序字段
 	 */
+	@ApiModelProperty(value = "排序字段", example = "null")
 	protected String orderFiled;
 
 	/**
 	 * 排序类型（升序：ASC，降序：DESC）
 	 */
+	@ApiModelProperty(value = "排序类型", example = "asc/desc")
 	protected OrderTypeEnum orderType;
 
 	public QueryBaseParam() {

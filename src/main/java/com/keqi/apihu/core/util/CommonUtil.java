@@ -34,4 +34,7 @@ public class CommonUtil {
 		return SecureUtil.sha256(SecureUtil.md5(username + secret + password));
 	}
 
+	public static void main(String[] args) {
+		System.out.println(encryptedPassword("admin", "123456"));
+	}
 }

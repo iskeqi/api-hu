@@ -59,8 +59,8 @@ public class AjaxEntityBuilder {
 	 *
 	 * @return ajaxEntity
 	 */
-	public static AjaxEntity success() {
-		AjaxEntity ajaxEntity = new AjaxEntity();
+	public static AjaxEntity<?> success() {
+		AjaxEntity<?> ajaxEntity = new AjaxEntity<>();
 		ajaxEntity.setStatus(successCode);
 		ajaxEntity.setMsg(successMsg);
 		return ajaxEntity;
@@ -77,10 +77,10 @@ public class AjaxEntityBuilder {
 		ajaxEntity.setMsg(successMsg);
 		ajaxEntity.setStatus(successCode);
 
-		PageVO pageVO = new PageVO();
-		pageVO.setTotal(total);
-		pageVO.setList(list == null ? Collections.emptyList() : list);
-		ajaxEntity.setBody(pageVO);
+		AjaxPageEntity ajaxPageEntity = new AjaxPageEntity();
+		ajaxPageEntity.setTotal(total);
+		ajaxPageEntity.setList(list == null ? Collections.emptyList() : list);
+		ajaxEntity.setBody(ajaxPageEntity);
 
 		return ajaxEntity;
 	}
@@ -88,21 +88,21 @@ public class AjaxEntityBuilder {
 	/**
 	 * 返回列表
 	 *
-	 * @param pageVO pageVO
+	 * @param ajaxPageEntity pageVO
 	 * @return r
 	 */
-	public static AjaxEntity successList(PageVO pageVO) {
+	public static AjaxEntity successList(AjaxPageEntity ajaxPageEntity) {
 		AjaxEntity ajaxEntity = new AjaxEntity();
 		ajaxEntity.setMsg(successMsg);
 		ajaxEntity.setStatus(successCode);
 
-		List<?> list = pageVO.getList();
+		List<?> list = ajaxPageEntity.getList();
 		if (list == null || list.size() <= 0) {
-			pageVO.setTotal(0);
-			pageVO.setList(Collections.emptyList());
+			ajaxPageEntity.setTotal(0);
+			ajaxPageEntity.setList(Collections.emptyList());
 		}
 
-		ajaxEntity.setBody(pageVO);
+		ajaxEntity.setBody(ajaxPageEntity);
 
 		return ajaxEntity;
 	}

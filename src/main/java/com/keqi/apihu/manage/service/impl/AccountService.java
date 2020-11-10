@@ -1,11 +1,12 @@
 package com.keqi.apihu.manage.service.impl;
 
-import com.keqi.apihu.core.common.PageVO;
+import com.keqi.apihu.core.common.AjaxPageEntity;
 import com.keqi.apihu.manage.domain.param.CreateAccountParam;
 import com.keqi.apihu.manage.domain.param.LoginParam;
 import com.keqi.apihu.manage.domain.param.QueryAccountParam;
 import com.keqi.apihu.manage.domain.param.UpdateAccountParam;
 import com.keqi.apihu.manage.domain.vo.LoginVO;
+import com.keqi.apihu.manage.domain.vo.PageAccountVO;
 
 public interface AccountService {
 
@@ -32,7 +33,7 @@ public interface AccountService {
      * @param queryAccountParam queryAccountParam
      * @return r
      */
-    PageVO pageAccount(QueryAccountParam queryAccountParam);
+    AjaxPageEntity<PageAccountVO> pageAccount(QueryAccountParam queryAccountParam);
 
     /**
      * 重置密码

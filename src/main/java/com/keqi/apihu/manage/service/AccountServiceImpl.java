@@ -52,7 +52,7 @@ public class AccountServiceImpl implements AccountService {
     public void updateByPrimaryKey(UpdateAccountParam updateAccountParam) {
         AccountDO accountDO = new AccountDO();
         BeanUtil.copyProperties(updateAccountParam, accountDO);
-        this.accountMapper.updateByPrimaryKeySelective(accountDO);
+        this.accountMapper.updateByPrimaryKey(accountDO);
     }
 
     /**
@@ -83,18 +83,18 @@ public class AccountServiceImpl implements AccountService {
      * @return r
      */
     @Override
-    public PageVO pageAccount(QueryAccountParam queryAccountParam) {
+    public AjaxPageEntity<PageAccountVO> pageAccount(QueryAccountParam queryAccountParam) {
         int total = this.accountMapper.countPageAccount(queryAccountParam);
 
-        PageVO pageVO = new PageVO();
+        AjaxPageEntity<PageAccountVO> ajaxPageEntity = new AjaxPageEntity<>();
 
         if (total > 0) {
             List<PageAccountVO> pageAccountVOList = this.accountMapper.pageAccount(queryAccountParam);
-            pageVO.setTotal(total);
-            pageVO.setList(pageAccountVOList);
+            ajaxPageEntity.setTotal(total);
+            ajaxPageEntity.setList(pageAccountVOList);
         }
 
-        return pageVO;
+        return ajaxPageEntity;
     }
 
     /**
@@ -147,7 +147,7 @@ public class AccountServiceImpl implements AccountService {
         AccountDO temp = new AccountDO();
         temp.setPassword(newEncryptionPassword);
         temp.setId(loginAccountId);
-        this.accountMapper.updateByPrimaryKeySelective(temp);
+        this.accountMapper.updatePasswordByPrimaryKey(temp);
     }
 
     /**

@@ -1,52 +1,42 @@
 package com.keqi.apihu.manage.service;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.keqi.apihu.core.common.PageVO;
+import com.keqi.apihu.core.common.AjaxPageEntity;
 import com.keqi.apihu.core.exception.BusinessException;
+import com.keqi.apihu.manage.domain.AccountProjectDO;
 import com.keqi.apihu.manage.domain.ProjectDO;
 import com.keqi.apihu.manage.domain.param.CreateProjectParam;
+import com.keqi.apihu.manage.domain.param.DesignatedAccountParam;
 import com.keqi.apihu.manage.domain.param.QueryProjectParam;
 import com.keqi.apihu.manage.domain.param.UpdateProjectParam;
 import com.keqi.apihu.manage.domain.vo.PageProjectVO;
+import com.keqi.apihu.manage.mapper.AccountProjectMapper;
 import com.keqi.apihu.manage.mapper.ProjectMapper;
 import com.keqi.apihu.manage.service.impl.ProjectService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class ProjectServiceImpl implements ProjectService{
 
-    @Resource
-    private ProjectMapper projectMapper;
+    private final ProjectMapper projectMapper;
+    private final AccountProjectMapper accountProjectMapper;
 
+    /**
+     * 根据id删除项目
+     * @param id id
+     * @return r
+     */
     @Override
     @Transactional
     public void deleteByPrimaryKey(Long id) {
         // 项目删除采用逻辑删除的方式，后续通过定时任务去删除项目表以及项目内的各个表的记录 todo
         this.projectMapper.disabledProject(id);
-    }
-
-    @Override
-    public int insert(ProjectDO record) {
-        return projectMapper.insert(record);
-    }
-
-    @Override
-    public int insertSelective(ProjectDO record) {
-        return projectMapper.insertSelective(record);
-    }
-
-    @Override
-    public ProjectDO selectByPrimaryKey(Long id) {
-        return projectMapper.selectByPrimaryKey(id);
-    }
-
-    @Override
-    public int updateByPrimaryKeySelective(ProjectDO record) {
-        return projectMapper.updateByPrimaryKeySelective(record);
     }
 
     /**
@@ -94,18 +84,42 @@ public class ProjectServiceImpl implements ProjectService{
      * @return r
      */
     @Override
-    public PageVO pageProject(QueryProjectParam queryProjectParam) {
+    public AjaxPageEntity<PageProjectVO> pageProject(QueryProjectParam queryProjectParam) {
         int total = this.projectMapper.countProject(queryProjectParam);
 
-        PageVO pageVO = new PageVO();
+        AjaxPageEntity ajaxPageEntity = new AjaxPageEntity();
 
         if (total > 0) {
             List<PageProjectVO> pageAccountVOList = this.projectMapper.pageProject(queryProjectParam);
-            pageVO.setTotal(total);
-            pageVO.setList(pageAccountVOList);
+            ajaxPageEntity.setTotal(total);
+            ajaxPageEntity.setList(pageAccountVOList);
         }
 
-        return pageVO;
+        return ajaxPageEntity;
+    }
+
+    /**
+     * 指定项目人员
+     *
+     * @param designatedAccountParam designatedAccountParam
+     */
+    @Override
+    @Transactional
+    public void designatedAccount(DesignatedAccountParam designatedAccountParam) {
+        // 删除项目-人员关联记录
+        this.accountProjectMapper.deleteByProjectId(designatedAccountParam.getProjectId());
+        // 增加项目-人员关联记录
+        List<Long> accountIdList = designatedAccountParam.getAccountIdList();
+        if (accountIdList.size() > 0) {
+            List<AccountProjectDO> accountProjectDOList = new ArrayList<>(accountIdList.size());
+            for (Long accountId : accountIdList) {
+                AccountProjectDO accountProjectDO = new AccountProjectDO();
+                accountProjectDO.setAccountId(accountId);
+                accountProjectDO.setProjectId(designatedAccountParam.getProjectId());
+                accountProjectDOList.add(accountProjectDO);
+            }
+            this.accountProjectMapper.batchInsert(accountProjectDOList);
+        }
     }
 
 }
