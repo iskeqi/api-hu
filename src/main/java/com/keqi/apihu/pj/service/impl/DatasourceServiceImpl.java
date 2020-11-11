@@ -1,17 +1,18 @@
-package com.keqi.apihu.pj;
+package com.keqi.apihu.pj.service.impl;
 
 import com.keqi.apihu.core.common.Auth;
 import com.keqi.apihu.core.exception.BusinessException;
 import com.keqi.apihu.pj.domain.db.DatasourceDO;
 import com.keqi.apihu.pj.domain.param.CreateDatasourceParam;
 import com.keqi.apihu.pj.mapper.DatasourceMapper;
+import com.keqi.apihu.pj.service.DatasourceService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @AllArgsConstructor
 @Service
-public class DatasourceServiceImpl implements DatasourceService{
+public class DatasourceServiceImpl implements DatasourceService {
 
     private final DatasourceMapper datasourceMapper;
 
