@@ -36,7 +36,7 @@ public class DatasourceServiceImpl implements DatasourceService {
     private final DatasourceTableColumnMapper datasourceTableColumnMapper;
 
     /**
-     * 根据id删除数据源 todo
+     * 根据id删除数据源
      * @param id id
      * @return r
      */
