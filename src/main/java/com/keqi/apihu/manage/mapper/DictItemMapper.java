@@ -2,6 +2,7 @@ package com.keqi.apihu.manage.mapper;
 
 import com.keqi.apihu.manage.domain.db.DictItemDO;
 import com.keqi.apihu.manage.domain.vo.DictItemVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -28,9 +29,10 @@ public interface DictItemMapper {
     /**
      * 查询是否存在 itemCode
      * @param itemCode itemCode
+     * @param typeCode typeCode
      * @return r
      */
-    int itemCodeExist(String itemCode);
+    int itemCodeExist(@Param("typeCode") String typeCode, @Param("itemCode") String itemCode);
 
     /**
      * 查询指定字典类型下的全部列表
@@ -38,4 +40,14 @@ public interface DictItemMapper {
      * @return r
      */
     List<DictItemVO> findAllByTypeCode(String typeCode);
+
+    /**
+     * 根据 typeCode 和 itemCode 查找字典项
+     * @param typeCode typeCode
+     * @param itemCode itemCode
+     * @return r
+     */
+    DictItemDO findOneByTypeCodeAndItemCode(@Param("typeCode")String typeCode,@Param("itemCode")String itemCode);
+
+
 }

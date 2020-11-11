@@ -1,26 +1,43 @@
 package com.keqi.apihu.pj.service;
 
-import com.keqi.apihu.pj.domain.db.DatasourceDO;
+import com.keqi.apihu.core.common.AjaxPageEntity;
+import com.keqi.apihu.manage.domain.vo.PageProjectVO;
 import com.keqi.apihu.pj.domain.param.CreateDatasourceParam;
+import com.keqi.apihu.pj.domain.param.QueryDatasourceParam;
+import com.keqi.apihu.pj.domain.param.UpdateDatasourceParam;
 
 public interface DatasourceService{
 
+    /**
+     * 根据id删除数据源
+     * @param id id
+     * @return r
+     */
+    void deleteByPrimaryKey(Long id);
 
-    int deleteByPrimaryKey(Long id);
-
-    int insert(DatasourceDO record);
-
-    int insertSelective(DatasourceDO record);
-
-    DatasourceDO selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(DatasourceDO record);
-
-    int updateByPrimaryKey(DatasourceDO record);
+    /**
+     * 修改数据源
+     * @param updateDatasourceParam updateDatasourceParam
+     * @return r
+     */
+    void updateByPrimaryKey(UpdateDatasourceParam updateDatasourceParam);
 
     /**
      * 增加数据源
      * @param createProjectParam createProjectParam
      */
     void createDataSource(CreateDatasourceParam createProjectParam);
+
+    /**
+     * 分页查询数据源列表
+     * @param queryDatasourceParam queryDatasourceParam
+     * @return r
+     */
+    AjaxPageEntity<PageProjectVO> pageDataSource(QueryDatasourceParam queryDatasourceParam);
+
+    /**
+     * 在线读取数据库
+     * @param id id
+     */
+    void readDataSource(Long id);
 }

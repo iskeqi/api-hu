@@ -1,4 +1,5 @@
 package com.keqi.apihu.manage.mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.keqi.apihu.manage.domain.db.ProjectDO;
 import com.keqi.apihu.manage.domain.param.QueryProjectParam;
@@ -55,4 +56,13 @@ public interface ProjectMapper {
      * @return r
      */
     List<PageProjectVO> pageProject(QueryProjectParam queryProjectParam);
+
+    /**
+     * 根据 projectName 查找项目
+     * @param projectName projectName
+     * @return r
+     */
+    ProjectDO findOneByProjectName(@Param("projectName")String projectName);
+
+
 }

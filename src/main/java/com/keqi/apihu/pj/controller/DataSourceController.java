@@ -5,10 +5,10 @@ import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.keqi.apihu.core.common.AjaxEntity;
 import com.keqi.apihu.core.common.AjaxEntityBuilder;
 import com.keqi.apihu.core.common.AjaxPageEntity;
-import com.keqi.apihu.manage.domain.param.QueryProjectParam;
-import com.keqi.apihu.manage.domain.param.UpdateProjectParam;
 import com.keqi.apihu.manage.domain.vo.PageProjectVO;
 import com.keqi.apihu.pj.domain.param.CreateDatasourceParam;
+import com.keqi.apihu.pj.domain.param.QueryDatasourceParam;
+import com.keqi.apihu.pj.domain.param.UpdateDatasourceParam;
 import com.keqi.apihu.pj.service.DatasourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -58,26 +58,40 @@ public class DataSourceController {
 
     /**
      * 修改数据源
-     * @param updateProjectParam updateProjectParam
+     * @param updateDatasourceParam updateDatasourceParam
      * @return r
      */
     @ApiOperation(value = "1.3 修改数据源")
     @ApiOperationSupport(order = 3)
     @PostMapping("/update")
-    public AjaxEntity update(@Validated @RequestBody UpdateProjectParam updateProjectParam) {
-        //this.datasourceService.updateByPrimaryKey(updateProjectParam);
+    public AjaxEntity update(@Validated @RequestBody UpdateDatasourceParam updateDatasourceParam) {
+        this.datasourceService.updateByPrimaryKey(updateDatasourceParam);
         return AjaxEntityBuilder.success();
     }
 
     /**
      * 查询数据源列表
-     * @param queryProjectParam queryProjectParam
+     * @param queryDatasourceParam queryDatasourceParam
      * @return r
      */
     @ApiOperation(value = "1.4 分页查询数据源列表")
     @ApiOperationSupport(order = 4)
     @PostMapping("/page")
-    public AjaxEntity<AjaxPageEntity<PageProjectVO>> page(@Validated @RequestBody QueryProjectParam queryProjectParam) {
-        return AjaxEntityBuilder.successList(null/*this.datasourceService.pageProject(queryProjectParam)*/);
+    public AjaxEntity<AjaxPageEntity<PageProjectVO>> page(@Validated @RequestBody QueryDatasourceParam queryDatasourceParam) {
+        return AjaxEntityBuilder.successList(this.datasourceService.pageDataSource(queryDatasourceParam));
+    }
+
+    /**
+     * 在线读取数据库
+     * @param id id
+     * @return r
+     */
+    @ApiOperation(value = "1.5 在线读取数据库")
+    @ApiOperationSupport(order = 5)
+    @ApiImplicitParam(name = "id", value = "数据源ID", example = "1", required = true)
+    @PostMapping("/readDataSource")
+    public AjaxEntity readDataSource(@RequestParam @NotNull Long id) {
+        this.datasourceService.readDataSource(id);
+        return AjaxEntityBuilder.success();
     }
 }

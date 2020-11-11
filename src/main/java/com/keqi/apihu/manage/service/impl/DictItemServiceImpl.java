@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @AllArgsConstructor
 @Service
@@ -40,7 +41,11 @@ public class DictItemServiceImpl implements DictItemService {
     @Override
     @Transactional
     public void updateByPrimaryKey(UpdateDictItemParam updateDictItemParam) {
-        this.itemCodeExist(updateDictItemParam.getItemCode());
+        DictItemDO temp = this.dictItemMapper.findOneByTypeCodeAndItemCode(updateDictItemParam.getTypeCode(),
+                updateDictItemParam.getItemCode());
+        if (temp != null && Objects.equals(temp.getId(), updateDictItemParam.getId())) {
+            throw new BusinessException("存在同名 itemCode ");
+        }
         DictItemDO dictItemDO = new DictItemDO();
         BeanUtil.copyProperties(updateDictItemParam, dictItemDO);
         this.dictItemMapper.updateByPrimaryKey(dictItemDO);
@@ -54,7 +59,12 @@ public class DictItemServiceImpl implements DictItemService {
     @Override
     @Transactional
     public void createItem(CreateDictItemParam createDictItemParam) {
-        this.itemCodeExist(createDictItemParam.getItemCode());
+        int count = this.dictItemMapper.itemCodeExist(createDictItemParam.getTypeCode(),
+                createDictItemParam.getItemCode());
+        if (count > 0) {
+            throw new BusinessException("存在同名 itemCode ");
+        }
+
         DictItemDO dictItemDO = new DictItemDO();
         BeanUtil.copyProperties(createDictItemParam, dictItemDO);
         this.dictItemMapper.insert(dictItemDO);
@@ -77,14 +87,5 @@ public class DictItemServiceImpl implements DictItemService {
 
     //================================私有方法================================//
 
-    /**
-     * 判断是否存在同名 itemCode
-     * @param itemCode itemCode
-     */
-    private void itemCodeExist(String itemCode) {
-        int count = this.dictItemMapper.itemCodeExist(itemCode);
-        if (count > 0) {
-            throw new BusinessException("存在同名 itemCode ");
-        }
-    }
+
 }

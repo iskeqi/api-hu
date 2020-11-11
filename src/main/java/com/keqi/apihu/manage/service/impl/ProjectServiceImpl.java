@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -48,8 +49,8 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional
     public void updateByPrimaryKey(UpdateProjectParam updateProjectParam) {
         // 查询是否存在同名的项目
-        int count = this.projectMapper.projectExist(updateProjectParam.getProjectName());
-        if (count > 0) {
+        ProjectDO temp = this.projectMapper.findOneByProjectName(updateProjectParam.getProjectName());
+        if (temp != null && Objects.equals(temp.getId(), updateProjectParam.getId())) {
             throw new BusinessException("系统中已存在同名项目");
         }
 
