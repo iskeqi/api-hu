@@ -43,21 +43,11 @@ public class DatasourceServiceImpl implements DatasourceService {
     @Override
     @Transactional
     public void deleteByPrimaryKey(Long id) {
-        // 查找 数据源 -> 所有表结构 id列表
-        List<DatasourceTableDO> datasourceTableDOList = this.datasourceTableMapper.findAllByDatasourceId(id);
-        List<Long> dataSourceTableIdList = datasourceTableDOList.stream()
-                .map(DatasourceTableDO::getId).collect(Collectors.toList());
+        // 删除该数据源对应的所有表和表中的所有列
+        this.deleteTableAndColumnByDatasourceId(id);
 
         // 删除数据源
         this.datasourceMapper.deleteByPrimaryKey(id);
-
-        // 删除数据源 -> 所有表结构
-        this.datasourceTableMapper.deleteByDatasourceId(id);
-
-        // 删除数据源 -> 所有表结构 -> 所有列
-        if (CollUtil.isNotEmpty(dataSourceTableIdList)) {
-            this.datasourceTableColumnMapper.deleteByDatasourceTableIdIn(dataSourceTableIdList);
-        }
     }
 
     /**
@@ -127,6 +117,9 @@ public class DatasourceServiceImpl implements DatasourceService {
     @Override
     @Transactional
     public void readDataSource(Long id) {
+        // "在线读取数据库信息" 功能会覆盖掉该数据源对应的所有表和字段，也就是删除
+        this.deleteTableAndColumnByDatasourceId(id);
+
         DatasourceDO datasourceDO = this.datasourceMapper.selectByPrimaryKey(id);
         // 读取数据源中的表结构和字段信息
         List<DatasourceTableDO> datasourceTableDOList = this.readAllTablesAndColumns(datasourceDO);
@@ -296,4 +289,22 @@ public class DatasourceServiceImpl implements DatasourceService {
         return datasourceTableDOList;
     }
 
+    /**
+     * 根据 datasourceId 删除该数据源对应的所有表和表中的所有列
+     * @param id id
+     */
+    private void deleteTableAndColumnByDatasourceId(Long id) {
+        // 查找 数据源 -> 所有表结构 id列表
+        List<DatasourceTableDO> datasourceTableDOList = this.datasourceTableMapper.findAllByDatasourceId(id);
+        List<Long> dataSourceTableIdList = datasourceTableDOList.stream()
+                .map(DatasourceTableDO::getId).collect(Collectors.toList());
+
+        // 删除数据源 -> 所有表结构
+        this.datasourceTableMapper.deleteByDatasourceId(id);
+
+        // 删除数据源 -> 所有表结构 -> 所有列
+        if (CollUtil.isNotEmpty(dataSourceTableIdList)) {
+            this.datasourceTableColumnMapper.deleteByDatasourceTableIdIn(dataSourceTableIdList);
+        }
+    }
 }
