@@ -45,4 +45,5 @@ public interface DatasourceTableMapper {
      * @return r
      */
     int batchInsert(@Param("list") List<DatasourceTableDO> list);
+
 }

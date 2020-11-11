@@ -12,6 +12,8 @@ import com.keqi.apihu.pj.domain.db.DatasourceTableDO;
 import com.keqi.apihu.pj.domain.param.CreateDatasourceParam;
 import com.keqi.apihu.pj.domain.param.QueryDatasourceParam;
 import com.keqi.apihu.pj.domain.param.UpdateDatasourceParam;
+import com.keqi.apihu.pj.domain.vo.PageDatasourceTableColumnVO;
+import com.keqi.apihu.pj.domain.vo.PageDatasourceTableVO;
 import com.keqi.apihu.pj.domain.vo.PageDatasourceVO;
 import com.keqi.apihu.pj.mapper.DatasourceMapper;
 import com.keqi.apihu.pj.mapper.DatasourceTableColumnMapper;
@@ -22,9 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -66,6 +66,7 @@ public class DatasourceServiceImpl implements DatasourceService {
      * @return r
      */
     @Override
+    @Transactional
     public void updateByPrimaryKey(UpdateDatasourceParam updateDatasourceParam) {
         DatasourceDO temp = this.datasourceMapper.
                 findOneByNameAndProjectid(updateDatasourceParam.getName(), Auth.getProjectId());
@@ -150,6 +151,76 @@ public class DatasourceServiceImpl implements DatasourceService {
             this.datasourceTableColumnMapper.batchInsert(datasourceTableColumnDOList);
         }
 
+    }
+
+    /**
+     * 查询全部数据源列表
+     *
+     * @param queryDatasourceParam queryDatasourceParam
+     * @return r
+     */
+    @Override
+    public AjaxPageEntity<PageDatasourceVO> listDataSource(QueryDatasourceParam queryDatasourceParam) {
+        queryDatasourceParam.setProjectId(Auth.getProjectId());
+        queryDatasourceParam.setPageSize(-1);
+        List<PageDatasourceVO> pageDatasourceVOList = this.datasourceMapper.pageDataSource(queryDatasourceParam);
+
+        AjaxPageEntity ajaxPageEntity = new AjaxPageEntity();
+        ajaxPageEntity.setTotal(pageDatasourceVOList.size());
+        ajaxPageEntity.setList(pageDatasourceVOList);
+
+        return ajaxPageEntity;
+    }
+
+    /**
+     * 查询指定数据源下的所有表
+     *
+     * @param id id
+     * @return r
+     */
+    @Override
+    public AjaxPageEntity<PageDatasourceTableVO> listByDatasourceId(Long id) {
+        List<DatasourceTableDO> datasourceTableDOList = this.datasourceTableMapper.findAllByDatasourceId(id);
+
+        // DO -> VO
+        List<PageDatasourceTableVO> pageDatasourceTableVOList = new ArrayList<>(datasourceTableDOList.size());
+        for (DatasourceTableDO datasourceTableDO : datasourceTableDOList) {
+            PageDatasourceTableVO temp = new PageDatasourceTableVO();
+            BeanUtil.copyProperties(datasourceTableDO, temp);
+            pageDatasourceTableVOList.add(temp);
+        }
+
+        AjaxPageEntity ajaxPageEntity = new AjaxPageEntity();
+        ajaxPageEntity.setTotal(pageDatasourceTableVOList.size());
+        ajaxPageEntity.setList(pageDatasourceTableVOList);
+
+        return ajaxPageEntity;
+    }
+
+    /**
+     * 查询指定表下的所有列
+     *
+     * @param id id
+     * @return r
+     */
+    @Override
+    public AjaxPageEntity<PageDatasourceTableColumnVO> listByDatasourceTableId(Long id) {
+        List<DatasourceTableColumnDO> datasourceTableColumnDOList = this.datasourceTableColumnMapper.
+                findAllByDatasourceTableIdIn(Collections.singletonList(id));
+
+        List<PageDatasourceTableColumnVO> pageDatasourceTableColumnVOList =
+                new ArrayList<>(datasourceTableColumnDOList.size());
+        for (DatasourceTableColumnDO datasourceTableColumnDO : datasourceTableColumnDOList) {
+            PageDatasourceTableColumnVO temp = new PageDatasourceTableColumnVO();
+            BeanUtil.copyProperties(datasourceTableColumnDO, temp);
+            pageDatasourceTableColumnVOList.add(temp);
+        }
+
+        AjaxPageEntity ajaxPageEntity = new AjaxPageEntity();
+        ajaxPageEntity.setTotal(pageDatasourceTableColumnVOList.size());
+        ajaxPageEntity.setList(pageDatasourceTableColumnVOList);
+
+        return ajaxPageEntity;
     }
 
 

@@ -9,6 +9,8 @@ import com.keqi.apihu.manage.domain.vo.PageProjectVO;
 import com.keqi.apihu.pj.domain.param.CreateDatasourceParam;
 import com.keqi.apihu.pj.domain.param.QueryDatasourceParam;
 import com.keqi.apihu.pj.domain.param.UpdateDatasourceParam;
+import com.keqi.apihu.pj.domain.vo.PageDatasourceTableColumnVO;
+import com.keqi.apihu.pj.domain.vo.PageDatasourceTableVO;
 import com.keqi.apihu.pj.service.DatasourceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -82,16 +84,54 @@ public class DataSourceController {
     }
 
     /**
+     * 查询全部数据源列表
+     * @param queryDatasourceParam queryDatasourceParam
+     * @return r
+     */
+    @ApiOperation(value = "1.5 查询全部数据源列表")
+    @ApiOperationSupport(order = 5)
+    @PostMapping("/list")
+    public AjaxEntity<AjaxPageEntity<PageProjectVO>> list(@Validated @RequestBody QueryDatasourceParam queryDatasourceParam) {
+        return AjaxEntityBuilder.successList(this.datasourceService.listDataSource(queryDatasourceParam));
+    }
+
+    /**
      * 在线读取数据库
      * @param id id
      * @return r
      */
-    @ApiOperation(value = "1.5 在线读取数据库")
-    @ApiOperationSupport(order = 5)
+    @ApiOperation(value = "1.6 在线读取数据库")
+    @ApiOperationSupport(order = 6)
     @ApiImplicitParam(name = "id", value = "数据源ID", example = "1", required = true)
     @PostMapping("/readDataSource")
     public AjaxEntity readDataSource(@RequestParam @NotNull Long id) {
         this.datasourceService.readDataSource(id);
         return AjaxEntityBuilder.success();
+    }
+
+    /**
+     * 查询指定数据源下的所有表
+     * @param id id
+     * @return r
+     */
+    @ApiOperation(value = "1.7 查询指定数据源下的所有表")
+    @ApiOperationSupport(order = 7)
+    @ApiImplicitParam(name = "id", value = "数据源ID", example = "1", required = true)
+    @PostMapping("/listByDatasourceId")
+    public AjaxEntity<AjaxPageEntity<PageDatasourceTableVO>> listByDatasourceId(@RequestParam @NotNull Long id) {
+        return AjaxEntityBuilder.successList(this.datasourceService.listByDatasourceId(id));
+    }
+
+    /**
+     * 查询指定表下的所有列
+     * @param id id
+     * @return r
+     */
+    @ApiOperation(value = "1.8 查询指定表下的所有列")
+    @ApiOperationSupport(order = 8)
+    @ApiImplicitParam(name = "id", value = "表ID", example = "1", required = true)
+    @PostMapping("/listByDatasourceTableId")
+    public AjaxEntity<AjaxPageEntity<PageDatasourceTableColumnVO>> listByDatasourceTableId(@RequestParam @NotNull Long id) {
+        return AjaxEntityBuilder.successList(this.datasourceService.listByDatasourceTableId(id));
     }
 }
