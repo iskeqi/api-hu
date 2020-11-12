@@ -5,14 +5,15 @@
     <!--@mbg.generated-->
     <!--@Table pj_api_group-->
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
     <result column="ancestors" jdbcType="VARCHAR" property="ancestors" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="order_num" jdbcType="INTEGER" property="orderNum" />
+    <result column="project_id" jdbcType="BIGINT" property="projectId" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, parent_id, ancestors, `name`, order_num
+    id, parent_id, ancestors, `name`, order_num, project_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -21,18 +22,21 @@
     from pj_api_group
     where id = #{id,jdbcType=BIGINT}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--@mbg.generated-->
     delete from pj_api_group
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.pj.domain.db.ApiGroupDO" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into pj_api_group (parent_id, ancestors, `name`, 
-      order_num)
-    values (#{parentId,jdbcType=INTEGER}, #{ancestors,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{orderNum,jdbcType=INTEGER})
+      order_num, project_id)
+    values (#{parentId,jdbcType=BIGINT}, #{ancestors,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=INTEGER}, #{projectId,jdbcType=BIGINT})
   </insert>
+
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.pj.domain.db.ApiGroupDO" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into pj_api_group
@@ -49,10 +53,13 @@
       <if test="orderNum != null">
         order_num,
       </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="parentId != null">
-        #{parentId,jdbcType=INTEGER},
+        #{parentId,jdbcType=BIGINT},
       </if>
       <if test="ancestors != null and ancestors != ''">
         #{ancestors,jdbcType=VARCHAR},
@@ -63,6 +70,9 @@
       <if test="orderNum != null">
         #{orderNum,jdbcType=INTEGER},
       </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=BIGINT},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.keqi.apihu.pj.domain.db.ApiGroupDO">
@@ -70,7 +80,7 @@
     update pj_api_group
     <set>
       <if test="parentId != null">
-        parent_id = #{parentId,jdbcType=INTEGER},
+        parent_id = #{parentId,jdbcType=BIGINT},
       </if>
       <if test="ancestors != null and ancestors != ''">
         ancestors = #{ancestors,jdbcType=VARCHAR},
@@ -81,16 +91,20 @@
       <if test="orderNum != null">
         order_num = #{orderNum,jdbcType=INTEGER},
       </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.keqi.apihu.pj.domain.db.ApiGroupDO">
     <!--@mbg.generated-->
     update pj_api_group
-    set parent_id = #{parentId,jdbcType=INTEGER},
+    set parent_id = #{parentId,jdbcType=BIGINT},
       ancestors = #{ancestors,jdbcType=VARCHAR},
       `name` = #{name,jdbcType=VARCHAR},
-      order_num = #{orderNum,jdbcType=INTEGER}
+      order_num = #{orderNum,jdbcType=INTEGER},
+      project_id = #{projectId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateBatch" parameterType="java.util.List">
@@ -99,7 +113,7 @@
     <trim prefix="set" suffixOverrides=",">
       <trim prefix="parent_id = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.parentId,jdbcType=INTEGER}
+          when id = #{item.id,jdbcType=BIGINT} then #{item.parentId,jdbcType=BIGINT}
         </foreach>
       </trim>
       <trim prefix="ancestors = case" suffix="end,">
@@ -117,20 +131,76 @@
           when id = #{item.id,jdbcType=BIGINT} then #{item.orderNum,jdbcType=INTEGER}
         </foreach>
       </trim>
+      <trim prefix="project_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.projectId,jdbcType=BIGINT}
+        </foreach>
+      </trim>
     </trim>
     where id in
     <foreach close=")" collection="list" item="item" open="(" separator=", ">
       #{item.id,jdbcType=BIGINT}
     </foreach>
   </update>
+
   <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into pj_api_group
-    (parent_id, ancestors, `name`, order_num)
+    (parent_id, ancestors, `name`, order_num, project_id)
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.parentId,jdbcType=INTEGER}, #{item.ancestors,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, 
-        #{item.orderNum,jdbcType=INTEGER})
+      (#{item.parentId,jdbcType=BIGINT}, #{item.ancestors,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, 
+        #{item.orderNum,jdbcType=INTEGER}, #{item.projectId,jdbcType=BIGINT})
     </foreach>
   </insert>
+
+  <select id="getMaxOrderNumByParentId" resultType="int">
+    select ifnull(max(order_num),0) from pj_api_group where parent_id = #{parentId,jdbcType=BIGINT} and project_id = #{projectId,jdbcType=BIGINT}
+  </select>
+
+<!--auto generated by MybatisCodeHelper on 2020-11-12-->
+  <select id="countByParentId" resultType="int">
+    select count(*)
+    from pj_api_group
+    where parent_id=#{parentId,jdbcType=BIGINT}
+  </select>
+
+<!--auto generated by MybatisCodeHelper on 2020-11-12-->
+  <update id="updateNameById">
+    update pj_api_group
+    set `name`= #{name,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT} and project_id = #{projectId,jdbcType=BIGINT}
+  </update>
+
+<!--auto generated by MybatisCodeHelper on 2020-11-12-->
+  <select id="findOneByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from pj_api_group
+    where `name`=#{name,jdbcType=VARCHAR} and project_id = #{projectId,jdbcType=BIGINT}
+  </select>
+
+<!--auto generated by MybatisCodeHelper on 2020-11-12-->
+  <select id="findAllByProjectId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from pj_api_group
+    where project_id=#{projectId,jdbcType=BIGINT}
+    order by parent_id, order_num
+  </select>
+
+<!--auto generated by MybatisCodeHelper on 2020-11-12-->
+  <select id="findAllByParentId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from pj_api_group
+    where parent_id=#{parentId,jdbcType=BIGINT}
+    order by order_num
+  </select>
+
+<!--auto generated by MybatisCodeHelper on 2020-11-12-->
+  <delete id="deleteByProjectId">
+    delete from pj_api_group where project_id=#{projectId,jdbcType=BIGINT}
+  </delete>
+
 </mapper>
