@@ -12,13 +12,13 @@ import javax.validation.constraints.NotBlank;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateApiGroupParam {
+public class UpdateApiGroupParam {
 
     /**
-    * 父级分组ID
+    * 分组ID
     */
-    @ApiModelProperty(value = "父级分组ID", example = "0")
-    private Long parentId;
+    @ApiModelProperty(value = "分组ID", example = "1")
+    private Long id;
 
     /**
     * 分组名称

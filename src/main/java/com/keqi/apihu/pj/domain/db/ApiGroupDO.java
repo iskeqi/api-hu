@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
     * API分组表
     */
@@ -21,7 +23,7 @@ public class ApiGroupDO {
     /**
     * 父级分组ID
     */
-    private Integer parentId;
+    private Long parentId;
 
     /**
     * 祖级列表
@@ -37,4 +39,16 @@ public class ApiGroupDO {
     * 显示顺序
     */
     private Integer orderNum;
+
+    /**
+    * 项目ID
+    */
+    private Long projectId;
+
+    //================================其他参数================================//
+
+    /**
+     * 子级分组列表
+     */
+    List<ApiGroupDO> subApiGroupDOList;
 }

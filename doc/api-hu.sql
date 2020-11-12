@@ -11,11 +11,35 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 11/11/2020 16:25:55
+ Date: 12/11/2020 18:58:20
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for pj_api_group
+-- ----------------------------
+DROP TABLE IF EXISTS `pj_api_group`;
+CREATE TABLE `pj_api_group`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'API分组ID',
+  `parent_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '父级分组ID',
+  `ancestors` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '祖级列表',
+  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '分组名称',
+  `order_num` int UNSIGNED NULL DEFAULT NULL COMMENT '显示顺序',
+  `project_id` bigint NULL DEFAULT NULL COMMENT '项目ID',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'API分组表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pj_api_group
+-- ----------------------------
+INSERT INTO `pj_api_group` VALUES (35, 0, '0', '系统管理模块', 1, 2);
+INSERT INTO `pj_api_group` VALUES (36, 0, '0', '项目管理模块', 2, 2);
+INSERT INTO `pj_api_group` VALUES (37, 9, '0,9', '用户管理', 1, 2);
+INSERT INTO `pj_api_group` VALUES (38, 9, '0,9', '字典管理', 2, 2);
+INSERT INTO `pj_api_group` VALUES (39, 10, '0,10', 'API管理', 1, 2);
+INSERT INTO `pj_api_group` VALUES (40, 10, '0,10', '数据源管理', 2, 2);
 
 -- ----------------------------
 -- Table structure for pj_datasource
@@ -30,16 +54,16 @@ CREATE TABLE `pj_datasource`  (
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据源密码',
   `projectId` bigint UNSIGNED NULL DEFAULT NULL COMMENT '项目ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '数据源表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '数据源表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pj_datasource
 -- ----------------------------
 INSERT INTO `pj_datasource` VALUES (2, 'api-hu', 'jdbc:mysql://10.10.20.200:3306/api-hu?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=GMT%2B8&allowMultiQueries=true', 'com.mysql.cj.jdbc.Driver', 'user_dev', 'Lt@888888', 2);
-INSERT INTO `pj_datasource` VALUES (3, 'api-hu2', 'jdbc:mysql://10.10.20.200:3306/api-hu?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=GMT%2B8&allowMultiQueries=true', 'com.mysql.cj.jdbc.Driver', 'user_dev', 'Lt@888888', 2);
-INSERT INTO `pj_datasource` VALUES (4, 'api-hu3', 'jdbc:mysql://10.10.20.200:3306/api-hu?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=GMT%2B8&allowMultiQueries=true', 'com.mysql.cj.jdbc.Driver', 'user_dev', 'Lt@888888', 2);
-INSERT INTO `pj_datasource` VALUES (5, 'api-hu4', 'jdbc:mysql://10.10.20.200:3306/api-hu?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=GMT%2B8&allowMultiQueries=true', 'com.mysql.cj.jdbc.Driver', 'user_dev', 'Lt@888888', 2);
-INSERT INTO `pj_datasource` VALUES (6, 'api-hu5', 'jdbc:mysql://10.10.20.200:3306/api-hu?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=GMT%2B8&allowMultiQueries=true', 'com.mysql.cj.jdbc.Driver', 'user_dev', 'Lt@888888', 2);
+INSERT INTO `pj_datasource` VALUES (3, 'api-hu3', 'jdbc:mysql://10.10.20.200:3306/api-hu?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=GMT%2B8&allowMultiQueries=true', 'com.mysql.cj.jdbc.Driver', 'user_dev', 'Lt@888888', 2);
+INSERT INTO `pj_datasource` VALUES (4, 'api-hu4', 'jdbc:mysql://10.10.20.200:3306/api-hu?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=GMT%2B8&allowMultiQueries=true', 'com.mysql.cj.jdbc.Driver', 'user_dev', 'Lt@888888', 2);
+INSERT INTO `pj_datasource` VALUES (5, 'api-hu5', 'jdbc:mysql://10.10.20.200:3306/api-hu?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=GMT%2B8&allowMultiQueries=true', 'com.mysql.cj.jdbc.Driver', 'user_dev', 'Lt@888888', 2);
+INSERT INTO `pj_datasource` VALUES (6, 'api-hu6', 'jdbc:mysql://10.10.20.200:3306/api-hu?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=GMT%2B8&allowMultiQueries=true', 'com.mysql.cj.jdbc.Driver', 'user_dev', 'Lt@888888', 2);
 
 -- ----------------------------
 -- Table structure for pj_datasource_table
@@ -51,18 +75,18 @@ CREATE TABLE `pj_datasource_table`  (
   `table_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '表名称',
   `table_comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '表备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '数据源表结构表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1056 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '数据源表结构表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pj_datasource_table
 -- ----------------------------
-INSERT INTO `pj_datasource_table` VALUES (1042, 2, 'pj_datasource', '数据源表');
-INSERT INTO `pj_datasource_table` VALUES (1043, 2, 'pj_datasource_table', '数据源表结构表');
-INSERT INTO `pj_datasource_table` VALUES (1044, 2, 'pj_datasource_table_column', '表结构字段列表');
-INSERT INTO `pj_datasource_table` VALUES (1045, 2, 'sys_account', '用户表');
-INSERT INTO `pj_datasource_table` VALUES (1046, 2, 'sys_account_project', '用户-项目关联表');
-INSERT INTO `pj_datasource_table` VALUES (1047, 2, 'sys_dict_item', '系统管理-字典表');
-INSERT INTO `pj_datasource_table` VALUES (1048, 2, 'sys_project', '项目表');
+INSERT INTO `pj_datasource_table` VALUES (1049, 2, 'pj_datasource', '数据源表');
+INSERT INTO `pj_datasource_table` VALUES (1050, 2, 'pj_datasource_table', '数据源表结构表');
+INSERT INTO `pj_datasource_table` VALUES (1051, 2, 'pj_datasource_table_column', '表结构字段列表');
+INSERT INTO `pj_datasource_table` VALUES (1052, 2, 'sys_account', '用户表');
+INSERT INTO `pj_datasource_table` VALUES (1053, 2, 'sys_account_project', '用户-项目关联表');
+INSERT INTO `pj_datasource_table` VALUES (1054, 2, 'sys_dict_item', '系统管理-字典表');
+INSERT INTO `pj_datasource_table` VALUES (1055, 2, 'sys_project', '项目表');
 
 -- ----------------------------
 -- Table structure for pj_datasource_table_column
@@ -75,51 +99,51 @@ CREATE TABLE `pj_datasource_table_column`  (
   `column_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '列类型',
   `column_comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '列描述',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '表结构字段列表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11317 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '表结构字段列表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pj_datasource_table_column
 -- ----------------------------
-INSERT INTO `pj_datasource_table_column` VALUES (11237, 1042, 'id', 'bigint unsigned', '数据源ID');
-INSERT INTO `pj_datasource_table_column` VALUES (11238, 1042, 'name', 'varchar', '数据源名称');
-INSERT INTO `pj_datasource_table_column` VALUES (11239, 1042, 'url', 'varchar', '数据源连接url');
-INSERT INTO `pj_datasource_table_column` VALUES (11240, 1042, 'driver_class_name', 'varchar', '数据源驱动名');
-INSERT INTO `pj_datasource_table_column` VALUES (11241, 1042, 'username', 'varchar', '数据源用户名');
-INSERT INTO `pj_datasource_table_column` VALUES (11242, 1042, 'password', 'varchar', '数据源密码');
-INSERT INTO `pj_datasource_table_column` VALUES (11243, 1042, 'projectId', 'bigint unsigned', '项目ID');
-INSERT INTO `pj_datasource_table_column` VALUES (11244, 1043, 'id', 'bigint unsigned', '表结构ID');
-INSERT INTO `pj_datasource_table_column` VALUES (11245, 1043, 'datasource_id', 'bigint unsigned', '数据源ID');
-INSERT INTO `pj_datasource_table_column` VALUES (11246, 1043, 'table_name', 'varchar', '表名称');
-INSERT INTO `pj_datasource_table_column` VALUES (11247, 1043, 'table_comment', 'varchar', '表备注');
-INSERT INTO `pj_datasource_table_column` VALUES (11248, 1044, 'id', 'bigint unsigned', '表字段ID');
-INSERT INTO `pj_datasource_table_column` VALUES (11249, 1044, 'datasource_table_id', 'bigint unsigned', '所属表ID');
-INSERT INTO `pj_datasource_table_column` VALUES (11250, 1044, 'column_name', 'varchar', '列名');
-INSERT INTO `pj_datasource_table_column` VALUES (11251, 1044, 'column_type', 'varchar', '列类型');
-INSERT INTO `pj_datasource_table_column` VALUES (11252, 1044, 'column_comment', 'varchar', '列描述');
-INSERT INTO `pj_datasource_table_column` VALUES (11253, 1045, 'id', 'bigint unsigned', '用户ID');
-INSERT INTO `pj_datasource_table_column` VALUES (11254, 1045, 'account', 'varchar', '用户名');
-INSERT INTO `pj_datasource_table_column` VALUES (11255, 1045, 'nick_name', 'varchar', '姓名');
-INSERT INTO `pj_datasource_table_column` VALUES (11256, 1045, 'post', 'varchar', '岗位');
-INSERT INTO `pj_datasource_table_column` VALUES (11257, 1045, 'password', 'varchar', '密码');
-INSERT INTO `pj_datasource_table_column` VALUES (11258, 1045, 'create_time', 'datetime', '创建时间');
-INSERT INTO `pj_datasource_table_column` VALUES (11259, 1045, 'update_time', 'datetime', '修改时间');
-INSERT INTO `pj_datasource_table_column` VALUES (11260, 1046, 'account_id', 'bigint unsigned', '用户ID');
-INSERT INTO `pj_datasource_table_column` VALUES (11261, 1046, 'project_id', 'bigint unsigned', '项目ID');
-INSERT INTO `pj_datasource_table_column` VALUES (11262, 1047, 'id', 'bigint unsigned', '字典记录主键');
-INSERT INTO `pj_datasource_table_column` VALUES (11263, 1047, 'type_code', 'varchar', '字典类型编码');
-INSERT INTO `pj_datasource_table_column` VALUES (11264, 1047, 'type_name', 'varchar', '字典类型名称');
-INSERT INTO `pj_datasource_table_column` VALUES (11265, 1047, 'item_code', 'varchar', '字典项编码');
-INSERT INTO `pj_datasource_table_column` VALUES (11266, 1047, 'item_value', 'varchar', '字典项值');
-INSERT INTO `pj_datasource_table_column` VALUES (11267, 1047, 'item_sort', 'int unsigned', '字典项排序');
-INSERT INTO `pj_datasource_table_column` VALUES (11268, 1047, 'item_remark', 'varchar', '字典项备注字段');
-INSERT INTO `pj_datasource_table_column` VALUES (11269, 1047, 'item_css', 'varchar', '字典项样式属性(备用字段)');
-INSERT INTO `pj_datasource_table_column` VALUES (11270, 1047, 'delete_flag', 'char', '逻辑删除字段（Y 未删除，N 已删除）');
-INSERT INTO `pj_datasource_table_column` VALUES (11271, 1048, 'id', 'bigint unsigned', '项目ID');
-INSERT INTO `pj_datasource_table_column` VALUES (11272, 1048, 'project_name', 'varchar', '项目名称');
-INSERT INTO `pj_datasource_table_column` VALUES (11273, 1048, 'project_note', 'varchar', '项目描述信息');
-INSERT INTO `pj_datasource_table_column` VALUES (11274, 1048, 'delete_flag', 'char', '逻辑删除(Y：未删除，N：已删除)');
-INSERT INTO `pj_datasource_table_column` VALUES (11275, 1048, 'create_time', 'datetime', '创建时间');
-INSERT INTO `pj_datasource_table_column` VALUES (11276, 1048, 'update_time', 'datetime', '修改时间');
+INSERT INTO `pj_datasource_table_column` VALUES (11277, 1049, 'id', 'bigint unsigned', '数据源ID');
+INSERT INTO `pj_datasource_table_column` VALUES (11278, 1049, 'name', 'varchar', '数据源名称');
+INSERT INTO `pj_datasource_table_column` VALUES (11279, 1049, 'url', 'varchar', '数据源连接url');
+INSERT INTO `pj_datasource_table_column` VALUES (11280, 1049, 'driver_class_name', 'varchar', '数据源驱动名');
+INSERT INTO `pj_datasource_table_column` VALUES (11281, 1049, 'username', 'varchar', '数据源用户名');
+INSERT INTO `pj_datasource_table_column` VALUES (11282, 1049, 'password', 'varchar', '数据源密码');
+INSERT INTO `pj_datasource_table_column` VALUES (11283, 1049, 'projectId', 'bigint unsigned', '项目ID');
+INSERT INTO `pj_datasource_table_column` VALUES (11284, 1050, 'id', 'bigint unsigned', '表结构ID');
+INSERT INTO `pj_datasource_table_column` VALUES (11285, 1050, 'datasource_id', 'bigint unsigned', '数据源ID');
+INSERT INTO `pj_datasource_table_column` VALUES (11286, 1050, 'table_name', 'varchar', '表名称');
+INSERT INTO `pj_datasource_table_column` VALUES (11287, 1050, 'table_comment', 'varchar', '表备注');
+INSERT INTO `pj_datasource_table_column` VALUES (11288, 1051, 'id', 'bigint unsigned', '表字段ID');
+INSERT INTO `pj_datasource_table_column` VALUES (11289, 1051, 'datasource_table_id', 'bigint unsigned', '所属表ID');
+INSERT INTO `pj_datasource_table_column` VALUES (11290, 1051, 'column_name', 'varchar', '列名');
+INSERT INTO `pj_datasource_table_column` VALUES (11291, 1051, 'column_type', 'varchar', '列类型');
+INSERT INTO `pj_datasource_table_column` VALUES (11292, 1051, 'column_comment', 'varchar', '列描述');
+INSERT INTO `pj_datasource_table_column` VALUES (11293, 1052, 'id', 'bigint unsigned', '用户ID');
+INSERT INTO `pj_datasource_table_column` VALUES (11294, 1052, 'account', 'varchar', '用户名');
+INSERT INTO `pj_datasource_table_column` VALUES (11295, 1052, 'nick_name', 'varchar', '姓名');
+INSERT INTO `pj_datasource_table_column` VALUES (11296, 1052, 'post', 'varchar', '岗位');
+INSERT INTO `pj_datasource_table_column` VALUES (11297, 1052, 'password', 'varchar', '密码');
+INSERT INTO `pj_datasource_table_column` VALUES (11298, 1052, 'create_time', 'datetime', '创建时间');
+INSERT INTO `pj_datasource_table_column` VALUES (11299, 1052, 'update_time', 'datetime', '修改时间');
+INSERT INTO `pj_datasource_table_column` VALUES (11300, 1053, 'account_id', 'bigint unsigned', '用户ID');
+INSERT INTO `pj_datasource_table_column` VALUES (11301, 1053, 'project_id', 'bigint unsigned', '项目ID');
+INSERT INTO `pj_datasource_table_column` VALUES (11302, 1054, 'id', 'bigint unsigned', '字典记录主键');
+INSERT INTO `pj_datasource_table_column` VALUES (11303, 1054, 'type_code', 'varchar', '字典类型编码');
+INSERT INTO `pj_datasource_table_column` VALUES (11304, 1054, 'type_name', 'varchar', '字典类型名称');
+INSERT INTO `pj_datasource_table_column` VALUES (11305, 1054, 'item_code', 'varchar', '字典项编码');
+INSERT INTO `pj_datasource_table_column` VALUES (11306, 1054, 'item_value', 'varchar', '字典项值');
+INSERT INTO `pj_datasource_table_column` VALUES (11307, 1054, 'item_sort', 'int unsigned', '字典项排序');
+INSERT INTO `pj_datasource_table_column` VALUES (11308, 1054, 'item_remark', 'varchar', '字典项备注字段');
+INSERT INTO `pj_datasource_table_column` VALUES (11309, 1054, 'item_css', 'varchar', '字典项样式属性(备用字段)');
+INSERT INTO `pj_datasource_table_column` VALUES (11310, 1054, 'delete_flag', 'char', '逻辑删除字段（Y 未删除，N 已删除）');
+INSERT INTO `pj_datasource_table_column` VALUES (11311, 1055, 'id', 'bigint unsigned', '项目ID');
+INSERT INTO `pj_datasource_table_column` VALUES (11312, 1055, 'project_name', 'varchar', '项目名称');
+INSERT INTO `pj_datasource_table_column` VALUES (11313, 1055, 'project_note', 'varchar', '项目描述信息');
+INSERT INTO `pj_datasource_table_column` VALUES (11314, 1055, 'delete_flag', 'char', '逻辑删除(Y：未删除，N：已删除)');
+INSERT INTO `pj_datasource_table_column` VALUES (11315, 1055, 'create_time', 'datetime', '创建时间');
+INSERT INTO `pj_datasource_table_column` VALUES (11316, 1055, 'update_time', 'datetime', '修改时间');
 
 -- ----------------------------
 -- Table structure for sys_account

@@ -5,7 +5,10 @@ import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.keqi.apihu.core.common.AjaxEntity;
 import com.keqi.apihu.core.common.AjaxEntityBuilder;
 import com.keqi.apihu.pj.domain.param.CreateApiGroupParam;
-import com.keqi.apihu.pj.service.impl.ApiGroupService;
+import com.keqi.apihu.pj.domain.param.MoveGroupParam;
+import com.keqi.apihu.pj.domain.param.UpdateApiGroupParam;
+import com.keqi.apihu.pj.domain.vo.PageApiGroupVO;
+import com.keqi.apihu.pj.service.ApiGroupService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Api(tags = "2. API分组管理")
 @ApiSupport(author = "keqi", order = 2)
@@ -52,11 +56,11 @@ public class ApiGroupController {
         return AjaxEntityBuilder.success();
     }
 
-  /*  *//**
+    /**
      * 修改API分组
      * @param updateApiGroupParam updateApiGroupParam
      * @return r
-     *//*
+     */
     @ApiOperation(value = "2.3 修改API分组")
     @ApiOperationSupport(order = 3)
     @PostMapping("/update")
@@ -65,16 +69,27 @@ public class ApiGroupController {
         return AjaxEntityBuilder.success();
     }
 
-    *//**
+    /**
      * 查询全部API分组列表
-     * @param queryApiGroupParam queryApiGroupParam
      * @return r
-     *//*
+     */
     @ApiOperation(value = "2.4 查询全部API分组列表")
     @ApiOperationSupport(order = 4)
-    @PostMapping("/list")
-    public AjaxEntity<AjaxPageEntity<PageProjectVO>> list(@Validated @RequestBody QueryApiGroupParam queryApiGroupParam) {
-        return AjaxEntityBuilder.successList(this.apiGroupService.listApiGroup(queryApiGroupParam));
-    }*/
+    @GetMapping("/list")
+    public AjaxEntity<List<PageApiGroupVO>> list() {
+        return AjaxEntityBuilder.success(this.apiGroupService.listApiGroup());
+    }
+
+    /**
+     * 移动分组顺序
+     * @return r
+     */
+    @ApiOperation(value = "2.5 移动分组顺序")
+    @ApiOperationSupport(order = 5)
+    @PostMapping("/moveGroup")
+    public AjaxEntity moveGroup(@Validated @RequestBody List<MoveGroupParam> moveGroupParamList) {
+        this.apiGroupService.moveGroup(moveGroupParamList);
+        return AjaxEntityBuilder.success();
+    }
 
 }
