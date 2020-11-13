@@ -71,5 +71,10 @@ public class ApiRequestDO {
     /**
     * 项目ID
     */
-    private Long projectid;
+    private Long projectId;
+
+    /**
+     * 所属分组ID
+     */
+    private Long apiGroupId;
 }

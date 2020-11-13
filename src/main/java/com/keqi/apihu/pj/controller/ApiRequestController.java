@@ -4,10 +4,10 @@ import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.keqi.apihu.core.common.AjaxEntity;
 import com.keqi.apihu.core.common.AjaxEntityBuilder;
+import com.keqi.apihu.core.common.AjaxPageEntity;
 import com.keqi.apihu.pj.domain.param.CreateApiRequestParam;
-import com.keqi.apihu.pj.domain.param.MoveGroupParam;
-import com.keqi.apihu.pj.domain.param.UpdateApiGroupParam;
-import com.keqi.apihu.pj.domain.vo.PageApiGroupVO;
+import com.keqi.apihu.pj.domain.param.QueryApiRequestParam;
+import com.keqi.apihu.pj.domain.vo.PageApiRequestVO;
 import com.keqi.apihu.pj.service.ApiRequestService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -17,7 +17,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Api(tags = "4. API管理")
 @ApiSupport(author = "keqi", order = 4)
@@ -49,7 +48,7 @@ public class ApiRequestController {
      */
     @ApiOperation(value = "4.2 删除API")
     @ApiOperationSupport(order = 2)
-    @ApiImplicitParam(name = "id", value = "APIID", example = "1", required = true)
+    @ApiImplicitParam(name = "id", value = "API ID", example = "1", required = true)
     @PostMapping("/delete")
     public AjaxEntity delete(@RequestParam @NotNull Long id) {
         this.apiRequestService.deleteByPrimaryKey(id);
@@ -58,39 +57,28 @@ public class ApiRequestController {
 
     /**
      * 修改API
-     * @param updateApiGroupParam updateApiGroupParam
+     * @param updateApiRequestParam updateApiRequestParam
      * @return r
      */
     @ApiOperation(value = "4.3 修改API")
     @ApiOperationSupport(order = 3)
     @PostMapping("/update")
-    public AjaxEntity update(@Validated @RequestBody UpdateApiGroupParam updateApiGroupParam) {
-        //this.apiRequestService.updateByPrimaryKey(updateApiGroupParam);
+    public AjaxEntity update(@Validated @RequestBody CreateApiRequestParam updateApiRequestParam) {
+        this.apiRequestService.updateByPrimaryKey(updateApiRequestParam);
         return AjaxEntityBuilder.success();
     }
 
     /**
-     * 查询全部API列表
+     * 分页查询API列表
+     * @param queryApiRequestParam queryApiRequestParam
      * @return r
      */
-    @ApiOperation(value = "4.4 查询全部API列表")
+    @ApiOperation(value = "4.4 分页查询API列表")
     @ApiOperationSupport(order = 4)
-    @GetMapping("/list")
-    public AjaxEntity<List<PageApiGroupVO>> list() {
-        //return AjaxEntityBuilder.success(this.apiRequestService.listApiGroup());
-        return null;
+    @PostMapping("/page")
+    public AjaxEntity<AjaxPageEntity<PageApiRequestVO>> list(@Validated @RequestBody QueryApiRequestParam queryApiRequestParam) {
+        return AjaxEntityBuilder.successList(this.apiRequestService.pageApiRequest(queryApiRequestParam));
     }
 
-    /**
-     * 移动分组顺序
-     * @return r
-     */
-    @ApiOperation(value = "4.5 移动分组顺序")
-    @ApiOperationSupport(order = 5)
-    @PostMapping("/moveGroup")
-    public AjaxEntity moveGroup(@Validated @RequestBody List<MoveGroupParam> moveGroupParamList) {
-        //this.apiRequestService.moveGroup(moveGroupParamList);
-        return AjaxEntityBuilder.success();
-    }
-
+    // todo 查询API详情、在本级移动API、移动到其他分组下
 }

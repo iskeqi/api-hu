@@ -15,12 +15,24 @@
     <result column="note" jdbcType="VARCHAR" property="note" />
     <result column="request_json_root_type" jdbcType="VARCHAR" property="requestJsonRootType" />
     <result column="response_json_root_type" jdbcType="VARCHAR" property="responseJsonRootType" />
-    <result column="projectId" jdbcType="BIGINT" property="projectid" />
+    <result column="projectId" jdbcType="BIGINT" property="projectId" />
+    <result column="api_group_id" jdbcType="BIGINT" property="apiGroupId" />
   </resultMap>
+
+  <resultMap id="PageApiRequestVO" type="com.keqi.apihu.pj.domain.vo.PageApiRequestVO">
+    <!--@mbg.generated-->
+    <!--@Table pj_api_request-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="requestMethod" jdbcType="VARCHAR" property="requestmethod" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     id, `name`, url, requestMethod, request_content_type, response_content_type, request_demo, 
-    response_demo, note, request_json_root_type, response_json_root_type, projectId
+    response_demo, note, request_json_root_type, response_json_root_type, projectId,api_group_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -29,6 +41,7 @@
     from pj_api_request
     where id = #{id,jdbcType=BIGINT}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--@mbg.generated-->
     delete from pj_api_request
@@ -37,16 +50,16 @@
 
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.pj.domain.db.ApiRequestDO" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into pj_api_request (`name`, url, requestMethod, 
-      request_content_type, response_content_type, 
-      request_demo, response_demo, note, 
-      request_json_root_type, response_json_root_type, 
-      projectId)
-    values (#{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{requestmethod,jdbcType=VARCHAR}, 
-      #{requestContentType,jdbcType=VARCHAR}, #{responseContentType,jdbcType=VARCHAR}, 
-      #{requestDemo,jdbcType=VARCHAR}, #{responseDemo,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
-      #{requestJsonRootType,jdbcType=VARCHAR}, #{responseJsonRootType,jdbcType=VARCHAR}, 
-      #{projectid,jdbcType=BIGINT})
+    insert into pj_api_request (`name`, url, requestMethod,
+    request_content_type, response_content_type,
+    request_demo, response_demo, note,
+    request_json_root_type, response_json_root_type,
+    projectId,api_group_id)
+    values (#{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{requestmethod,jdbcType=VARCHAR},
+    #{requestContentType,jdbcType=VARCHAR}, #{responseContentType,jdbcType=VARCHAR},
+    #{requestDemo,jdbcType=VARCHAR}, #{responseDemo,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR},
+    #{requestJsonRootType,jdbcType=VARCHAR}, #{responseJsonRootType,jdbcType=VARCHAR},
+    #{projectId,jdbcType=BIGINT},#{apiGroupId,jdbcType=BIGINT})
   </insert>
 
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.pj.domain.db.ApiRequestDO" useGeneratedKeys="true">
@@ -83,7 +96,7 @@
       <if test="responseJsonRootType != null and responseJsonRootType != ''">
         response_json_root_type,
       </if>
-      <if test="projectid != null">
+      <if test="projectId != null">
         projectId,
       </if>
     </trim>
@@ -118,8 +131,8 @@
       <if test="responseJsonRootType != null and responseJsonRootType != ''">
         #{responseJsonRootType,jdbcType=VARCHAR},
       </if>
-      <if test="projectid != null">
-        #{projectid,jdbcType=BIGINT},
+      <if test="projectId != null">
+        #{projectId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -157,8 +170,8 @@
       <if test="responseJsonRootType != null and responseJsonRootType != ''">
         response_json_root_type = #{responseJsonRootType,jdbcType=VARCHAR},
       </if>
-      <if test="projectid != null">
-        projectId = #{projectid,jdbcType=BIGINT},
+      <if test="projectId != null">
+        projectId = #{projectId,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -167,16 +180,16 @@
     <!--@mbg.generated-->
     update pj_api_request
     set `name` = #{name,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      requestMethod = #{requestmethod,jdbcType=VARCHAR},
-      request_content_type = #{requestContentType,jdbcType=VARCHAR},
-      response_content_type = #{responseContentType,jdbcType=VARCHAR},
-      request_demo = #{requestDemo,jdbcType=VARCHAR},
-      response_demo = #{responseDemo,jdbcType=VARCHAR},
-      note = #{note,jdbcType=VARCHAR},
-      request_json_root_type = #{requestJsonRootType,jdbcType=VARCHAR},
-      response_json_root_type = #{responseJsonRootType,jdbcType=VARCHAR},
-      projectId = #{projectid,jdbcType=BIGINT}
+    url = #{url,jdbcType=VARCHAR},
+    requestMethod = #{requestmethod,jdbcType=VARCHAR},
+    request_content_type = #{requestContentType,jdbcType=VARCHAR},
+    response_content_type = #{responseContentType,jdbcType=VARCHAR},
+    request_demo = #{requestDemo,jdbcType=VARCHAR},
+    response_demo = #{responseDemo,jdbcType=VARCHAR},
+    note = #{note,jdbcType=VARCHAR},
+    request_json_root_type = #{requestJsonRootType,jdbcType=VARCHAR},
+    response_json_root_type = #{responseJsonRootType,jdbcType=VARCHAR},
+    projectId = #{projectId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateBatch" parameterType="java.util.List">
@@ -235,7 +248,7 @@
       </trim>
       <trim prefix="projectId = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.projectid,jdbcType=BIGINT}
+          when id = #{item.id,jdbcType=BIGINT} then #{item.projectId,jdbcType=BIGINT}
         </foreach>
       </trim>
     </trim>
@@ -252,11 +265,35 @@
       )
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.name,jdbcType=VARCHAR}, #{item.url,jdbcType=VARCHAR}, #{item.requestmethod,jdbcType=VARCHAR}, 
-        #{item.requestContentType,jdbcType=VARCHAR}, #{item.responseContentType,jdbcType=VARCHAR}, 
-        #{item.requestDemo,jdbcType=VARCHAR}, #{item.responseDemo,jdbcType=VARCHAR}, #{item.note,jdbcType=VARCHAR}, 
-        #{item.requestJsonRootType,jdbcType=VARCHAR}, #{item.responseJsonRootType,jdbcType=VARCHAR}, 
-        #{item.projectid,jdbcType=BIGINT})
+      (#{item.name,jdbcType=VARCHAR}, #{item.url,jdbcType=VARCHAR}, #{item.requestmethod,jdbcType=VARCHAR},
+      #{item.requestContentType,jdbcType=VARCHAR}, #{item.responseContentType,jdbcType=VARCHAR},
+      #{item.requestDemo,jdbcType=VARCHAR}, #{item.responseDemo,jdbcType=VARCHAR}, #{item.note,jdbcType=VARCHAR},
+      #{item.requestJsonRootType,jdbcType=VARCHAR}, #{item.responseJsonRootType,jdbcType=VARCHAR},
+      #{item.projectId,jdbcType=BIGINT})
     </foreach>
   </insert>
+
+<!--auto generated by MybatisCodeHelper on 2020-11-13-->
+  <select id="countByName" resultType="int">
+    select count(*)
+    from pj_api_request
+    where projectId = #{projectId,jdbcType=BIGINT}
+    <if test="searchValue != null and searchValue != ''">
+      and name like concat('%',replace(replace(#{searchValue},'%','/%'),'_','/_'),'%') escape '/'
+    </if>
+  </select>
+
+  <select id="pageApiRequest" resultMap="PageApiRequestVO">
+    select
+        id, `name`, url, requestMethod, note
+    from pj_api_request
+    where projectId = #{projectId,jdbcType=BIGINT}
+      <if test="searchValue != null and searchValue != ''">
+        and name like concat('%',replace(replace(#{searchValue},'%','/%'),'_','/_'),'%') escape '/'
+      </if>
+    order by id
+    <if test="pageSize > 0">
+      limit #{offset}, #{pageSize}
+    </if>
+  </select>
 </mapper>

@@ -26,4 +26,13 @@ public interface ApiRequestParamMapper {
     int updateBatch(List<ApiRequestParamDO> list);
 
     int batchInsert(@Param("list") List<ApiRequestParamDO> list);
+
+    /**
+     * 根据 apiRequestId 删除所有请求和相应参数
+     * @param apiRequestId apiRequestId
+     * @return r
+     */
+    int deleteByApiRequestId(@Param("apiRequestId")Long apiRequestId);
+
+
 }

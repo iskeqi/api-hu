@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -16,12 +17,13 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateApiRequestParam {
+public class UpdateApiRequestParam {
 
     /**
-     * API ID(新增时不使用，修改时才使用)
+     * API ID
      */
-    @ApiModelProperty(value = "API ID(新增时不使用，修改时才使用)", example = "1")
+    @ApiModelProperty(value = "API ID", example = "1")
+    @NotNull
     private Long id;
 
     /**
@@ -98,11 +100,11 @@ public class CreateApiRequestParam {
      * 请求参数列表
      */
     @ApiModelProperty(value = "请求参数列表", required = true)
-    private List<CreateApiRequestParamParam> requestParamList;
+    private List<UpdateApiRequestParamParam> requestParamList;
 
     /**
      * 响应参数列表
      */
     @ApiModelProperty(value = "响应参数列表", required = true)
-    private List<CreateApiRequestParamParam> responseParamList;
+    private List<UpdateApiRequestParamParam> responseParamList;
 }

@@ -1,12 +1,15 @@
 package com.keqi.apihu.pj.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.keqi.apihu.core.common.AjaxPageEntity;
 import com.keqi.apihu.core.common.Auth;
 import com.keqi.apihu.pj.domain.ApiParamType;
 import com.keqi.apihu.pj.domain.db.ApiRequestDO;
 import com.keqi.apihu.pj.domain.db.ApiRequestParamDO;
 import com.keqi.apihu.pj.domain.param.CreateApiRequestParam;
 import com.keqi.apihu.pj.domain.param.CreateApiRequestParamParam;
+import com.keqi.apihu.pj.domain.param.QueryApiRequestParam;
+import com.keqi.apihu.pj.domain.vo.PageApiRequestVO;
 import com.keqi.apihu.pj.mapper.ApiRequestMapper;
 import com.keqi.apihu.pj.mapper.ApiRequestParamMapper;
 import com.keqi.apihu.pj.service.ApiRequestService;
@@ -23,9 +26,17 @@ public class ApiRequestServiceImpl implements ApiRequestService {
     private final ApiRequestMapper apiRequestMapper;
     private final ApiRequestParamMapper apiRequestParamMapper;
 
+    /**
+     * 删除API
+     * @param id id
+     * @return r
+     */
     @Override
+    @Transactional
     public int deleteByPrimaryKey(Long id) {
-        return apiRequestMapper.deleteByPrimaryKey(id);
+        int i = this.apiRequestMapper.deleteByPrimaryKey(id);
+        int j = this.apiRequestParamMapper.deleteByApiRequestId(id);
+        return i + j;
     }
 
     @Override
@@ -48,9 +59,18 @@ public class ApiRequestServiceImpl implements ApiRequestService {
         return apiRequestMapper.updateByPrimaryKeySelective(record);
     }
 
+    /**
+     * 修改API
+     * @param updateApiRequestParam updateApiRequestParam
+     * @return r
+     */
     @Override
-    public int updateByPrimaryKey(ApiRequestDO record) {
-        return apiRequestMapper.updateByPrimaryKey(record);
+    @Transactional
+    public void updateByPrimaryKey(CreateApiRequestParam updateApiRequestParam) {
+        int i = this.deleteByPrimaryKey(updateApiRequestParam.getId());
+        if (i > 0) {
+            this.createApiRequest(updateApiRequestParam);
+        }
     }
 
     @Override
@@ -72,7 +92,7 @@ public class ApiRequestServiceImpl implements ApiRequestService {
     @Transactional
     public void createApiRequest(CreateApiRequestParam createApiRequestParam) {
         ApiRequestDO apiRequestDO = new ApiRequestDO();
-        apiRequestDO.setProjectid(Auth.getProjectId());
+        apiRequestDO.setProjectId(Auth.getProjectId());
         BeanUtil.copyProperties(createApiRequestParam, apiRequestDO);
         this.apiRequestMapper.insert(apiRequestDO);
 
@@ -87,6 +107,28 @@ public class ApiRequestServiceImpl implements ApiRequestService {
         if (responseParamList.size() > 0) {
             this.insertParameters(requestParamList, ApiParamType.RESPONSE, apiRequestDO);
         }
+    }
+
+    /**
+     * 分页查询API列表
+     *
+     * @param queryApiRequestParam queryApiRequestParam
+     * @return r
+     */
+    @Override
+    public AjaxPageEntity<PageApiRequestVO> pageApiRequest(QueryApiRequestParam queryApiRequestParam) {
+        queryApiRequestParam.setProjectId(Auth.getProjectId());
+        int total = this.apiRequestMapper.countByName(queryApiRequestParam);
+
+        AjaxPageEntity ajaxPageEntity = new AjaxPageEntity();
+
+        if (total > 0) {
+            List<PageApiRequestVO> pageAccountVOList = this.apiRequestMapper.pageApiRequest(queryApiRequestParam);
+            ajaxPageEntity.setTotal(total);
+            ajaxPageEntity.setList(pageAccountVOList);
+        }
+
+        return ajaxPageEntity;
     }
 
     //================================私有方法================================//

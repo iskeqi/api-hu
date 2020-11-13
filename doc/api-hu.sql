@@ -11,11 +11,52 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 12/11/2020 18:58:20
+ Date: 13/11/2020 18:27:39
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for pj_api_environment
+-- ----------------------------
+DROP TABLE IF EXISTS `pj_api_environment`;
+CREATE TABLE `pj_api_environment`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '环境ID',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '环境名称',
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '前置URL',
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `projectId` bigint UNSIGNED NULL DEFAULT NULL COMMENT '项目ID',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'API 环境表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pj_api_environment
+-- ----------------------------
+INSERT INTO `pj_api_environment` VALUES (2, '测试环境', 'http://192.168.49.35/api-hu', '此环境用于开发自测和前端联调', 2);
+INSERT INTO `pj_api_environment` VALUES (7, '<<开发测试环境>>', 'http://192.168.49.35/api-hu', '此环境用于开发自测和前端联调', 2);
+INSERT INTO `pj_api_environment` VALUES (8, '<<开发测试环境>>', 'http://192.168.49.35/api-hu', '此环境用于开发自测和前端联调', 2);
+
+-- ----------------------------
+-- Table structure for pj_api_environment_param
+-- ----------------------------
+DROP TABLE IF EXISTS `pj_api_environment_param`;
+CREATE TABLE `pj_api_environment_param`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '参数ID',
+  `param_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数名称',
+  `param_value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数值',
+  `param_note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数备注',
+  `param_type` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数类型（HEADER/QUERY）',
+  `api_environment_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '所属环境ID',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'API环境参数表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pj_api_environment_param
+-- ----------------------------
+INSERT INTO `pj_api_environment_param` VALUES (2, 'accessToken', 'GUiOiJTVVBFUl9BRE1JTiIsInByb2p', '访问accessToken', 'HEADER', 2);
+INSERT INTO `pj_api_environment_param` VALUES (6, '<<accessToken>>', 'GUiOiJTVVBFUl9BRE1JTiIsInByb2p', '访问accessToken', 'HEADER', 7);
+INSERT INTO `pj_api_environment_param` VALUES (7, '<<accessToken>>', 'GUiOiJTVVBFUl9BRE1JTiIsInByb2p', '访问accessToken', 'HEADER', 8);
 
 -- ----------------------------
 -- Table structure for pj_api_group
@@ -29,17 +70,69 @@ CREATE TABLE `pj_api_group`  (
   `order_num` int UNSIGNED NULL DEFAULT NULL COMMENT '显示顺序',
   `project_id` bigint NULL DEFAULT NULL COMMENT '项目ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'API分组表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'API分组表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pj_api_group
 -- ----------------------------
-INSERT INTO `pj_api_group` VALUES (35, 0, '0', '系统管理模块', 1, 2);
-INSERT INTO `pj_api_group` VALUES (36, 0, '0', '项目管理模块', 2, 2);
-INSERT INTO `pj_api_group` VALUES (37, 9, '0,9', '用户管理', 1, 2);
-INSERT INTO `pj_api_group` VALUES (38, 9, '0,9', '字典管理', 2, 2);
-INSERT INTO `pj_api_group` VALUES (39, 10, '0,10', 'API管理', 1, 2);
-INSERT INTO `pj_api_group` VALUES (40, 10, '0,10', '数据源管理', 2, 2);
+INSERT INTO `pj_api_group` VALUES (41, 0, '0', '系统管理模块', 1, 2);
+INSERT INTO `pj_api_group` VALUES (42, 0, '0', '项目管理模块', 2, 2);
+INSERT INTO `pj_api_group` VALUES (43, 41, '0,41', '用户管理', 1, 2);
+INSERT INTO `pj_api_group` VALUES (44, 41, '0,41', '字典管理', 2, 2);
+INSERT INTO `pj_api_group` VALUES (45, 42, '0,42', 'API管理', 1, 2);
+INSERT INTO `pj_api_group` VALUES (46, 42, '0,42', '数据源管理', 2, 2);
+
+-- ----------------------------
+-- Table structure for pj_api_request
+-- ----------------------------
+DROP TABLE IF EXISTS `pj_api_request`;
+CREATE TABLE `pj_api_request`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'API请求ID',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '接口名称',
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '接口地址',
+  `requestMethod` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '请求方式',
+  `request_content_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '请求数据类型',
+  `response_content_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '响应数据类型',
+  `request_demo` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '请求示例',
+  `response_demo` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '响应示例',
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '接口描述',
+  `request_json_root_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '请求JSON根类型',
+  `response_json_root_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '响应JSON根类型',
+  `projectId` bigint UNSIGNED NULL DEFAULT NULL COMMENT '项目ID',
+  `api_group_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT 'API所属分组ID',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'API 请求表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pj_api_request
+-- ----------------------------
+INSERT INTO `pj_api_request` VALUES (10, '新增用户1', '/user/create', 'POST', 'application/json', 'application/json', '{}', '{}', '增加用户1', 'object', 'object', 2, 43);
+
+-- ----------------------------
+-- Table structure for pj_api_request_param
+-- ----------------------------
+DROP TABLE IF EXISTS `pj_api_request_param`;
+CREATE TABLE `pj_api_request_param`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'API请求或响应参数ID',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数名称',
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数说明',
+  `required` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '是否必须（必须 Y，非必须N）',
+  `type` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数类型(string,int等)',
+  `example` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '示例',
+  `param_type` char(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '请求/响应（REQUEST/RESPONSE）',
+  `api_request_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '请求API ID',
+  `parent_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '父级参数ID(顶级参数的 parentId 置为0)',
+  `order_num` bigint NULL DEFAULT NULL COMMENT '参数排序字段',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'API 请求的请求参数和相应参数' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pj_api_request_param
+-- ----------------------------
+INSERT INTO `pj_api_request_param` VALUES (21, 'username', '用户名', 'Y', 'string', 'xiaoming', 'REQUEST', 10, 0, 1);
+INSERT INTO `pj_api_request_param` VALUES (22, 'username', '用户名', 'Y', 'string', 'xiaoming', 'REQUEST', 10, 21, 1);
+INSERT INTO `pj_api_request_param` VALUES (23, 'username', '用户名', 'Y', 'string', 'xiaoming', 'RESPONSE', 10, 0, 1);
+INSERT INTO `pj_api_request_param` VALUES (24, 'username', '用户名', 'Y', 'string', 'xiaoming', 'RESPONSE', 10, 23, 1);
 
 -- ----------------------------
 -- Table structure for pj_datasource
