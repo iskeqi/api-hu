@@ -129,25 +129,46 @@ public class ApiGroupServiceImpl implements ApiGroupService{
     @Transactional
     public void moveGroup(List<MoveGroupParam> moveGroupParamList) {
         // 移动分组时会打乱分组的前后顺序，这里直接利用前端树形控件的方式来实现，后端直接做全量替换
+        Long projectId = Auth.getProjectId();
+        this.apiGroupMapper.deleteByProjectId(projectId);
 
-        // 遍历树形结构，并转成List列表，并组装对应的参数
+        // 组装树的根节点
         MoveGroupParam root = new MoveGroupParam();
         root.setId((long) 0);
         root.setParentId(PjConstant.rootParentId);
         root.setAncestors(null);
         root.setSubMoveGroupParamList(moveGroupParamList);
-        List<MoveGroupParam> moveGroupParams = this.resolveTreeList(root);
 
-        // Param 转换为 DO
-        List<ApiGroupDO> apiGroupDOList = new ArrayList<>(moveGroupParams.size());
-        for (MoveGroupParam moveGroupParam : moveGroupParams) {
-            ApiGroupDO apiGroupDO = new ApiGroupDO();
-            BeanUtil.copyProperties(moveGroupParam, apiGroupDO);
-            apiGroupDOList.add(apiGroupDO);
+        // 遍历树形结构（使用 BFS 遍历 N叉树的典型应用）
+        Queue<MoveGroupParam> queue = new LinkedList<>();
+        queue.offer(root);
+        Map<MoveGroupParam, MoveGroupParam> map = new HashMap<>();
+        while (!queue.isEmpty()) {
+            MoveGroupParam moveGroupParam = null;
+            for (int i = 0; i < queue.size(); i++) {
+                moveGroupParam = queue.poll();
+
+                if (!Objects.equals(moveGroupParam.getId(), (long)0)) {
+                    // 执行插入记录
+                    ApiGroupDO apiGroupDO = new ApiGroupDO();
+                    BeanUtil.copyProperties(moveGroupParam, apiGroupDO);
+                    this.apiGroupMapper.insert(apiGroupDO);
+                    moveGroupParam.setId(apiGroupDO.getId());
+                }
+
+                List<MoveGroupParam> subMoveGroupParamList = moveGroupParam.getSubMoveGroupParamList();
+                for (int j = 0; j < subMoveGroupParamList.size(); j++) {
+                    MoveGroupParam t = subMoveGroupParamList.get(j);
+                    map.put(t, moveGroupParam); // 每一个子级节点，都以自己为 key ，父节点为 value，存储到Map中
+                    t.setOrderNum(j + 1);
+                    t.setParentId(map.get(t).getId());
+                    t.setAncestors(moveGroupParam.getAncestors() == null ? String.valueOf(PjConstant.rootParentId)
+                            : moveGroupParam.getAncestors() + "," + moveGroupParam.getId());
+                    t.setProjectId(projectId);
+                    queue.offer(t);
+                }
+            }
         }
-
-        this.apiGroupMapper.deleteByProjectId(Auth.getProjectId());
-        this.apiGroupMapper.batchInsert(apiGroupDOList);
     }
 
     //================================私有方法================================//
@@ -185,38 +206,4 @@ public class ApiGroupServiceImpl implements ApiGroupService{
         apiGroupDOTreeList.sort(Comparator.comparing(PageApiGroupVO::getOrderNum));
         return apiGroupDOTreeList;
     }
-
-    /**
-     * 遍历树形结构（使用 BFS 遍历 N叉树的典型应用）
-     * @param root root
-     * @return r
-     */
-    private List<MoveGroupParam> resolveTreeList(MoveGroupParam root) {
-        List<MoveGroupParam> ans = new ArrayList<>();
-        Long projectId = Auth.getProjectId();
-        // todo 这里的 id 组装有问题哦，毕竟这里是需要实际插入的，因为删除了之后，id 已经变化了
-        Queue<MoveGroupParam> queue = new LinkedList<>();
-        queue.offer(root);
-        while (!queue.isEmpty()) {
-            MoveGroupParam moveGroupParam = null;
-            for (int i = 0; i < queue.size(); i++) {
-                moveGroupParam = queue.poll();
-                List<MoveGroupParam> subMoveGroupParamList = moveGroupParam.getSubMoveGroupParamList();
-                for (int j = 0; j < subMoveGroupParamList.size(); j++) {
-                    MoveGroupParam t = subMoveGroupParamList.get(j);
-                    t.setOrderNum(j + 1);
-                    t.setParentId(moveGroupParam.getId());
-                    t.setAncestors(moveGroupParam.getAncestors() == null ? String.valueOf(PjConstant.rootParentId)
-                            : moveGroupParam.getAncestors() + "," + moveGroupParam.getId());
-                    t.setProjectId(projectId);
-                    queue.offer(t);
-                    ans.add(t);
-                }
-            }
-        }
-
-        return ans;
-    }
-
-
 }
