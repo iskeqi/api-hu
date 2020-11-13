@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.keqi.apihu.pj.mapper.ApiRequestMapper">
+  <resultMap id="BaseResultMap" type="com.keqi.apihu.pj.domain.db.ApiRequestDO">
+    <!--@mbg.generated-->
+    <!--@Table pj_api_request-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="requestMethod" jdbcType="VARCHAR" property="requestmethod" />
+    <result column="request_content_type" jdbcType="VARCHAR" property="requestContentType" />
+    <result column="response_content_type" jdbcType="VARCHAR" property="responseContentType" />
+    <result column="request_demo" jdbcType="VARCHAR" property="requestDemo" />
+    <result column="response_demo" jdbcType="VARCHAR" property="responseDemo" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="request_json_root_type" jdbcType="VARCHAR" property="requestJsonRootType" />
+    <result column="response_json_root_type" jdbcType="VARCHAR" property="responseJsonRootType" />
+    <result column="projectId" jdbcType="BIGINT" property="projectid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, url, requestMethod, request_content_type, response_content_type, request_demo, 
+    response_demo, note, request_json_root_type, response_json_root_type, projectId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from pj_api_request
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from pj_api_request
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.pj.domain.db.ApiRequestDO" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pj_api_request (`name`, url, requestMethod, 
+      request_content_type, response_content_type, 
+      request_demo, response_demo, note, 
+      request_json_root_type, response_json_root_type, 
+      projectId)
+    values (#{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{requestmethod,jdbcType=VARCHAR}, 
+      #{requestContentType,jdbcType=VARCHAR}, #{responseContentType,jdbcType=VARCHAR}, 
+      #{requestDemo,jdbcType=VARCHAR}, #{responseDemo,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{requestJsonRootType,jdbcType=VARCHAR}, #{responseJsonRootType,jdbcType=VARCHAR}, 
+      #{projectid,jdbcType=BIGINT})
+  </insert>
+
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.pj.domain.db.ApiRequestDO" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pj_api_request
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null and name != ''">
+        `name`,
+      </if>
+      <if test="url != null and url != ''">
+        url,
+      </if>
+      <if test="requestmethod != null and requestmethod != ''">
+        requestMethod,
+      </if>
+      <if test="requestContentType != null and requestContentType != ''">
+        request_content_type,
+      </if>
+      <if test="responseContentType != null and responseContentType != ''">
+        response_content_type,
+      </if>
+      <if test="requestDemo != null and requestDemo != ''">
+        request_demo,
+      </if>
+      <if test="responseDemo != null and responseDemo != ''">
+        response_demo,
+      </if>
+      <if test="note != null and note != ''">
+        note,
+      </if>
+      <if test="requestJsonRootType != null and requestJsonRootType != ''">
+        request_json_root_type,
+      </if>
+      <if test="responseJsonRootType != null and responseJsonRootType != ''">
+        response_json_root_type,
+      </if>
+      <if test="projectid != null">
+        projectId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null and name != ''">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null and url != ''">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="requestmethod != null and requestmethod != ''">
+        #{requestmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="requestContentType != null and requestContentType != ''">
+        #{requestContentType,jdbcType=VARCHAR},
+      </if>
+      <if test="responseContentType != null and responseContentType != ''">
+        #{responseContentType,jdbcType=VARCHAR},
+      </if>
+      <if test="requestDemo != null and requestDemo != ''">
+        #{requestDemo,jdbcType=VARCHAR},
+      </if>
+      <if test="responseDemo != null and responseDemo != ''">
+        #{responseDemo,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null and note != ''">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="requestJsonRootType != null and requestJsonRootType != ''">
+        #{requestJsonRootType,jdbcType=VARCHAR},
+      </if>
+      <if test="responseJsonRootType != null and responseJsonRootType != ''">
+        #{responseJsonRootType,jdbcType=VARCHAR},
+      </if>
+      <if test="projectid != null">
+        #{projectid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.keqi.apihu.pj.domain.db.ApiRequestDO">
+    <!--@mbg.generated-->
+    update pj_api_request
+    <set>
+      <if test="name != null and name != ''">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null and url != ''">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="requestmethod != null and requestmethod != ''">
+        requestMethod = #{requestmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="requestContentType != null and requestContentType != ''">
+        request_content_type = #{requestContentType,jdbcType=VARCHAR},
+      </if>
+      <if test="responseContentType != null and responseContentType != ''">
+        response_content_type = #{responseContentType,jdbcType=VARCHAR},
+      </if>
+      <if test="requestDemo != null and requestDemo != ''">
+        request_demo = #{requestDemo,jdbcType=VARCHAR},
+      </if>
+      <if test="responseDemo != null and responseDemo != ''">
+        response_demo = #{responseDemo,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null and note != ''">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="requestJsonRootType != null and requestJsonRootType != ''">
+        request_json_root_type = #{requestJsonRootType,jdbcType=VARCHAR},
+      </if>
+      <if test="responseJsonRootType != null and responseJsonRootType != ''">
+        response_json_root_type = #{responseJsonRootType,jdbcType=VARCHAR},
+      </if>
+      <if test="projectid != null">
+        projectId = #{projectid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.keqi.apihu.pj.domain.db.ApiRequestDO">
+    <!--@mbg.generated-->
+    update pj_api_request
+    set `name` = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      requestMethod = #{requestmethod,jdbcType=VARCHAR},
+      request_content_type = #{requestContentType,jdbcType=VARCHAR},
+      response_content_type = #{responseContentType,jdbcType=VARCHAR},
+      request_demo = #{requestDemo,jdbcType=VARCHAR},
+      response_demo = #{responseDemo,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      request_json_root_type = #{requestJsonRootType,jdbcType=VARCHAR},
+      response_json_root_type = #{responseJsonRootType,jdbcType=VARCHAR},
+      projectId = #{projectid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update pj_api_request
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`name` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.name,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="url = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.url,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="requestMethod = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.requestmethod,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="request_content_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.requestContentType,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="response_content_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.responseContentType,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="request_demo = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.requestDemo,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="response_demo = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.responseDemo,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="note = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.note,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="request_json_root_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.requestJsonRootType,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="response_json_root_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.responseJsonRootType,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="projectId = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.projectid,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into pj_api_request
+    (`name`, url, requestMethod, request_content_type, response_content_type, request_demo, 
+      response_demo, note, request_json_root_type, response_json_root_type, projectId
+      )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.name,jdbcType=VARCHAR}, #{item.url,jdbcType=VARCHAR}, #{item.requestmethod,jdbcType=VARCHAR}, 
+        #{item.requestContentType,jdbcType=VARCHAR}, #{item.responseContentType,jdbcType=VARCHAR}, 
+        #{item.requestDemo,jdbcType=VARCHAR}, #{item.responseDemo,jdbcType=VARCHAR}, #{item.note,jdbcType=VARCHAR}, 
+        #{item.requestJsonRootType,jdbcType=VARCHAR}, #{item.responseJsonRootType,jdbcType=VARCHAR}, 
+        #{item.projectid,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+</mapper>
