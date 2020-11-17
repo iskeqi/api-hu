@@ -2,13 +2,10 @@ package com.keqi.apihu.pj.service;
 
 import com.keqi.apihu.core.common.AjaxPageEntity;
 import com.keqi.apihu.pj.domain.Direction;
-import com.keqi.apihu.pj.domain.db.ApiRequestDO;
 import com.keqi.apihu.pj.domain.param.CreateApiRequestParam;
 import com.keqi.apihu.pj.domain.param.QueryApiRequestParam;
 import com.keqi.apihu.pj.domain.vo.ApiRequestDetailVO;
 import com.keqi.apihu.pj.domain.vo.PageApiRequestVO;
-
-import java.util.List;
 
 public interface ApiRequestService {
 
@@ -19,10 +16,6 @@ public interface ApiRequestService {
      */
     int deleteByPrimaryKey(Long id);
 
-    int insert(ApiRequestDO record);
-
-    int insertSelective(ApiRequestDO record);
-
     /**
      * 查询API详情
      * @param id id
@@ -30,18 +23,12 @@ public interface ApiRequestService {
      */
     ApiRequestDetailVO selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(ApiRequestDO record);
-
     /**
      * 修改API
      * @param updateApiRequestParam updateApiRequestParam
      * @return r
      */
     void updateByPrimaryKey(CreateApiRequestParam updateApiRequestParam);
-
-    int updateBatch(List<ApiRequestDO> list);
-
-    int batchInsert(List<ApiRequestDO> list);
 
     /**
      * 增加API

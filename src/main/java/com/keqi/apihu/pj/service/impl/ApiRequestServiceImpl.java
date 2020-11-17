@@ -43,16 +43,6 @@ public class ApiRequestServiceImpl implements ApiRequestService {
         return i + j;
     }
 
-    @Override
-    public int insert(ApiRequestDO record) {
-        return apiRequestMapper.insert(record);
-    }
-
-    @Override
-    public int insertSelective(ApiRequestDO record) {
-        return apiRequestMapper.insertSelective(record);
-    }
-
     /**
      * 查询API详情
      * @param id id
@@ -81,11 +71,6 @@ public class ApiRequestServiceImpl implements ApiRequestService {
         return detail;
     }
 
-    @Override
-    public int updateByPrimaryKeySelective(ApiRequestDO record) {
-        return apiRequestMapper.updateByPrimaryKeySelective(record);
-    }
-
     /**
      * 修改API
      * @param updateApiRequestParam updateApiRequestParam
@@ -98,16 +83,6 @@ public class ApiRequestServiceImpl implements ApiRequestService {
         if (i > 0) {
             this.createApiRequest(updateApiRequestParam);
         }
-    }
-
-    @Override
-    public int updateBatch(List<ApiRequestDO> list) {
-        return apiRequestMapper.updateBatch(list);
-    }
-
-    @Override
-    public int batchInsert(List<ApiRequestDO> list) {
-        return apiRequestMapper.batchInsert(list);
     }
 
     /**
@@ -211,7 +186,6 @@ public class ApiRequestServiceImpl implements ApiRequestService {
     }
 
     //================================私有方法================================//
-
 
     /**
      * 使用 BFS 遍历树形结构，并插入数据到对应的表中
