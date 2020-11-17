@@ -8,31 +8,31 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
-    * 数据源表结构表
-    */
+ * 数据源表结构表
+ */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class DatasourceTableDO {
     /**
-    * 表结构ID
-    */
+     * 表结构ID
+     */
     private Long id;
 
     /**
-    * 数据源ID
-    */
+     * 数据源ID
+     */
     private Long datasourceId;
 
     /**
-    * 表名称
-    */
+     * 表名称
+     */
     private String tableName;
 
     /**
-    * 表备注
-    */
+     * 表备注
+     */
     private String tableComment;
 
     //================================其他参数================================//

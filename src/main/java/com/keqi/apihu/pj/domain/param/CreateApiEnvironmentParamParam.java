@@ -17,28 +17,28 @@ import javax.validation.constraints.NotBlank;
 public class CreateApiEnvironmentParamParam {
 
     /**
-    * 参数名称
-    */
+     * 参数名称
+     */
     @ApiModelProperty(value = "参数名称", example = "accessToken", required = true)
     @NotBlank
     private String paramName;
 
     /**
-    * 参数值
-    */
+     * 参数值
+     */
     @ApiModelProperty(value = "参数值", example = "GUiOiJTVVBFUl9BRE1JTiIsInByb2p", required = true)
     @NotBlank
     private String paramValue;
 
     /**
-    * 参数备注
-    */
+     * 参数备注
+     */
     @ApiModelProperty(value = "参数备注", example = "访问accessToken")
     private String paramNote;
 
     /**
-    * 参数类型（HEADER/QUERY）
-    */
+     * 参数类型（HEADER/QUERY）
+     */
     @ApiModelProperty(value = "参数类型", example = "HEADER", required = true)
     @NotBlank
     private ParamType paramType;

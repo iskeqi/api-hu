@@ -28,6 +28,7 @@ public class DictController {
 
     /**
      * 增加字典项
+     *
      * @param createDictItemParam createDictItemParam
      * @return r
      */
@@ -41,6 +42,7 @@ public class DictController {
 
     /**
      * 删除字典项
+     *
      * @param id id
      * @return r
      */
@@ -55,6 +57,7 @@ public class DictController {
 
     /**
      * 修改字典项
+     *
      * @param updateDictItemParam updateDictItemParam
      * @return r
      */
@@ -68,6 +71,7 @@ public class DictController {
 
     /**
      * 查询指定字典类型下的全部列表
+     *
      * @param typeCode typeCode
      * @return r
      */

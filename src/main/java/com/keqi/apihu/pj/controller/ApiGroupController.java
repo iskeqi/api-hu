@@ -28,9 +28,10 @@ import java.util.List;
 public class ApiGroupController {
 
     private final ApiGroupService apiGroupService;
-    
+
     /**
      * 增加API分组
+     *
      * @param createApiGroupParam createApiGroupParam
      * @return r
      */
@@ -44,6 +45,7 @@ public class ApiGroupController {
 
     /**
      * 删除API分组
+     *
      * @param id id
      * @return r
      */
@@ -58,6 +60,7 @@ public class ApiGroupController {
 
     /**
      * 修改API分组
+     *
      * @param updateApiGroupParam updateApiGroupParam
      * @return r
      */
@@ -71,6 +74,7 @@ public class ApiGroupController {
 
     /**
      * 查询全部API分组列表
+     *
      * @return r
      */
     @ApiOperation(value = "2.4 查询全部API分组列表")
@@ -82,6 +86,7 @@ public class ApiGroupController {
 
     /**
      * 移动分组顺序
+     *
      * @return r
      */
     @ApiOperation(value = "2.5 移动分组顺序")

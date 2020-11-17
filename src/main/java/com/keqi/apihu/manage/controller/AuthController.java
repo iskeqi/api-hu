@@ -29,6 +29,7 @@ public class AuthController {
 
     /**
      * 登录
+     *
      * @param loginParam loginParam
      * @return r
      */
@@ -41,6 +42,7 @@ public class AuthController {
 
     /**
      * 用户自己修改密码
+     *
      * @param oldPassword oldPassword
      * @param newPassword newPassword
      * @return r
@@ -50,7 +52,7 @@ public class AuthController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "oldPassword", value = "旧密码", example = "123456", required = true),
             @ApiImplicitParam(name = "newPassword", value = "新密码", example = "123456", required = true)
-        }
+    }
     )
     @PostMapping("/updatePassword")
     public AjaxEntity updatePassword(String oldPassword, String newPassword) {

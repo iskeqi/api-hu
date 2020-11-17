@@ -1,159 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.keqi.apihu.pj.mapper.ApiEnvironmentParamMapper">
-  <resultMap id="BaseResultMap" type="com.keqi.apihu.pj.domain.db.ApiEnvironmentParamDO">
-    <!--@mbg.generated-->
-    <!--@Table pj_api_environment_param-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="param_name" jdbcType="VARCHAR" property="paramName" />
-    <result column="param_value" jdbcType="VARCHAR" property="paramValue" />
-    <result column="param_note" jdbcType="VARCHAR" property="paramNote" />
-    <result column="param_type" jdbcType="CHAR" property="paramType" />
-    <result column="api_environment_id" jdbcType="BIGINT" property="apiEnvironmentId" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, param_name, param_value, param_note, param_type, api_environment_id
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from pj_api_environment_param
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    <!--@mbg.generated-->
-    delete from pj_api_environment_param
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.pj.domain.db.ApiEnvironmentParamDO" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into pj_api_environment_param (param_name, param_value, param_note, 
-      param_type, api_environment_id)
-    values (#{paramName,jdbcType=VARCHAR}, #{paramValue,jdbcType=VARCHAR}, #{paramNote,jdbcType=VARCHAR}, 
-      #{paramType,jdbcType=CHAR}, #{apiEnvironmentId,jdbcType=BIGINT})
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.pj.domain.db.ApiEnvironmentParamDO" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into pj_api_environment_param
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="paramName != null and paramName != ''">
-        param_name,
-      </if>
-      <if test="paramValue != null and paramValue != ''">
-        param_value,
-      </if>
-      <if test="paramNote != null and paramNote != ''">
-        param_note,
-      </if>
-      <if test="paramType != null and paramType != ''">
-        param_type,
-      </if>
-      <if test="apiEnvironmentId != null">
-        api_environment_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="paramName != null and paramName != ''">
-        #{paramName,jdbcType=VARCHAR},
-      </if>
-      <if test="paramValue != null and paramValue != ''">
-        #{paramValue,jdbcType=VARCHAR},
-      </if>
-      <if test="paramNote != null and paramNote != ''">
-        #{paramNote,jdbcType=VARCHAR},
-      </if>
-      <if test="paramType != null and paramType != ''">
-        #{paramType,jdbcType=CHAR},
-      </if>
-      <if test="apiEnvironmentId != null">
-        #{apiEnvironmentId,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.keqi.apihu.pj.domain.db.ApiEnvironmentParamDO">
-    <!--@mbg.generated-->
-    update pj_api_environment_param
-    <set>
-      <if test="paramName != null and paramName != ''">
-        param_name = #{paramName,jdbcType=VARCHAR},
-      </if>
-      <if test="paramValue != null and paramValue != ''">
+    <resultMap id="BaseResultMap" type="com.keqi.apihu.pj.domain.db.ApiEnvironmentParamDO">
+        <!--@mbg.generated-->
+        <!--@Table pj_api_environment_param-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="param_name" jdbcType="VARCHAR" property="paramName"/>
+        <result column="param_value" jdbcType="VARCHAR" property="paramValue"/>
+        <result column="param_note" jdbcType="VARCHAR" property="paramNote"/>
+        <result column="param_type" jdbcType="CHAR" property="paramType"/>
+        <result column="api_environment_id" jdbcType="BIGINT" property="apiEnvironmentId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, param_name, param_value, param_note, param_type, api_environment_id
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from pj_api_environment_param
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete from pj_api_environment_param
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id"
+            parameterType="com.keqi.apihu.pj.domain.db.ApiEnvironmentParamDO" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into pj_api_environment_param (param_name, param_value, param_note,
+        param_type, api_environment_id)
+        values (#{paramName,jdbcType=VARCHAR}, #{paramValue,jdbcType=VARCHAR}, #{paramNote,jdbcType=VARCHAR},
+        #{paramType,jdbcType=CHAR}, #{apiEnvironmentId,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.keqi.apihu.pj.domain.db.ApiEnvironmentParamDO" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into pj_api_environment_param
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="paramName != null and paramName != ''">
+                param_name,
+            </if>
+            <if test="paramValue != null and paramValue != ''">
+                param_value,
+            </if>
+            <if test="paramNote != null and paramNote != ''">
+                param_note,
+            </if>
+            <if test="paramType != null and paramType != ''">
+                param_type,
+            </if>
+            <if test="apiEnvironmentId != null">
+                api_environment_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="paramName != null and paramName != ''">
+                #{paramName,jdbcType=VARCHAR},
+            </if>
+            <if test="paramValue != null and paramValue != ''">
+                #{paramValue,jdbcType=VARCHAR},
+            </if>
+            <if test="paramNote != null and paramNote != ''">
+                #{paramNote,jdbcType=VARCHAR},
+            </if>
+            <if test="paramType != null and paramType != ''">
+                #{paramType,jdbcType=CHAR},
+            </if>
+            <if test="apiEnvironmentId != null">
+                #{apiEnvironmentId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.keqi.apihu.pj.domain.db.ApiEnvironmentParamDO">
+        <!--@mbg.generated-->
+        update pj_api_environment_param
+        <set>
+            <if test="paramName != null and paramName != ''">
+                param_name = #{paramName,jdbcType=VARCHAR},
+            </if>
+            <if test="paramValue != null and paramValue != ''">
+                param_value = #{paramValue,jdbcType=VARCHAR},
+            </if>
+            <if test="paramNote != null and paramNote != ''">
+                param_note = #{paramNote,jdbcType=VARCHAR},
+            </if>
+            <if test="paramType != null and paramType != ''">
+                param_type = #{paramType,jdbcType=CHAR},
+            </if>
+            <if test="apiEnvironmentId != null">
+                api_environment_id = #{apiEnvironmentId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.keqi.apihu.pj.domain.db.ApiEnvironmentParamDO">
+        <!--@mbg.generated-->
+        update pj_api_environment_param
+        set param_name = #{paramName,jdbcType=VARCHAR},
         param_value = #{paramValue,jdbcType=VARCHAR},
-      </if>
-      <if test="paramNote != null and paramNote != ''">
         param_note = #{paramNote,jdbcType=VARCHAR},
-      </if>
-      <if test="paramType != null and paramType != ''">
         param_type = #{paramType,jdbcType=CHAR},
-      </if>
-      <if test="apiEnvironmentId != null">
-        api_environment_id = #{apiEnvironmentId,jdbcType=BIGINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.keqi.apihu.pj.domain.db.ApiEnvironmentParamDO">
-    <!--@mbg.generated-->
-    update pj_api_environment_param
-    set param_name = #{paramName,jdbcType=VARCHAR},
-      param_value = #{paramValue,jdbcType=VARCHAR},
-      param_note = #{paramNote,jdbcType=VARCHAR},
-      param_type = #{paramType,jdbcType=CHAR},
-      api_environment_id = #{apiEnvironmentId,jdbcType=BIGINT}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateBatch" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update pj_api_environment_param
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="param_name = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.paramName,jdbcType=VARCHAR}
+        api_environment_id = #{apiEnvironmentId,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update pj_api_environment_param
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="param_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.paramName,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="param_value = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.paramValue,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="param_note = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.paramNote,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="param_type = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.paramType,jdbcType=CHAR}
+                </foreach>
+            </trim>
+            <trim prefix="api_environment_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.apiEnvironmentId,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
         </foreach>
-      </trim>
-      <trim prefix="param_value = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.paramValue,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="param_note = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.paramNote,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="param_type = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.paramType,jdbcType=CHAR}
-        </foreach>
-      </trim>
-      <trim prefix="api_environment_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.apiEnvironmentId,jdbcType=BIGINT}
-        </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=BIGINT}
-    </foreach>
-  </update>
+    </update>
 
-  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into pj_api_environment_param
-    (param_name, param_value, param_note, param_type, api_environment_id)
-    values
-    <foreach collection="list" item="item" separator=",">
-      (#{item.paramName,jdbcType=VARCHAR}, #{item.paramValue,jdbcType=VARCHAR}, #{item.paramNote,jdbcType=VARCHAR}, 
-        #{item.paramType,jdbcType=CHAR}, #{item.apiEnvironmentId,jdbcType=BIGINT})
-    </foreach>
-  </insert>
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into pj_api_environment_param
+        (param_name, param_value, param_note, param_type, api_environment_id)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.paramName,jdbcType=VARCHAR}, #{item.paramValue,jdbcType=VARCHAR},
+            #{item.paramNote,jdbcType=VARCHAR},
+            #{item.paramType,jdbcType=CHAR}, #{item.apiEnvironmentId,jdbcType=BIGINT})
+        </foreach>
+    </insert>
 
-<!--auto generated by MybatisCodeHelper on 2020-11-13-->
-  <delete id="deleteByApiEnvironmentId">
-    delete from pj_api_environment_param
-    where api_environment_id=#{apiEnvironmentId,jdbcType=BIGINT}
-  </delete>
+    <!--auto generated by MybatisCodeHelper on 2020-11-13-->
+    <delete id="deleteByApiEnvironmentId">
+        delete from pj_api_environment_param
+        where api_environment_id=#{apiEnvironmentId,jdbcType=BIGINT}
+    </delete>
 </mapper>

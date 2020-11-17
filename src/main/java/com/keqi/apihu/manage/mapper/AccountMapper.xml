@@ -1,158 +1,159 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.keqi.apihu.manage.mapper.AccountMapper">
+    <resultMap id="BaseResultMap" type="com.keqi.apihu.manage.domain.db.AccountDO">
+        <!--@mbg.generated-->
+        <!--@Table sys_account-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="post" jdbcType="VARCHAR" property="post"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
 
-  <resultMap id="BaseResultMap" type="com.keqi.apihu.manage.domain.db.AccountDO">
-    <!--@mbg.generated-->
-    <!--@Table sys_account-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="account" jdbcType="VARCHAR" property="account" />
-    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
-    <result column="post" jdbcType="VARCHAR" property="post" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
+    <resultMap id="PageAccountVO" type="com.keqi.apihu.manage.domain.vo.PageAccountVO">
+        <!--@mbg.generated-->
+        <!--@Table sys_account-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="post" jdbcType="VARCHAR" property="post"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="numberOfProjectsOwned" jdbcType="INTEGER" property="numberOfProjectsOwned"/>
+    </resultMap>
 
-  <resultMap id="PageAccountVO" type="com.keqi.apihu.manage.domain.vo.PageAccountVO">
-    <!--@mbg.generated-->
-    <!--@Table sys_account-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="account" jdbcType="VARCHAR" property="account" />
-    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
-    <result column="post" jdbcType="VARCHAR" property="post" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="numberOfProjectsOwned" jdbcType="INTEGER" property="numberOfProjectsOwned"/>
-  </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, account, nick_name, post, `password`, create_time, update_time
+    </sql>
 
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, account, nick_name, post, `password`, create_time, update_time
-  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from sys_account
+        where id = #{id,jdbcType=BIGINT}
+    </select>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from sys_account
-    where id = #{id,jdbcType=BIGINT}
-  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete from sys_account
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    <!--@mbg.generated-->
-    delete from sys_account
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.manage.domain.db.AccountDO"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into sys_account (account, nick_name, post,
+        `password`, create_time, update_time
+        )
+        values (#{account,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{post,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR}, now(), now()
+        )
+    </insert>
 
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.manage.domain.db.AccountDO" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into sys_account (account, nick_name, post, 
-      `password`, create_time, update_time
-      )
-    values (#{account,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{post,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, now(), now()
-      )
-  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.keqi.apihu.manage.domain.db.AccountDO" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into sys_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="account != null">
+                account,
+            </if>
+            <if test="nickName != null">
+                nick_name,
+            </if>
+            <if test="post != null">
+                post,
+            </if>
+            <if test="password != null">
+                `password`,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="post != null">
+                #{post,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
 
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.manage.domain.db.AccountDO" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into sys_account
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="account != null">
-        account,
-      </if>
-      <if test="nickName != null">
-        nick_name,
-      </if>
-      <if test="post != null">
-        post,
-      </if>
-      <if test="password != null">
-        `password`,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="account != null">
-        #{account,jdbcType=VARCHAR},
-      </if>
-      <if test="nickName != null">
-        #{nickName,jdbcType=VARCHAR},
-      </if>
-      <if test="post != null">
-        #{post,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.keqi.apihu.manage.domain.db.AccountDO">
+        <!--@mbg.generated-->
+        update sys_account
+        set nick_name = #{nickName,jdbcType=VARCHAR},
+        post = #{post,jdbcType=VARCHAR},
+        update_time = now()
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.keqi.apihu.manage.domain.db.AccountDO">
-    <!--@mbg.generated-->
-    update sys_account
-    set nick_name = #{nickName,jdbcType=VARCHAR},
-      post = #{post,jdbcType=VARCHAR},
-      update_time = now()
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <select id="accountExist" resultType="int">
+        select count(*) from sys_account where account = #{account,jdbcType=VARCHAR} limit 1
+    </select>
 
-  <select id="accountExist" resultType="int">
-    select count(*) from sys_account where account = #{account,jdbcType=VARCHAR} limit 1
-  </select>
+    <select id="countPageAccount" resultType="int">
+        select count(*) from sys_account
+        <where>
+            <if test="searchValue != null and searchValue != ''">
+                account like concat('%',replace(replace(#{searchValue},'%','/%'),'_','/_'),'%') escape '/'
+                or
+                nick_name like concat('%',replace(replace(#{searchValue},'%','/%'),'_','/_'),'%') escape '/'
+            </if>
+        </where>
+    </select>
 
-  <select id="countPageAccount" resultType="int">
-    select count(*) from sys_account
-    <where>
-      <if test="searchValue != null and searchValue != ''">
-        account like concat('%',replace(replace(#{searchValue},'%','/%'),'_','/_'),'%') escape '/'
-        or
-        nick_name like concat('%',replace(replace(#{searchValue},'%','/%'),'_','/_'),'%') escape '/'
-      </if>
-    </where>
-  </select>
+    <select id="pageAccount" resultMap="PageAccountVO">
+        select
+        id, account, nick_name, post, create_time,
+        (select count(*) from sys_account_project where account_id = id) as numberOfProjectsOwned
+        from sys_account
+        <where>
+            <if test="searchValue != null and searchValue != ''">
+                account like concat('%',replace(replace(#{searchValue},'%','/%'),'_','/_'),'%') escape '/'
+                or
+                nick_name like concat('%',replace(replace(#{searchValue},'%','/%'),'_','/_'),'%') escape '/'
+            </if>
+        </where>
+        order by update_time desc
+        <if test="pageSize >= 0">
+            limit #{offset}, #{pageSize}
+        </if>
+    </select>
 
-  <select id="pageAccount" resultMap="PageAccountVO">
-    select
-            id, account, nick_name, post, create_time,
-            (select count(*) from sys_account_project where account_id = id) as numberOfProjectsOwned
-    from sys_account
-    <where>
-      <if test="searchValue != null and searchValue != ''">
-        account like concat('%',replace(replace(#{searchValue},'%','/%'),'_','/_'),'%') escape '/'
-        or
-        nick_name like concat('%',replace(replace(#{searchValue},'%','/%'),'_','/_'),'%') escape '/'
-      </if>
-    </where>
-    order by update_time desc
-    <if test="pageSize >= 0">
-      limit #{offset}, #{pageSize}
-    </if>
-  </select>
+    <update id="updatePasswordByPrimaryKey">
+        update sys_account
+        set `password` = #{password,jdbcType=VARCHAR},
+        update_time = now()
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 
-  <update id="updatePasswordByPrimaryKey">
-    update sys_account
-    set `password` = #{password,jdbcType=VARCHAR},
-    update_time = now()
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-
-  <select id="findOneByAccount" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select
-    <include refid="Base_Column_List" />
-    from sys_account
-    where account = #{account,jdbcType=VARCHAR}
-  </select>
+    <select id="findOneByAccount" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from sys_account
+        where account = #{account,jdbcType=VARCHAR}
+    </select>
 </mapper>

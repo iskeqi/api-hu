@@ -20,7 +20,7 @@ public class ApiRequestParamVO {
      */
     @ApiModelProperty(value = "参数ID", example = "1")
     private Long id;
-    
+
     /**
      * 参数名称
      */

@@ -5,6 +5,6 @@ package com.keqi.apihu.core.pojo;
  */
 public enum ReadOnlyEnum {
 
-	Y, N;
+    Y, N;
 
 }

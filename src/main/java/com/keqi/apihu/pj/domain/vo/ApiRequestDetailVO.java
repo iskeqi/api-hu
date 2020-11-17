@@ -108,5 +108,5 @@ public class ApiRequestDetailVO {
      */
     @ApiModelProperty(value = "响应参数列表")
     private List<ApiRequestParamVO> responseParamList;
-    
+
 }

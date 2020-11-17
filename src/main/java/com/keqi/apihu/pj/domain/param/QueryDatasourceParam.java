@@ -15,9 +15,6 @@ import lombok.NoArgsConstructor;
 public class QueryDatasourceParam extends QueryBaseParam {
 
 
-
-
-
     //================================其他参数================================//
 
     @ApiModelProperty(hidden = true)

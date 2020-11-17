@@ -33,6 +33,7 @@ public class ProjectController {
 
     /**
      * 增加项目
+     *
      * @param createProjectParam createProjectParam
      * @return r
      */
@@ -46,6 +47,7 @@ public class ProjectController {
 
     /**
      * 删除项目
+     *
      * @param id id
      * @return r
      */
@@ -60,6 +62,7 @@ public class ProjectController {
 
     /**
      * 修改项目
+     *
      * @param updateProjectParam updateProjectParam
      * @return r
      */
@@ -73,6 +76,7 @@ public class ProjectController {
 
     /**
      * 查询项目列表
+     *
      * @param queryProjectParam queryProjectParam
      * @return r
      */
@@ -85,6 +89,7 @@ public class ProjectController {
 
     /**
      * 指定项目人员
+     *
      * @param designatedAccountParam designatedAccountParam
      * @return r
      */
@@ -95,22 +100,6 @@ public class ProjectController {
         this.projectService.designatedAccount(designatedAccountParam);
         return AjaxEntityBuilder.success();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

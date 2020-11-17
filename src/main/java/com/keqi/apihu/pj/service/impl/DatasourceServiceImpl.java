@@ -37,6 +37,7 @@ public class DatasourceServiceImpl implements DatasourceService {
 
     /**
      * 根据id删除数据源
+     *
      * @param id id
      * @return r
      */
@@ -52,6 +53,7 @@ public class DatasourceServiceImpl implements DatasourceService {
 
     /**
      * 修改数据源
+     *
      * @param updateDatasourceParam updateDatasourceParam
      * @return r
      */
@@ -221,6 +223,7 @@ public class DatasourceServiceImpl implements DatasourceService {
 
     /**
      * 读取指定数据源的所有表结构和表对应的列信息
+     *
      * @param datasourceDO datasourceDO
      * @return r
      */
@@ -291,6 +294,7 @@ public class DatasourceServiceImpl implements DatasourceService {
 
     /**
      * 根据 datasourceId 删除该数据源对应的所有表和表中的所有列
+     *
      * @param id id
      */
     private void deleteTableAndColumnByDatasourceId(Long id) {

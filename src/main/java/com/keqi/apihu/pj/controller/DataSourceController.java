@@ -30,9 +30,10 @@ import javax.validation.constraints.NotNull;
 public class DataSourceController {
 
     private final DatasourceService datasourceService;
-    
+
     /**
      * 增加数据源
+     *
      * @param createProjectParam createProjectParam
      * @return r
      */
@@ -46,6 +47,7 @@ public class DataSourceController {
 
     /**
      * 删除数据源
+     *
      * @param id id
      * @return r
      */
@@ -60,6 +62,7 @@ public class DataSourceController {
 
     /**
      * 修改数据源
+     *
      * @param updateDatasourceParam updateDatasourceParam
      * @return r
      */
@@ -73,6 +76,7 @@ public class DataSourceController {
 
     /**
      * 查询数据源列表
+     *
      * @param queryDatasourceParam queryDatasourceParam
      * @return r
      */
@@ -85,6 +89,7 @@ public class DataSourceController {
 
     /**
      * 查询全部数据源列表
+     *
      * @param queryDatasourceParam queryDatasourceParam
      * @return r
      */
@@ -97,6 +102,7 @@ public class DataSourceController {
 
     /**
      * 在线读取数据库
+     *
      * @param id id
      * @return r
      */
@@ -111,6 +117,7 @@ public class DataSourceController {
 
     /**
      * 查询指定数据源下的所有表
+     *
      * @param id id
      * @return r
      */
@@ -124,6 +131,7 @@ public class DataSourceController {
 
     /**
      * 查询指定表下的所有列
+     *
      * @param id id
      * @return r
      */

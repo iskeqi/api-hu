@@ -5,6 +5,6 @@ package com.keqi.apihu.core.pojo;
  */
 public enum UserTypeEnum {
 
-	SUPER_ADMIN, COMMON_USER;
+    SUPER_ADMIN, COMMON_USER;
 
 }

@@ -10,8 +10,8 @@ import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
-    * API 请求的请求参数和相应参数
-    */
+ * API 请求的请求参数和相应参数
+ */
 @Data
 @Builder
 @AllArgsConstructor
@@ -19,36 +19,36 @@ import java.util.List;
 public class UpdateApiRequestParamParam {
 
     /**
-    * 参数名称
-    */
+     * 参数名称
+     */
     @ApiModelProperty(value = "参数名称", example = "username", required = true)
     @NotBlank
     private String name;
 
     /**
-    * 参数说明
-    */
+     * 参数说明
+     */
     @ApiModelProperty(value = "参数说明", example = "用户名", required = true)
     @NotBlank
     private String note;
 
     /**
-    * 是否必须（必须 Y，非必须N）
-    */
+     * 是否必须（必须 Y，非必须N）
+     */
     @ApiModelProperty(value = "是否必须（必须 Y，非必须N）", example = "Y", required = true)
     @NotBlank
     private String required;
 
     /**
-    * 参数类型(string,int等)
-    */
+     * 参数类型(string,int等)
+     */
     @ApiModelProperty(value = "参数类型(string,int等)", example = "string", required = true)
     @NotBlank
     private String type;
 
     /**
-    * 示例
-    */
+     * 示例
+     */
     @ApiModelProperty(value = "示例", example = "xiaoming", required = true)
     @NotBlank
     private String example;

@@ -11,6 +11,7 @@ public interface ApiRequestService {
 
     /**
      * 删除API
+     *
      * @param id id
      * @return r
      */
@@ -18,6 +19,7 @@ public interface ApiRequestService {
 
     /**
      * 查询API详情
+     *
      * @param id id
      * @return r
      */
@@ -25,6 +27,7 @@ public interface ApiRequestService {
 
     /**
      * 修改API
+     *
      * @param updateApiRequestParam updateApiRequestParam
      * @return r
      */
@@ -32,12 +35,14 @@ public interface ApiRequestService {
 
     /**
      * 增加API
+     *
      * @param createApiRequestParam createApiRequestParam
      */
     void createApiRequest(CreateApiRequestParam createApiRequestParam);
 
     /**
      * 分页查询API列表
+     *
      * @param queryApiRequestParam queryApiRequestParam
      * @return r
      */
@@ -45,14 +50,16 @@ public interface ApiRequestService {
 
     /**
      * 在本级移动API
-     * @param id id
+     *
+     * @param id        id
      * @param direction direction
      */
     void moveApi(Long id, Direction direction);
 
     /**
      * 移动API到其他分组下
-     * @param id id
+     *
+     * @param id         id
      * @param apiGroupId apiGroupId
      */
     void moveApiToOtherGroup(Long id, Long apiGroupId);

@@ -20,13 +20,14 @@ import java.util.*;
 
 @Service
 @AllArgsConstructor
-public class ApiGroupServiceImpl implements ApiGroupService{
+public class ApiGroupServiceImpl implements ApiGroupService {
 
     private final ApiGroupMapper apiGroupMapper;
     private final ApiRequestMapper apiRequestMapper;
 
     /**
      * 删除API分组
+     *
      * @param id id
      * @return r
      */
@@ -49,6 +50,7 @@ public class ApiGroupServiceImpl implements ApiGroupService{
 
     /**
      * 修改API分组
+     *
      * @param updateApiGroupParam updateApiGroupParam
      * @return r
      */
@@ -125,7 +127,7 @@ public class ApiGroupServiceImpl implements ApiGroupService{
     /**
      * 移动分组顺序
      *
-     * @param moveGroupParamList        moveGroupParamList
+     * @param moveGroupParamList moveGroupParamList
      */
     @Override
     @Transactional
@@ -150,7 +152,7 @@ public class ApiGroupServiceImpl implements ApiGroupService{
             for (int i = 0; i < queue.size(); i++) {
                 moveGroupParam = queue.poll();
 
-                if (!Objects.equals(moveGroupParam.getId(), (long)0)) {
+                if (!Objects.equals(moveGroupParam.getId(), (long) 0)) {
                     // 执行插入记录
                     ApiGroupDO apiGroupDO = new ApiGroupDO();
                     BeanUtil.copyProperties(moveGroupParam, apiGroupDO);
@@ -177,6 +179,7 @@ public class ApiGroupServiceImpl implements ApiGroupService{
 
     /**
      * 根据 parentId 计算分组的祖级列表
+     *
      * @param parentId parentId
      * @return r
      */
@@ -194,6 +197,7 @@ public class ApiGroupServiceImpl implements ApiGroupService{
 
     /**
      * 把没有层次结构的分组列表按照父子结构关系进行组装（递归构造树形结构）
+     *
      * @param pageApiGroupVOS apiGroupDOList
      * @return r
      */

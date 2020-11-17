@@ -32,6 +32,7 @@ public class ApiRequestServiceImpl implements ApiRequestService {
 
     /**
      * 删除API
+     *
      * @param id id
      * @return r
      */
@@ -45,6 +46,7 @@ public class ApiRequestServiceImpl implements ApiRequestService {
 
     /**
      * 查询API详情
+     *
      * @param id id
      * @return r
      */
@@ -73,6 +75,7 @@ public class ApiRequestServiceImpl implements ApiRequestService {
 
     /**
      * 修改API
+     *
      * @param updateApiRequestParam updateApiRequestParam
      * @return r
      */
@@ -189,13 +192,14 @@ public class ApiRequestServiceImpl implements ApiRequestService {
 
     /**
      * 使用 BFS 遍历树形结构，并插入数据到对应的表中
+     *
      * @param requestParamParamList requestParamParamList
-     * @param apiParamType apiParamType
-     * @param apiRequestDO apiRequestDO
+     * @param apiParamType          apiParamType
+     * @param apiRequestDO          apiRequestDO
      */
     private void insertParameters(List<CreateApiRequestParamParam> requestParamParamList, ApiParamType apiParamType, ApiRequestDO apiRequestDO) {
         CreateApiRequestParamParam root = new CreateApiRequestParamParam();
-        root.setId((long)0);
+        root.setId((long) 0);
         root.setSubList(requestParamParamList);
 
         Queue<CreateApiRequestParamParam> queue = new LinkedList<>();
@@ -206,7 +210,7 @@ public class ApiRequestServiceImpl implements ApiRequestService {
             for (int i = 0; i < queue.size(); i++) {
                 c = queue.poll();
 
-                if (!Objects.equals(c.getId(), (long)0)) {
+                if (!Objects.equals(c.getId(), (long) 0)) {
                     // 插入记录
                     ApiRequestParamDO apiRequestParamDO = new ApiRequestParamDO();
                     BeanUtil.copyProperties(c, apiRequestParamDO);
@@ -232,6 +236,7 @@ public class ApiRequestServiceImpl implements ApiRequestService {
 
     /**
      * 把没有层次结构的分组列表按照父子结构关系进行组装（递归构造树形结构）
+     *
      * @param list list
      * @return r
      */

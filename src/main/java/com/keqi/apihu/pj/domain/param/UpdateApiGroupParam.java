@@ -15,14 +15,14 @@ import javax.validation.constraints.NotBlank;
 public class UpdateApiGroupParam {
 
     /**
-    * 分组ID
-    */
+     * 分组ID
+     */
     @ApiModelProperty(value = "分组ID", example = "1")
     private Long id;
 
     /**
-    * 分组名称
-    */
+     * 分组名称
+     */
     @ApiModelProperty(value = "分组名称", example = "系统管理模块", required = true)
     @NotBlank
     private String name;

@@ -7,8 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
-    * 数据源表
-    */
+ * 数据源表
+ */
 @Data
 @Builder
 @AllArgsConstructor
@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 public class PageDatasourceVO {
 
     /**
-    * 数据源ID
-    */
+     * 数据源ID
+     */
     @ApiModelProperty(value = "数据源ID", example = "1")
     private Long id;
 

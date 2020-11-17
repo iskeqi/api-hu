@@ -29,6 +29,7 @@ public interface ApiRequestMapper {
 
     /**
      * 根据 id 查询 API
+     *
      * @param id id
      * @return r
      */
@@ -76,40 +77,45 @@ public interface ApiRequestMapper {
 
     /**
      * 查询指定分组下且小于 orderNum 的最大的一个 API记录
+     *
      * @param apiGroupId apiGroupId
-     * @param orderNum orderNum
+     * @param orderNum   orderNum
      * @return r
      */
     ApiRequestDO findPreviousByApiGroupId(@Param("apiGroupId") Long apiGroupId, @Param("orderNum") Integer orderNum);
 
     /**
      * 查询指定分组下且大于 orderNum 的最小的一个 API记录
+     *
      * @param apiGroupId apiGroupId
-     * @param orderNum orderNum
+     * @param orderNum   orderNum
      * @return r
      */
     ApiRequestDO findNextByApiGroupId(@Param("apiGroupId") Long apiGroupId, @Param("orderNum") Integer orderNum);
 
     /**
      * 根据 id 修改 orderNum 字段
+     *
      * @param orderNum orderNum
-     * @param id id
+     * @param id       id
      * @return r
      */
-    int updateOrderNumById(@Param("orderNum")Integer orderNum, @Param("id")Long id);
+    int updateOrderNumById(@Param("orderNum") Integer orderNum, @Param("id") Long id);
 
     /**
      * 根据 id 修改 apiGroupId 和 orderNum 字段
+     *
      * @param apiGroupId apiGroupId
-     * @param orderNum orderNum
-     * @param id id
+     * @param orderNum   orderNum
+     * @param id         id
      * @return r
      */
-    int updateApiGroupIdAndOrderNumById(@Param("apiGroupId")Long apiGroupId, @Param("orderNum")Integer orderNum, @Param("id")Long id);
+    int updateApiGroupIdAndOrderNumById(@Param("apiGroupId") Long apiGroupId, @Param("orderNum") Integer orderNum, @Param("id") Long id);
 
 
     /**
      * 根据apiGroupId 查找该分组的 API 总数
+     *
      * @param apiGroupId apiGroupId
      * @return r
      */

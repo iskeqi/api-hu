@@ -30,9 +30,10 @@ import javax.validation.constraints.NotNull;
 public class ApiRequestController {
 
     private final ApiRequestService apiRequestService;
-    
+
     /**
      * 增加API
+     *
      * @param createApiRequestParam createApiRequestParam
      * @return r
      */
@@ -46,6 +47,7 @@ public class ApiRequestController {
 
     /**
      * 删除API
+     *
      * @param id id
      * @return r
      */
@@ -60,6 +62,7 @@ public class ApiRequestController {
 
     /**
      * 修改API
+     *
      * @param updateApiRequestParam updateApiRequestParam
      * @return r
      */
@@ -73,6 +76,7 @@ public class ApiRequestController {
 
     /**
      * 分页查询API列表
+     *
      * @param queryApiRequestParam queryApiRequestParam
      * @return r
      */
@@ -85,6 +89,7 @@ public class ApiRequestController {
 
     /**
      * 查询API详情
+     *
      * @param id id
      * @return r
      */
@@ -92,13 +97,14 @@ public class ApiRequestController {
     @ApiOperationSupport(order = 5)
     @ApiImplicitParam(name = "id", value = "API ID", example = "1", required = true)
     @PostMapping("/detail")
-    public AjaxEntity<ApiRequestDetailVO> detail (@NotNull @RequestParam Long id) {
+    public AjaxEntity<ApiRequestDetailVO> detail(@NotNull @RequestParam Long id) {
         return AjaxEntityBuilder.success(this.apiRequestService.selectByPrimaryKey(id));
     }
 
     /**
      * 在本级移动API
-     * @param id id
+     *
+     * @param id        id
      * @param direction direction
      * @return r
      */
@@ -116,7 +122,8 @@ public class ApiRequestController {
 
     /**
      * 移动API到其他分组下
-     * @param id id
+     *
+     * @param id         id
      * @param apiGroupId apiGroupId
      * @return r
      */

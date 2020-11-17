@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class RequireLoginUserBOAspect {
 
-	@Before("@annotation(RequireLoginUserBO)")
-	public void injectTheCurrentlyLoginUserInformation(JoinPoint point) throws Throwable {
-		// 注入当前线程中保存的登录对象，需要通过反射的方式判断是否存在固定属性loginUserBO
-	}
+    @Before("@annotation(RequireLoginUserBO)")
+    public void injectTheCurrentlyLoginUserInformation(JoinPoint point) throws Throwable {
+        // 注入当前线程中保存的登录对象，需要通过反射的方式判断是否存在固定属性loginUserBO
+    }
 }

@@ -1,167 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.keqi.apihu.manage.mapper.ProjectMapper">
+    <resultMap id="BaseResultMap" type="com.keqi.apihu.manage.domain.db.ProjectDO">
+        <!--@mbg.generated-->
+        <!--@Table sys_project-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="project_name" jdbcType="VARCHAR" property="projectName"/>
+        <result column="project_note" jdbcType="VARCHAR" property="projectNote"/>
+        <result column="delete_flag" jdbcType="CHAR" property="deleteFlag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
 
-  <resultMap id="BaseResultMap" type="com.keqi.apihu.manage.domain.db.ProjectDO">
-    <!--@mbg.generated-->
-    <!--@Table sys_project-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
-    <result column="project_note" jdbcType="VARCHAR" property="projectNote" />
-    <result column="delete_flag" jdbcType="CHAR" property="deleteFlag" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
+    <resultMap id="PageProjectVO" type="com.keqi.apihu.manage.domain.vo.PageProjectVO">
+        <!--@mbg.generated-->
+        <!--@Table sys_project-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="project_name" jdbcType="VARCHAR" property="projectName"/>
+        <result column="project_note" jdbcType="VARCHAR" property="projectNote"/>
+        <result column="apiTotal" jdbcType="INTEGER" property="apiTotal"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="numberOfCollaborators" jdbcType="INTEGER" property="numberOfCollaborators"/>
+    </resultMap>
 
-  <resultMap id="PageProjectVO" type="com.keqi.apihu.manage.domain.vo.PageProjectVO">
-    <!--@mbg.generated-->
-    <!--@Table sys_project-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
-    <result column="project_note" jdbcType="VARCHAR" property="projectNote" />
-    <result column="apiTotal" jdbcType="INTEGER" property="apiTotal" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="numberOfCollaborators" jdbcType="INTEGER" property="numberOfCollaborators" />
-  </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, project_name, project_note, delete_flag, create_time, update_time
+    </sql>
 
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, project_name, project_note, delete_flag, create_time, update_time
-  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from sys_project
+        where id = #{id,jdbcType=BIGINT} and delete_flag = 'Y'
+    </select>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from sys_project
-    where id = #{id,jdbcType=BIGINT} and delete_flag = 'Y'
-  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete from sys_project
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    <!--@mbg.generated-->
-    delete from sys_project
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.manage.domain.db.ProjectDO"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into sys_project (project_name, project_note, delete_flag,
+        create_time, update_time)
+        values (#{projectName,jdbcType=VARCHAR}, #{projectNote,jdbcType=VARCHAR}, 'Y',
+        now(), now())
+    </insert>
 
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.manage.domain.db.ProjectDO" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into sys_project (project_name, project_note, delete_flag, 
-      create_time, update_time)
-    values (#{projectName,jdbcType=VARCHAR}, #{projectNote,jdbcType=VARCHAR}, 'Y',
-      now(), now())
-  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.keqi.apihu.manage.domain.db.ProjectDO" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into sys_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectName != null and projectName != ''">
+                project_name,
+            </if>
+            <if test="projectNote != null and projectNote != ''">
+                project_note,
+            </if>
+            <if test="deleteFlag != null and deleteFlag != ''">
+                delete_flag,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectName != null and projectName != ''">
+                #{projectName,jdbcType=VARCHAR},
+            </if>
+            <if test="projectNote != null and projectNote != ''">
+                #{projectNote,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteFlag != null and deleteFlag != ''">
+                #{deleteFlag,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
 
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.manage.domain.db.ProjectDO" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into sys_project
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="projectName != null and projectName != ''">
-        project_name,
-      </if>
-      <if test="projectNote != null and projectNote != ''">
-        project_note,
-      </if>
-      <if test="deleteFlag != null and deleteFlag != ''">
-        delete_flag,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="projectName != null and projectName != ''">
-        #{projectName,jdbcType=VARCHAR},
-      </if>
-      <if test="projectNote != null and projectNote != ''">
-        #{projectNote,jdbcType=VARCHAR},
-      </if>
-      <if test="deleteFlag != null and deleteFlag != ''">
-        #{deleteFlag,jdbcType=CHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.keqi.apihu.manage.domain.db.ProjectDO">
+        <!--@mbg.generated-->
+        update sys_project
+        <set>
+            <if test="projectName != null and projectName != ''">
+                project_name = #{projectName,jdbcType=VARCHAR},
+            </if>
+            <if test="projectNote != null and projectNote != ''">
+                project_note = #{projectNote,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteFlag != null and deleteFlag != ''">
+                delete_flag = #{deleteFlag,jdbcType=CHAR},
+            </if>
+            update_time = now(),
+        </set>
+        where id = #{id,jdbcType=BIGINT} and delete_flag = 'Y'
+    </update>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.keqi.apihu.manage.domain.db.ProjectDO">
-    <!--@mbg.generated-->
-    update sys_project
-    <set>
-      <if test="projectName != null and projectName != ''">
-        project_name = #{projectName,jdbcType=VARCHAR},
-      </if>
-      <if test="projectNote != null and projectNote != ''">
+    <update id="updateByPrimaryKey" parameterType="com.keqi.apihu.manage.domain.db.ProjectDO">
+        <!--@mbg.generated-->
+        update sys_project
+        set project_name = #{projectName,jdbcType=VARCHAR},
         project_note = #{projectNote,jdbcType=VARCHAR},
-      </if>
-      <if test="deleteFlag != null and deleteFlag != ''">
-        delete_flag = #{deleteFlag,jdbcType=CHAR},
-      </if>
-        update_time = now(),
-    </set>
-    where id = #{id,jdbcType=BIGINT} and delete_flag = 'Y'
-  </update>
+        update_time = now()
+        where id = #{id,jdbcType=BIGINT} and delete_flag = 'Y'
+    </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.keqi.apihu.manage.domain.db.ProjectDO">
-    <!--@mbg.generated-->
-    update sys_project
-    set project_name = #{projectName,jdbcType=VARCHAR},
-      project_note = #{projectNote,jdbcType=VARCHAR},
-      update_time = now()
-    where id = #{id,jdbcType=BIGINT} and delete_flag = 'Y'
-  </update>
+    <select id="projectExist" resultType="int">
+        select count(*) from sys_project where project_name = #{projectName,jdbcType=VARCHAR} and delete_flag = 'Y'
+        limit 1
+    </select>
 
-  <select id="projectExist" resultType="int">
-    select count(*) from sys_project where project_name = #{projectName,jdbcType=VARCHAR} and delete_flag = 'Y' limit 1
-  </select>
+    <update id="disabledProject">
+        update sys_project set delete_flag = 'N' where id = #{id,jdbcType=BIGINT} and delete_flag = 'Y'
+    </update>
 
-  <update id="disabledProject">
-    update sys_project set delete_flag = 'N' where id = #{id,jdbcType=BIGINT} and delete_flag = 'Y'
-  </update>
+    <select id="countProject" resultType="int">
+        select count(*) from sys_project
+        where delete_flag = 'Y'
+        <if test="searchValue != null and searchValue != ''">
+            and project_name like concat('%',replace(replace(#{searchValue},'%','/%'),'_','/_'),'%') escape '/'
+        </if>
+    </select>
 
-  <select id="countProject" resultType="int">
-    select count(*) from sys_project
-    where delete_flag = 'Y'
-    <if test="searchValue != null and searchValue != ''">
-      and project_name like concat('%',replace(replace(#{searchValue},'%','/%'),'_','/_'),'%') escape '/'
-    </if>
-  </select>
-
-  <select id="pageProject" resultMap="PageProjectVO">
-    select
-        id, project_name, project_note,  create_time,
+    <select id="pageProject" resultMap="PageProjectVO">
+        select
+        id, project_name, project_note, create_time,
         (select count(*) from sys_account_project where project_id = id) as numberOfCollaborators,
         (select count(*) from pj_api_request where projectId = id) as apiTotal
-    from sys_project
-    where delete_flag = 'Y'
-    <if test="searchValue != null and searchValue != ''">
-      and project_name like concat('%',replace(replace(#{searchValue},'%','/%'),'_','/_'),'%') escape '/'
-    </if>
-    order by update_time desc
-    <if test="pageSize >= 0">
-      limit #{offset}, #{pageSize}
-    </if>
-  </select>
+        from sys_project
+        where delete_flag = 'Y'
+        <if test="searchValue != null and searchValue != ''">
+            and project_name like concat('%',replace(replace(#{searchValue},'%','/%'),'_','/_'),'%') escape '/'
+        </if>
+        order by update_time desc
+        <if test="pageSize >= 0">
+            limit #{offset}, #{pageSize}
+        </if>
+    </select>
 
-<!--auto generated by MybatisCodeHelper on 2020-11-11-->
-  <select id="findOneByProjectName" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from sys_project
-    where project_name=#{projectName,jdbcType=VARCHAR} and delete_flag = 'Y'
-  </select>
+    <!--auto generated by MybatisCodeHelper on 2020-11-11-->
+    <select id="findOneByProjectName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_project
+        where project_name=#{projectName,jdbcType=VARCHAR} and delete_flag = 'Y'
+    </select>
 
-<!--auto generated by MybatisCodeHelper on 2020-11-17-->
-  <select id="findAllDisableProjects" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from sys_project
-    where delete_flag = 'N'
-  </select>
+    <!--auto generated by MybatisCodeHelper on 2020-11-17-->
+    <select id="findAllDisableProjects" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_project
+        where delete_flag = 'N'
+    </select>
 </mapper>

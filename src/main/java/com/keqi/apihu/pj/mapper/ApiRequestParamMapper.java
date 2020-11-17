@@ -11,6 +11,7 @@ public interface ApiRequestParamMapper {
 
     /**
      * 增加
+     *
      * @param record record
      * @return r
      */
@@ -30,18 +31,20 @@ public interface ApiRequestParamMapper {
 
     /**
      * 根据 apiRequestId 删除所有请求和相应参数
+     *
      * @param apiRequestId apiRequestId
      * @return r
      */
-    int deleteByApiRequestId(@Param("apiRequestId")Long apiRequestId);
+    int deleteByApiRequestId(@Param("apiRequestId") Long apiRequestId);
 
     /**
      * 根据 apiRequstId 和 paramType 查询参数列表
+     *
      * @param apiRequestId apiRequestId
-     * @param paramType paramType
+     * @param paramType    paramType
      * @return r
      */
-    List<ApiRequestParamVO> findAllByApiRequestIdAndParamType(@Param("apiRequestId")Long apiRequestId, @Param("paramType")String paramType);
+    List<ApiRequestParamVO> findAllByApiRequestIdAndParamType(@Param("apiRequestId") Long apiRequestId, @Param("paramType") String paramType);
 
 
 }

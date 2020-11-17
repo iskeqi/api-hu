@@ -15,9 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 public class AjaxPageEntity<T> {
 
-	@ApiModelProperty(value = "总记录数", required = true, example = "20")
-	private int total;
+    @ApiModelProperty(value = "总记录数", required = true, example = "20")
+    private int total;
 
-	@ApiModelProperty(value = "记录列表", required = true)
-	private List<T> list;
+    @ApiModelProperty(value = "记录列表", required = true)
+    private List<T> list;
 }

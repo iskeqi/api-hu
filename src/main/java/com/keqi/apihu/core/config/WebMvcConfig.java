@@ -15,36 +15,36 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-	private final HandlerInterceptor securityInterceptor;
+    private final HandlerInterceptor securityInterceptor;
 
-	public WebMvcConfig(@Qualifier("securityInterceptor") HandlerInterceptor securityInterceptor) {
-		this.securityInterceptor = securityInterceptor;
-	}
+    public WebMvcConfig(@Qualifier("securityInterceptor") HandlerInterceptor securityInterceptor) {
+        this.securityInterceptor = securityInterceptor;
+    }
 
-	/**
-	 * 注册拦截器对象
-	 *
-	 * @param registry registry
-	 */
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		// 注册一个安全拦截器，拦截所有请求（登录接口除外）
-		registry.addInterceptor(securityInterceptor).addPathPatterns("/**").excludePathPatterns("/sys/auth/login");
-	}
+    /**
+     * 注册拦截器对象
+     *
+     * @param registry registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        // 注册一个安全拦截器，拦截所有请求（登录接口除外）
+        registry.addInterceptor(securityInterceptor).addPathPatterns("/**").excludePathPatterns("/sys/auth/login");
+    }
 
-	/**
-	 * 跨域配置
-	 *
-	 * @param registry registry
-	 */
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**")
-				.allowedOrigins("*")
-				.allowedMethods("GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS")
-				.allowCredentials(true)
-				.maxAge(3600)
-				.allowedHeaders("*");
-	}
+    /**
+     * 跨域配置
+     *
+     * @param registry registry
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowCredentials(true)
+                .maxAge(3600)
+                .allowedHeaders("*");
+    }
 }
 

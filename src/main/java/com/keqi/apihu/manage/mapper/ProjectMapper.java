@@ -1,4 +1,5 @@
 package com.keqi.apihu.manage.mapper;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.keqi.apihu.manage.domain.db.ProjectDO;
@@ -12,6 +13,7 @@ public interface ProjectMapper {
 
     /**
      * 新增项目
+     *
      * @param record record
      * @return r
      */
@@ -25,12 +27,14 @@ public interface ProjectMapper {
 
     /**
      * 禁用项目
+     *
      * @param id id
      */
     void disabledProject(Long id);
 
     /**
      * 修改项目
+     *
      * @param record record
      * @return r
      */
@@ -38,6 +42,7 @@ public interface ProjectMapper {
 
     /**
      * 判断是否存在同名项目名
+     *
      * @param projectName projectName
      * @return r
      */
@@ -45,6 +50,7 @@ public interface ProjectMapper {
 
     /**
      * 分页列表查询记录总数
+     *
      * @param queryProjectParam queryProjectParam
      * @return r
      */
@@ -52,6 +58,7 @@ public interface ProjectMapper {
 
     /**
      * 分页查询项目列表总数
+     *
      * @param queryProjectParam queryProjectParam
      * @return r
      */
@@ -59,13 +66,15 @@ public interface ProjectMapper {
 
     /**
      * 根据 projectName 查找项目
+     *
      * @param projectName projectName
      * @return r
      */
-    ProjectDO findOneByProjectName(@Param("projectName")String projectName);
+    ProjectDO findOneByProjectName(@Param("projectName") String projectName);
 
     /**
      * 根据 deleteFlag 查询所有已删除的项目列表
+     *
      * @return r
      */
     List<ProjectDO> findAllDisableProjects();

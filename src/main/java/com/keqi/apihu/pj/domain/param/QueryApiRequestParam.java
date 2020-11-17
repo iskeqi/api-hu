@@ -21,7 +21,6 @@ public class QueryApiRequestParam extends QueryBaseParam {
     private Long apiGroupId;
 
 
-
     //================================其他参数================================//
 
     @ApiModelProperty(hidden = true)

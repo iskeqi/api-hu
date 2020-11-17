@@ -1,170 +1,174 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.keqi.apihu.pj.mapper.ApiEnvironmentMapper">
-  <resultMap id="BaseResultMap" type="com.keqi.apihu.pj.domain.db.ApiEnvironmentDO">
-    <!--@mbg.generated-->
-    <!--@Table pj_api_environment-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="note" jdbcType="VARCHAR" property="note" />
-    <result column="projectId" jdbcType="BIGINT" property="projectid" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.keqi.apihu.pj.domain.db.ApiEnvironmentDO">
+        <!--@mbg.generated-->
+        <!--@Table pj_api_environment-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="note" jdbcType="VARCHAR" property="note"/>
+        <result column="projectId" jdbcType="BIGINT" property="projectid"/>
+    </resultMap>
 
-  <resultMap id="PageApiEnvironmentVO" type="com.keqi.apihu.pj.domain.vo.PageApiEnvironmentVO">
-    <!--@mbg.generated-->
-    <!--@Table pj_api_environment-->
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="note" jdbcType="VARCHAR" property="note" />
-    <collection property="pageApiEnvironmentParamVOList" ofType="com.keqi.apihu.pj.domain.vo.PageApiEnvironmentParamVO" columnPrefix="paep_">
-      <id column="id" property="id"/>
-      <result column="param_name" property="paramName"/>
-      <result column="param_value" property="paramValue"/>
-      <result column="param_note" property="paramNote"/>
-      <result column="param_type" property="paramType"/>
-    </collection>
-  </resultMap>
+    <resultMap id="PageApiEnvironmentVO" type="com.keqi.apihu.pj.domain.vo.PageApiEnvironmentVO">
+        <!--@mbg.generated-->
+        <!--@Table pj_api_environment-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="note" jdbcType="VARCHAR" property="note"/>
+        <collection property="pageApiEnvironmentParamVOList"
+                    ofType="com.keqi.apihu.pj.domain.vo.PageApiEnvironmentParamVO" columnPrefix="paep_">
+            <id column="id" property="id"/>
+            <result column="param_name" property="paramName"/>
+            <result column="param_value" property="paramValue"/>
+            <result column="param_note" property="paramNote"/>
+            <result column="param_type" property="paramType"/>
+        </collection>
+    </resultMap>
 
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, `name`, url, note, projectId
-  </sql>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, `name`, url, note, projectId
+    </sql>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from pj_api_environment
-    where id = #{id,jdbcType=BIGINT}
-  </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from pj_api_environment
+        where id = #{id,jdbcType=BIGINT}
+    </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    <!--@mbg.generated-->
-    delete from pj_api_environment
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete from pj_api_environment
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
 
 
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.pj.domain.db.ApiEnvironmentDO" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into pj_api_environment (`name`, url, note, 
-      projectId)
-    values (#{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
-      #{projectid,jdbcType=BIGINT})
-  </insert>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.pj.domain.db.ApiEnvironmentDO"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into pj_api_environment (`name`, url, note,
+        projectId)
+        values (#{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR},
+        #{projectid,jdbcType=BIGINT})
+    </insert>
 
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.keqi.apihu.pj.domain.db.ApiEnvironmentDO" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into pj_api_environment
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="name != null and name != ''">
-        `name`,
-      </if>
-      <if test="url != null and url != ''">
-        url,
-      </if>
-      <if test="note != null and note != ''">
-        note,
-      </if>
-      <if test="projectid != null">
-        projectId,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="name != null and name != ''">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null and url != ''">
-        #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="note != null and note != ''">
-        #{note,jdbcType=VARCHAR},
-      </if>
-      <if test="projectid != null">
-        #{projectid,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.keqi.apihu.pj.domain.db.ApiEnvironmentDO">
-    <!--@mbg.generated-->
-    update pj_api_environment
-    <set>
-      <if test="name != null and name != ''">
-        `name` = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null and url != ''">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.keqi.apihu.pj.domain.db.ApiEnvironmentDO" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into pj_api_environment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                `name`,
+            </if>
+            <if test="url != null and url != ''">
+                url,
+            </if>
+            <if test="note != null and note != ''">
+                note,
+            </if>
+            <if test="projectid != null">
+                projectId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null and url != ''">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="note != null and note != ''">
+                #{note,jdbcType=VARCHAR},
+            </if>
+            <if test="projectid != null">
+                #{projectid,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.keqi.apihu.pj.domain.db.ApiEnvironmentDO">
+        <!--@mbg.generated-->
+        update pj_api_environment
+        <set>
+            <if test="name != null and name != ''">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null and url != ''">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="note != null and note != ''">
+                note = #{note,jdbcType=VARCHAR},
+            </if>
+            <if test="projectid != null">
+                projectId = #{projectid,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.keqi.apihu.pj.domain.db.ApiEnvironmentDO">
+        <!--@mbg.generated-->
+        update pj_api_environment
+        set `name` = #{name,jdbcType=VARCHAR},
         url = #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="note != null and note != ''">
         note = #{note,jdbcType=VARCHAR},
-      </if>
-      <if test="projectid != null">
-        projectId = #{projectid,jdbcType=BIGINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.keqi.apihu.pj.domain.db.ApiEnvironmentDO">
-    <!--@mbg.generated-->
-    update pj_api_environment
-    set `name` = #{name,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      note = #{note,jdbcType=VARCHAR},
-      projectId = #{projectid,jdbcType=BIGINT}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateBatch" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update pj_api_environment
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="`name` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.name,jdbcType=VARCHAR}
+        projectId = #{projectid,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update pj_api_environment
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="`name` = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.name,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="url = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.url,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="note = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.note,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="projectId = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when id = #{item.id,jdbcType=BIGINT} then #{item.projectid,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.id,jdbcType=BIGINT}
         </foreach>
-      </trim>
-      <trim prefix="url = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.url,jdbcType=VARCHAR}
+    </update>
+    <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into pj_api_environment
+        (`name`, url, note, projectId)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.name,jdbcType=VARCHAR}, #{item.url,jdbcType=VARCHAR}, #{item.note,jdbcType=VARCHAR},
+            #{item.projectid,jdbcType=BIGINT})
         </foreach>
-      </trim>
-      <trim prefix="note = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.note,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="projectId = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.projectid,jdbcType=BIGINT}
-        </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=BIGINT}
-    </foreach>
-  </update>
-  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into pj_api_environment
-    (`name`, url, note, projectId)
-    values
-    <foreach collection="list" item="item" separator=",">
-      (#{item.name,jdbcType=VARCHAR}, #{item.url,jdbcType=VARCHAR}, #{item.note,jdbcType=VARCHAR}, 
-        #{item.projectid,jdbcType=BIGINT})
-    </foreach>
-  </insert>
+    </insert>
 
-<!--auto generated by MybatisCodeHelper on 2020-11-13-->
-  <select id="findAll" resultMap="PageApiEnvironmentVO">
-    select
+    <!--auto generated by MybatisCodeHelper on 2020-11-13-->
+    <select id="findAll" resultMap="PageApiEnvironmentVO">
+        select
         p.id, p.`name`, p.url, p.note, p.projectId,
         paep.id as paep_id, paep.param_name as paep_param_name, paep.param_value as paep_param_value,
-        paep.param_note as paep_param_note,paep.param_type as paep_param_type, paep.api_environment_id as paep_api_environment_id
-    from pj_api_environment p
-    left join pj_api_environment_param paep on p.id = paep.api_environment_id
-    where projectId = #{projectId,jdbcType=BIGINT}
-    order by p.id
-  </select>
+        paep.param_note as paep_param_note,paep.param_type as paep_param_type, paep.api_environment_id as
+        paep_api_environment_id
+        from pj_api_environment p
+        left join pj_api_environment_param paep on p.id = paep.api_environment_id
+        where projectId = #{projectId,jdbcType=BIGINT}
+        order by p.id
+    </select>
 </mapper>

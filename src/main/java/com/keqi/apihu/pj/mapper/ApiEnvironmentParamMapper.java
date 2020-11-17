@@ -22,6 +22,7 @@ public interface ApiEnvironmentParamMapper {
 
     /**
      * 批量增加
+     *
      * @param list list
      * @return r
      */
@@ -29,10 +30,11 @@ public interface ApiEnvironmentParamMapper {
 
     /**
      * 根据 apiEnvironmentId 删除对应的参数
+     *
      * @param apiEnvironmentId apiEnvironmentId
      * @return r
      */
-    int deleteByApiEnvironmentId(@Param("apiEnvironmentId")Long apiEnvironmentId);
+    int deleteByApiEnvironmentId(@Param("apiEnvironmentId") Long apiEnvironmentId);
 
 
 }

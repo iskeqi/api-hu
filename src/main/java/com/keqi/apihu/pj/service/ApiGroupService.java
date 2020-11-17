@@ -7,10 +7,11 @@ import com.keqi.apihu.pj.domain.vo.PageApiGroupVO;
 
 import java.util.List;
 
-public interface ApiGroupService{
+public interface ApiGroupService {
 
     /**
      * 删除API分组
+     *
      * @param id id
      * @return r
      */
@@ -18,6 +19,7 @@ public interface ApiGroupService{
 
     /**
      * 修改API分组
+     *
      * @param updateApiGroupParam updateApiGroupParam
      * @return r
      */
@@ -25,18 +27,21 @@ public interface ApiGroupService{
 
     /**
      * 增加API分组
+     *
      * @param createApiGroupParam createApiGroupParam
      */
     void createApiGroup(CreateApiGroupParam createApiGroupParam);
 
     /**
      * 查询全部API分组列表
+     *
      * @return r
      */
     List<PageApiGroupVO> listApiGroup();
 
     /**
      * 移动分组顺序
+     *
      * @param moveGroupParamList moveGroupParamList
      */
     void moveGroup(List<MoveGroupParam> moveGroupParamList);

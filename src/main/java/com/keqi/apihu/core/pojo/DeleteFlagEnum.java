@@ -5,6 +5,6 @@ package com.keqi.apihu.core.pojo;
  */
 public enum DeleteFlagEnum {
 
-	Y, N;
+    Y, N;
 
 }

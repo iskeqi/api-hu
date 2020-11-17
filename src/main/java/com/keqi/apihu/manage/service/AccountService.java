@@ -12,24 +12,28 @@ public interface AccountService {
 
     /**
      * 根据主键删除用户
+     *
      * @param id id
      */
     void deleteByPrimaryKey(Long id);
 
     /**
      * 根据主键修改用户信息
+     *
      * @param updateAccountParam updateAccountParam
      */
     void updateByPrimaryKey(UpdateAccountParam updateAccountParam);
 
     /**
      * 创建用户
+     *
      * @param createAccountParam createAccountParam
      */
     void createAccount(CreateAccountParam createAccountParam);
 
     /**
      * 查询用户分页列表
+     *
      * @param queryAccountParam queryAccountParam
      * @return r
      */
@@ -37,12 +41,14 @@ public interface AccountService {
 
     /**
      * 重置密码
+     *
      * @param id id
      */
     void resetPassword(Long id);
 
     /**
      * 用户修改密码
+     *
      * @param oldPassword oldPassword
      * @param newPassword newPassword
      */
@@ -50,6 +56,7 @@ public interface AccountService {
 
     /**
      * 登录
+     *
      * @param loginParam loginParam
      */
     LoginVO login(LoginParam loginParam);

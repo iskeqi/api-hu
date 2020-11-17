@@ -10,6 +10,7 @@ public interface AccountMapper {
 
     /**
      * 根据主键删除用户记录
+     *
      * @param id id
      * @return r
      */
@@ -17,6 +18,7 @@ public interface AccountMapper {
 
     /**
      * 新增用户
+     *
      * @param record record
      * @return r
      */
@@ -26,13 +28,15 @@ public interface AccountMapper {
 
     /**
      * 根据用户ID查询用户信息
-     * @param id
-     * @return
+     *
+     * @param id id
+     * @return r
      */
     AccountDO selectByPrimaryKey(Long id);
 
     /**
      * 根据主键修改用户信息
+     *
      * @param record record
      * @return r
      */
@@ -40,6 +44,7 @@ public interface AccountMapper {
 
     /**
      * 判断用户名是否存在
+     *
      * @param account account
      * @return 返回值大于零，即存在该用户名
      */
@@ -47,6 +52,7 @@ public interface AccountMapper {
 
     /**
      * 分页列表查询记录总数
+     *
      * @param queryAccountParam queryAccountParam
      * @return r
      */
@@ -54,6 +60,7 @@ public interface AccountMapper {
 
     /**
      * 查询用户分页列表
+     *
      * @param queryAccountParam queryAccountParam
      * @return r
      */
@@ -61,14 +68,16 @@ public interface AccountMapper {
 
     /**
      * 根据用户ID修改密码
+     *
      * @param accountDO accountDO
      */
     void updatePasswordByPrimaryKey(AccountDO accountDO);
 
     /**
      * 根据用户账号查找用户信息
+     *
      * @param account account
-     * @return
+     * @return r
      */
     AccountDO findOneByAccount(String account);
 }

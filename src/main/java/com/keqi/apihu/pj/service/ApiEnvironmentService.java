@@ -10,6 +10,7 @@ public interface ApiEnvironmentService {
 
     /**
      * 删除API环境
+     *
      * @param id id
      * @return r
      */
@@ -17,6 +18,7 @@ public interface ApiEnvironmentService {
 
     /**
      * 修改API环境
+     *
      * @param updateApiEnvironmentParam updateApiEnvironmentParam
      * @return r
      */
@@ -24,12 +26,14 @@ public interface ApiEnvironmentService {
 
     /**
      * 增加API环境
+     *
      * @param createApiEnvironmentParam createApiEnvironmentParam
      */
     void createApiEnvironment(CreateApiEnvironmentParam createApiEnvironmentParam);
 
     /**
      * 查询全部API环境列表
+     *
      * @return r
      */
     List<PageApiEnvironmentVO> listApiEnvironment();

@@ -12,6 +12,7 @@ public interface AccountProjectMapper {
 
     /**
      * 批量增加记录
+     *
      * @param list list
      * @return r
      */
@@ -19,13 +20,15 @@ public interface AccountProjectMapper {
 
     /**
      * 删除指定项目ID关联的人员列表
+     *
      * @param projectId projectId
      */
     void deleteByProjectId(Long projectId);
 
     /**
      * 删除指定人员ID关联的项目列表
-     * @param id
+     *
+     * @param id id
      */
     void deleteByAccountId(Long id);
 }

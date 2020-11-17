@@ -34,6 +34,7 @@ public class AccountController {
 
     /**
      * 增加用户
+     *
      * @param createAccountParam createAccountParam
      * @return r
      */
@@ -47,6 +48,7 @@ public class AccountController {
 
     /**
      * 删除用户
+     *
      * @param id id
      * @return r
      */
@@ -61,6 +63,7 @@ public class AccountController {
 
     /**
      * 修改用户信息
+     *
      * @param updateAccountParam updateAccountParam
      * @return r
      */
@@ -74,6 +77,7 @@ public class AccountController {
 
     /**
      * 查询用户分页列表
+     *
      * @param queryAccountParam queryAccountParam
      * @return r
      */
@@ -87,6 +91,7 @@ public class AccountController {
 
     /**
      * 重置用户密码
+     *
      * @param id id
      * @return r
      */

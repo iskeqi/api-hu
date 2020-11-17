@@ -21,20 +21,20 @@ public class PageApiEnvironmentVO {
     private Long id;
 
     /**
-    * 环境名称
-    */
+     * 环境名称
+     */
     @ApiModelProperty(value = "环境名称", example = "开发测试环境")
     private String name;
 
     /**
-    * 前置URL
-    */
+     * 前置URL
+     */
     @ApiModelProperty(value = "前置URL", example = "http://192.168.49.35/api-hu")
     private String url;
 
     /**
-    * 备注
-    */
+     * 备注
+     */
     @ApiModelProperty(value = "备注", example = "此环境用于开发自测和前端联调")
     private String note;
 

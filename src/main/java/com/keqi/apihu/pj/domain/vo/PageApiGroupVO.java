@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
-    * API分组表
-    */
+ * API分组表
+ */
 @Data
 @Builder
 @AllArgsConstructor
@@ -18,32 +18,32 @@ import java.util.List;
 public class PageApiGroupVO {
 
     /**
-    * API分组ID
-    */
+     * API分组ID
+     */
     @ApiModelProperty(value = "API分组ID", example = "1")
     private Long id;
 
     /**
-    * 父级分组ID
-    */
+     * 父级分组ID
+     */
     @ApiModelProperty(value = "父级分组ID", example = "0")
     private Long parentId;
 
     /**
-    * 祖级列表
-    */
+     * 祖级列表
+     */
     @ApiModelProperty(value = "祖级列表", example = "0")
     private String ancestors;
 
     /**
-    * 分组名称
-    */
+     * 分组名称
+     */
     @ApiModelProperty(value = "分组名称", example = "0")
     private String name;
 
     /**
-    * 显示顺序
-    */
+     * 显示顺序
+     */
     @ApiModelProperty(value = "显示顺序", example = "1")
     private Integer orderNum;
 

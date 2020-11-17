@@ -19,33 +19,33 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class LoginUserBO {
 
-	/**
-	 * 用户ID
-	 */
-	private Long id;
+    /**
+     * 用户ID
+     */
+    private Long id;
 
-	/**
-	 * 登录用户账号名
-	 */
-	private String account;
+    /**
+     * 登录用户账号名
+     */
+    private String account;
 
-	/**
-	 * 登录用户姓名
-	 */
-	private String nickName;
+    /**
+     * 登录用户姓名
+     */
+    private String nickName;
 
-	/**
-	 * 岗位
-	 */
-	private String post;
+    /**
+     * 岗位
+     */
+    private String post;
 
-	/**
-	 * 用户类型
-	 */
-	private UserTypeEnum userType;
+    /**
+     * 用户类型
+     */
+    private UserTypeEnum userType;
 
-	/**
-	 * 当前操作项目ID
-	 */
-	private Long projectId;
+    /**
+     * 当前操作项目ID
+     */
+    private Long projectId;
 }

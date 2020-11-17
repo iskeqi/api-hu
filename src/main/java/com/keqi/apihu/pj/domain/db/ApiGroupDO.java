@@ -8,41 +8,41 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
-    * API分组表
-    */
+ * API分组表
+ */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApiGroupDO {
     /**
-    * API分组ID
-    */
+     * API分组ID
+     */
     private Long id;
 
     /**
-    * 父级分组ID
-    */
+     * 父级分组ID
+     */
     private Long parentId;
 
     /**
-    * 祖级列表
-    */
+     * 祖级列表
+     */
     private String ancestors;
 
     /**
-    * 分组名称
-    */
+     * 分组名称
+     */
     private String name;
 
     /**
-    * 显示顺序
-    */
+     * 显示顺序
+     */
     private Integer orderNum;
 
     /**
-    * 项目ID
-    */
+     * 项目ID
+     */
     private Long projectId;
 
     //================================其他参数================================//

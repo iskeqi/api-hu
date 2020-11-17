@@ -15,12 +15,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AjaxEntity<T> {
 
-	@ApiModelProperty(value = "响应状态码", example = "200", required = true)
-	private Integer status;
+    @ApiModelProperty(value = "响应状态码", example = "200", required = true)
+    private Integer status;
 
-	@ApiModelProperty(value = "响应描述信息", example = "OK", required = true)
-	private String msg;
+    @ApiModelProperty(value = "响应描述信息", example = "OK", required = true)
+    private String msg;
 
-	@ApiModelProperty(value = "响应体", required = true)
-	private T body;
+    @ApiModelProperty(value = "响应体", required = true)
+    private T body;
 }
