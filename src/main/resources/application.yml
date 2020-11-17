@@ -1,5 +1,5 @@
 server:
-  port: 9090
+  port: 9091
   servlet:
     context-path: /api-hu
 
@@ -26,5 +26,3 @@ logging:
 # 开启 knife4j 增强功能
 knife4j:
   enable: true
-  setting:
-    enableSwaggerModels: false

@@ -14,7 +14,11 @@ import lombok.NoArgsConstructor;
 @Data
 public class QueryApiRequestParam extends QueryBaseParam {
 
-
+    /**
+     * 分组ID
+     */
+    @ApiModelProperty(value = "分组ID", example = "1", required = true)
+    private Long apiGroupId;
 
 
 

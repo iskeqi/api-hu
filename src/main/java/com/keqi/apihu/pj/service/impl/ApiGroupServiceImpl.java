@@ -10,6 +10,7 @@ import com.keqi.apihu.pj.domain.param.MoveGroupParam;
 import com.keqi.apihu.pj.domain.param.UpdateApiGroupParam;
 import com.keqi.apihu.pj.domain.vo.PageApiGroupVO;
 import com.keqi.apihu.pj.mapper.ApiGroupMapper;
+import com.keqi.apihu.pj.mapper.ApiRequestMapper;
 import com.keqi.apihu.pj.service.ApiGroupService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import java.util.*;
 public class ApiGroupServiceImpl implements ApiGroupService{
 
     private final ApiGroupMapper apiGroupMapper;
+    private final ApiRequestMapper apiRequestMapper;
 
     /**
      * 删除API分组
@@ -34,8 +36,8 @@ public class ApiGroupServiceImpl implements ApiGroupService{
         // 查询该分组下级分组总数
         int groupCount = this.apiGroupMapper.countByParentId(id);
 
-        // 查询该分组下级API总数 todo
-        int apiCount = 0;
+        // 查询该分组下级API总数
+        int apiCount = this.apiRequestMapper.countByApiGroupId(id);
 
         // 删除对应的分组，如果该分组下有其它分组或者接口，则不允许删除，必须要先移出
         if (groupCount > 0 || apiCount > 0) {
@@ -100,7 +102,7 @@ public class ApiGroupServiceImpl implements ApiGroupService{
     }
 
     /**
-     * 查询全部API分组列表 todo
+     * 查询全部API分组列表
      *
      * @return r
      */

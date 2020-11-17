@@ -95,6 +95,12 @@ public class CreateApiRequestParam {
     private String responseJsonRootType;
 
     /**
+     * API所属分组ID
+     */
+    @ApiModelProperty(value = "API所属分组ID", example = "43", required = true)
+    private Long apiGroupId;
+
+    /**
      * 请求参数列表
      */
     @ApiModelProperty(value = "请求参数列表", required = true)

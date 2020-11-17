@@ -5,12 +5,15 @@ import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.keqi.apihu.core.common.AjaxEntity;
 import com.keqi.apihu.core.common.AjaxEntityBuilder;
 import com.keqi.apihu.core.common.AjaxPageEntity;
+import com.keqi.apihu.pj.domain.Direction;
 import com.keqi.apihu.pj.domain.param.CreateApiRequestParam;
 import com.keqi.apihu.pj.domain.param.QueryApiRequestParam;
+import com.keqi.apihu.pj.domain.vo.ApiRequestDetailVO;
 import com.keqi.apihu.pj.domain.vo.PageApiRequestVO;
 import com.keqi.apihu.pj.service.ApiRequestService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -80,5 +83,52 @@ public class ApiRequestController {
         return AjaxEntityBuilder.successList(this.apiRequestService.pageApiRequest(queryApiRequestParam));
     }
 
-    // todo 查询API详情、在本级移动API、移动到其他分组下
+    /**
+     * 查询API详情
+     * @param id id
+     * @return r
+     */
+    @ApiOperation(value = "4.5 查询API详情")
+    @ApiOperationSupport(order = 5)
+    @ApiImplicitParam(name = "id", value = "API ID", example = "1", required = true)
+    @PostMapping("/detail")
+    public AjaxEntity<ApiRequestDetailVO> detail (@NotNull @RequestParam Long id) {
+        return AjaxEntityBuilder.success(this.apiRequestService.selectByPrimaryKey(id));
+    }
+
+    /**
+     * 在本级移动API
+     * @param id id
+     * @param direction direction
+     * @return r
+     */
+    @ApiOperation(value = "4.6 在本级移动API")
+    @ApiOperationSupport(order = 6)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "API ID", example = "1", required = true),
+            @ApiImplicitParam(name = "direction", value = "移动方向", example = "UP", required = true)
+    })
+    @PostMapping("/moveApi")
+    public AjaxEntity moveApi(@NotNull @RequestParam Long id, @NotNull @RequestParam Direction direction) {
+        this.apiRequestService.moveApi(id, direction);
+        return AjaxEntityBuilder.success();
+    }
+
+    /**
+     * 移动API到其他分组下
+     * @param id id
+     * @param apiGroupId apiGroupId
+     * @return r
+     */
+    @ApiOperation(value = "4.7 移动API到其他分组下")
+    @ApiOperationSupport(order = 7)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "API ID", example = "1", required = true),
+            @ApiImplicitParam(name = "apiGroupId", value = "分组ID", example = "1", required = true)
+    })
+    @PostMapping("/moveApiToOtherGroup")
+    public AjaxEntity moveApiToOtherGroup(@NotNull @RequestParam Long id, @NotNull @RequestParam Long apiGroupId) {
+        this.apiRequestService.moveApiToOtherGroup(id, apiGroupId);
+        return AjaxEntityBuilder.success();
+    }
 }

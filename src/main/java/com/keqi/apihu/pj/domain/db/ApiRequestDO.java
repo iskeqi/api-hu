@@ -77,4 +77,9 @@ public class ApiRequestDO {
      * 所属分组ID
      */
     private Long apiGroupId;
+
+    /**
+     * 显示顺序
+     */
+    private Integer orderNum;
 }

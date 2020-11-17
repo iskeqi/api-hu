@@ -105,7 +105,7 @@ public class GlobalExceptionHandler {
 	}
 
 	/**
-	 * 这个异常必须要放在最后，开发阶段直接把异常信心显示在页面上，更方便
+	 * 这个异常必须要放在最后，开发阶段直接把异常信息显示在页面上，更方便
 	 * todo 待补充
 	 */
 	@ExceptionHandler(Throwable.class)

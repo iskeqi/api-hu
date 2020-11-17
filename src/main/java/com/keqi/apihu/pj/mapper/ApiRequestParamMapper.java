@@ -1,6 +1,7 @@
 package com.keqi.apihu.pj.mapper;
 
 import com.keqi.apihu.pj.domain.db.ApiRequestParamDO;
+import com.keqi.apihu.pj.domain.vo.ApiRequestParamVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -33,6 +34,14 @@ public interface ApiRequestParamMapper {
      * @return r
      */
     int deleteByApiRequestId(@Param("apiRequestId")Long apiRequestId);
+
+    /**
+     * 根据 apiRequstId 和 paramType 查询参数列表
+     * @param apiRequestId apiRequestId
+     * @param paramType paramType
+     * @return r
+     */
+    List<ApiRequestParamVO> findAllByApiRequestIdAndParamType(@Param("apiRequestId")Long apiRequestId, @Param("paramType")String paramType);
 
 
 }

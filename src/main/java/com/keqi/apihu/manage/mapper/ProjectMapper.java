@@ -64,5 +64,9 @@ public interface ProjectMapper {
      */
     ProjectDO findOneByProjectName(@Param("projectName")String projectName);
 
-
+    /**
+     * 根据 deleteFlag 查询所有已删除的项目列表
+     * @return r
+     */
+    List<ProjectDO> findAllDisableProjects();
 }

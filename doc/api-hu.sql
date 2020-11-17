@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 13/11/2020 18:27:39
+ Date: 17/11/2020 15:50:40
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `pj_api_environment`  (
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `projectId` bigint UNSIGNED NULL DEFAULT NULL COMMENT '项目ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'API 环境表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'API 环境表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pj_api_environment
@@ -49,7 +49,7 @@ CREATE TABLE `pj_api_environment_param`  (
   `param_type` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数类型（HEADER/QUERY）',
   `api_environment_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '所属环境ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'API环境参数表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'API环境参数表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pj_api_environment_param
@@ -100,13 +100,15 @@ CREATE TABLE `pj_api_request`  (
   `response_json_root_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '响应JSON根类型',
   `projectId` bigint UNSIGNED NULL DEFAULT NULL COMMENT '项目ID',
   `api_group_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT 'API所属分组ID',
+  `order_num` int UNSIGNED NULL DEFAULT NULL COMMENT '显示顺序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'API 请求表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'API 请求表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pj_api_request
 -- ----------------------------
-INSERT INTO `pj_api_request` VALUES (10, '新增用户1', '/user/create', 'POST', 'application/json', 'application/json', '{}', '{}', '增加用户1', 'object', 'object', 2, 43);
+INSERT INTO `pj_api_request` VALUES (10, '新增用户1', '/user/create', 'POST', 'application/json', 'application/json', '{}', '{}', '增加用户1', 'object', 'object', 2, 43, 2);
+INSERT INTO `pj_api_request` VALUES (13, '新增e124用户', '/user/create', 'POST', 'application/json', 'application/json', '{}', '{}', '增加4213用户', 'object', 'object', 2, 45, 1);
 
 -- ----------------------------
 -- Table structure for pj_api_request_param
@@ -124,7 +126,7 @@ CREATE TABLE `pj_api_request_param`  (
   `parent_id` bigint UNSIGNED NULL DEFAULT NULL COMMENT '父级参数ID(顶级参数的 parentId 置为0)',
   `order_num` bigint NULL DEFAULT NULL COMMENT '参数排序字段',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'API 请求的请求参数和相应参数' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'API 请求的请求参数和相应参数' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pj_api_request_param
@@ -133,6 +135,10 @@ INSERT INTO `pj_api_request_param` VALUES (21, 'username', '用户名', 'Y', 'st
 INSERT INTO `pj_api_request_param` VALUES (22, 'username', '用户名', 'Y', 'string', 'xiaoming', 'REQUEST', 10, 21, 1);
 INSERT INTO `pj_api_request_param` VALUES (23, 'username', '用户名', 'Y', 'string', 'xiaoming', 'RESPONSE', 10, 0, 1);
 INSERT INTO `pj_api_request_param` VALUES (24, 'username', '用户名', 'Y', 'string', 'xiaoming', 'RESPONSE', 10, 23, 1);
+INSERT INTO `pj_api_request_param` VALUES (34, 'username', '用户名', 'Y', 'string', 'xiaoming', 'REQUEST', 13, 0, 1);
+INSERT INTO `pj_api_request_param` VALUES (35, 'username', '用户名', 'Y', 'string', 'xiaoming', 'REQUEST', 13, 34, 1);
+INSERT INTO `pj_api_request_param` VALUES (36, 'username', '用户名', 'Y', 'string', 'xiaoming', 'RESPONSE', 13, 0, 1);
+INSERT INTO `pj_api_request_param` VALUES (37, 'username', '用户名', 'Y', 'string', 'xiaoming', 'RESPONSE', 13, 36, 1);
 
 -- ----------------------------
 -- Table structure for pj_datasource
