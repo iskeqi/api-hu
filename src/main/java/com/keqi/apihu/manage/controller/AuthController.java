@@ -12,10 +12,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @Api(tags = "1. 登录相关接口管理")
@@ -52,10 +49,9 @@ public class AuthController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "oldPassword", value = "旧密码", example = "123456", required = true),
             @ApiImplicitParam(name = "newPassword", value = "新密码", example = "123456", required = true)
-    }
-    )
+    })
     @PostMapping("/updatePassword")
-    public AjaxEntity updatePassword(String oldPassword, String newPassword) {
+    public AjaxEntity updatePassword(@RequestParam String oldPassword, @RequestParam String newPassword) {
         this.accountService.updatePassword(oldPassword, newPassword);
         return AjaxEntityBuilder.success();
     }

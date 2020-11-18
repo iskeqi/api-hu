@@ -10,7 +10,7 @@ import java.util.Objects;
 @Component
 public class Auth {
 
-    private static ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<Map<String, Object>> threadLocal = new ThreadLocal<>();
 
     /**
      * 获取当前线程操作用户登录名

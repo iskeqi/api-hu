@@ -1,6 +1,5 @@
 package com.keqi.apihu.core.config;
 
-import com.github.xiaoymin.knife4j.spring.extension.OpenApiExtensionResolver;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,8 +15,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @EnableSwagger2WebMvc
 @AllArgsConstructor
 public class Knife4jConfiguration {
-
-    private final OpenApiExtensionResolver openApiExtensionResolver;
 
     @Bean
     public Docket sys() {
@@ -47,7 +44,7 @@ public class Knife4jConfiguration {
         return new ApiInfoBuilder()
                 .title("API-HU")
                 .description("API-HU 接口文档管理工具")
-                .termsOfServiceUrl("http://localhost:9090/api-hu")
+                .termsOfServiceUrl("http://localhost:9091/api-hu")
                 .version("1.0")
                 .build();
     }
