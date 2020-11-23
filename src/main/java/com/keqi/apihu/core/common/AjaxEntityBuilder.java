@@ -14,16 +14,16 @@ import java.util.List;
 public class AjaxEntityBuilder {
 
     /*OK(200, "OK")*/
-    private static final int successCode = HttpStatus.OK.value();
-    private static final String successMsg = HttpStatus.OK.getReasonPhrase();
+    public static final int successCode = HttpStatus.OK.value();
+    public static final String successMsg = HttpStatus.OK.getReasonPhrase();
 
     /*INTERNAL_SERVER_ERROR(500, "Internal Server Error")*/
-    private static final int failureCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
-    private static final String failureMsg = HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase();
+    public static final int failureCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
+    public static final String failureMsg = HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase();
 
     /*UNAUTHORIZED(401, "Unauthorized")*/
-    private static final int noAuthCode = HttpStatus.UNAUTHORIZED.value();
-    private static final String noAuthMsg = HttpStatus.UNAUTHORIZED.getReasonPhrase();
+    public static final int noAuthCode = HttpStatus.UNAUTHORIZED.value();
+    public static final String noAuthMsg = HttpStatus.UNAUTHORIZED.getReasonPhrase();
 
 
     /**
