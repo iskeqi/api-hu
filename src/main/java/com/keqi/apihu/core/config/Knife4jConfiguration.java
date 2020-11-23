@@ -71,17 +71,17 @@ public class Knife4jConfiguration {
         list.add(new ResponseMessageBuilder()
                 .code(AjaxEntityBuilder.successCode)
                 .message(AjaxEntityBuilder.successMsg)
-                .responseModel(new ModelRef("Json")).build());
+                .responseModel(new ModelRef("JSON")).build());
 
         list.add(new ResponseMessageBuilder()
                 .code(AjaxEntityBuilder.failureCode)
                 .message(AjaxEntityBuilder.failureMsg)
-                .responseModel(new ModelRef("Json")).build());
+                .responseModel(new ModelRef("JSON")).build());
 
         list.add(new ResponseMessageBuilder()
                 .code(AjaxEntityBuilder.noAuthCode)
                 .message(AjaxEntityBuilder.noAuthMsg)
-                .responseModel(new ModelRef("Json")).build());
+                .responseModel(new ModelRef("JSON")).build());
 
         return list;
     }
