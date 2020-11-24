@@ -11,6 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * 确定是 {} 为根节点的 JSON 对象
+ */
 @Alias("JSONObjectHandler")
 public class JSONObjectHandler extends BaseTypeHandler<JSONObject> {
 
