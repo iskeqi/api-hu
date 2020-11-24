@@ -55,5 +55,12 @@ public interface DictItemMapper {
      */
     DictItemDO findOneByTypeCodeAndItemCode(@Param("typeCode") String typeCode, @Param("itemCode") String itemCode);
 
+    /**
+     * 查询字典表中所有的 typeCode 列表
+     *
+     * @return r
+     */
+    List<String> listTypeCode();
+
 
 }

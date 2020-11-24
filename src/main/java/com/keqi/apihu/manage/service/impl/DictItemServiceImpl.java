@@ -9,6 +9,7 @@ import com.keqi.apihu.manage.domain.param.CreateDictItemParam;
 import com.keqi.apihu.manage.domain.param.UpdateDictItemParam;
 import com.keqi.apihu.manage.domain.vo.DictItemVO;
 import com.keqi.apihu.manage.mapper.DictItemMapper;
+import com.keqi.apihu.manage.util.DictUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ import java.util.Objects;
 public class DictItemServiceImpl implements DictItemService {
 
     private final DictItemMapper dictItemMapper;
+    private final DictUtil dictUtil;
 
     /**
      * 删除字典项（物理删除）
@@ -32,6 +34,9 @@ public class DictItemServiceImpl implements DictItemService {
     @Transactional
     public void deleteByPrimaryKey(Long id) {
         dictItemMapper.deleteByPrimaryKey(id);
+
+        // 重新加载字典缓存
+        this.dictUtil.run();
     }
 
     /**
@@ -44,12 +49,15 @@ public class DictItemServiceImpl implements DictItemService {
     public void updateByPrimaryKey(UpdateDictItemParam updateDictItemParam) {
         DictItemDO temp = this.dictItemMapper.findOneByTypeCodeAndItemCode(updateDictItemParam.getTypeCode(),
                 updateDictItemParam.getItemCode());
-        if (temp != null && Objects.equals(temp.getId(), updateDictItemParam.getId())) {
+        if (temp != null && !Objects.equals(temp.getId(), updateDictItemParam.getId())) {
             throw new BusinessException("存在同名 itemCode ");
         }
         DictItemDO dictItemDO = new DictItemDO();
         BeanUtil.copyProperties(updateDictItemParam, dictItemDO);
         this.dictItemMapper.updateByPrimaryKey(dictItemDO);
+
+        // 重新加载字典缓存
+        this.dictUtil.run();
     }
 
     /**
@@ -69,6 +77,9 @@ public class DictItemServiceImpl implements DictItemService {
         DictItemDO dictItemDO = new DictItemDO();
         BeanUtil.copyProperties(createDictItemParam, dictItemDO);
         this.dictItemMapper.insert(dictItemDO);
+
+        // 重新加载字典缓存
+        this.dictUtil.run();
     }
 
     /**

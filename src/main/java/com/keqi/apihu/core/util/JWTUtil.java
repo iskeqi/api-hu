@@ -38,7 +38,7 @@ public class JWTUtil {
      * @return r
      */
     public static LoginUserBO resolveToken(String accessToken) {
-        Claims body = null;
+        Claims body;
         try {
             body = Jwts.parser().setSigningKey(secret)
                     .parseClaimsJws(accessToken)
