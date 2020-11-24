@@ -1,5 +1,5 @@
 server:
-  port: 9091
+  port: 9090
   servlet:
     context-path: /api-hu
 
@@ -14,6 +14,8 @@ spring:
 mybatis:
   config-location:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 只有这样 typeHandler 中的类使用了 @Alias 注解才会生效
+    type-aliases-package: com.keqi.apihu.core.typeHandler
 
 # log configuration
 logging:
