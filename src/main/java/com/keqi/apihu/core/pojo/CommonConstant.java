@@ -9,10 +9,6 @@ public abstract class CommonConstant {
 
     public static final String LOGIN_USER = "loginUser";
 
-    public static final String CREATE = "CREATE";
-
-    public static final String UPDATE = "UPDATE";
-
     public static final String DEFAULT_PASSWORD = "123456";
 
     public static final String SUPER_ADMIN = "admin";
