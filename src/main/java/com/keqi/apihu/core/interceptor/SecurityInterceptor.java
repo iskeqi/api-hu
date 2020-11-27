@@ -26,18 +26,6 @@ public class SecurityInterceptor implements HandlerInterceptor {
         String contextPath = request.getContextPath();
 
         String projectIdStr = request.getHeader(CommonConstant.PROJECT_ID);
-        String accessToken = request.getHeader(CommonConstant.ACCESS_TOKEN);
-
-        // 通过 header 中的 accessToken 属性来获取当前登录用户信息
-        LoginUserBO loginUserBO = JWTUtil.resolveToken(accessToken);
-        if (StringUtils.isEmpty(accessToken) || loginUserBO == null) {
-            throw new BusinessException("当前操作用户未登录");
-        }
-        loginUserBO.setProjectId(StringUtils.isEmpty(projectIdStr) ? null : Long.valueOf(projectIdStr));
-        // 设置当前操作用户信息到当前线程对象中
-        Auth.setLoginUserBO(loginUserBO);
-
-
         if (requestURI.startsWith("/pj/") || requestURI.startsWith(contextPath + "/pj/")) {
             // 设置当前请求操作的项目ID（如果 URI 是以 /contextPath/pj/ 或者是以 /pj/ 开头的，那么必须要包含 projectId）
             if (StringUtils.isEmpty(projectIdStr)) {
@@ -45,7 +33,17 @@ public class SecurityInterceptor implements HandlerInterceptor {
             }
         }
 
-        return true;
+        // 通过 header 中的 accessToken 属性来获取当前登录用户信息
+        String accessToken = request.getHeader(CommonConstant.ACCESS_TOKEN);
+        LoginUserBO loginUserBO = JWTUtil.resolveToken(accessToken);
+        if (loginUserBO != null) {
+            loginUserBO.setProjectId(StringUtils.isEmpty(projectIdStr) ? null : Long.valueOf(projectIdStr));
+            // 设置当前操作用户信息到当前线程对象中
+            Auth.setLoginUserBO(loginUserBO);
+            return true;
+        } else {
+            throw new BusinessException("当前操作用户未登录");
+        }
     }
 
 }
