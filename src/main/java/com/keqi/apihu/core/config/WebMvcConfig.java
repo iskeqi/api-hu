@@ -29,18 +29,19 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 注册一个安全拦截器，拦截所有请求（登录接口及 knife4j 的UI界面接口除外）
-        String[] excludePaths = new String[]{
-                "/sys/auth/login",
+        String[] knife4jPaths = new String[]{
                 "/doc.html",
-                "/swagger-resources",
-                "/v2/api-docs",
-                "/swagger-ui.html",
-                "/swagger-resources/configuration/ui",
-                "/swagger-resources/configuration/security",
+                "/webjars/**",
+                "/swagger-resources/**",
+                "/v2/**",
+                "/favicon.ico",
+                "/error"
         };
 
         registry.addInterceptor(securityInterceptor).addPathPatterns("/**")
-                .excludePathPatterns(excludePaths);
+                .excludePathPatterns(knife4jPaths)
+                .excludePathPatterns("")
+                .excludePathPatterns("/sys/auth/login");
     }
 
     /**
