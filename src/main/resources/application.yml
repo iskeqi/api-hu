@@ -28,11 +28,4 @@ logging:
 # 开启 knife4j 增强功能
 knife4j:
   enable: true
-  # 开启Swagger的Basic认证功能,默认是false
-  basic:
-    enable: false
-    # Basic认证用户名
-    username: admin
-    # Basic认证密码
-    password: 123456
 

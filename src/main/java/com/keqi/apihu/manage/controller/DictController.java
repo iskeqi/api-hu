@@ -1,5 +1,6 @@
 package com.keqi.apihu.manage.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.keqi.apihu.core.common.AjaxEntity;
@@ -9,6 +10,7 @@ import com.keqi.apihu.manage.service.DictItemService;
 import com.keqi.apihu.manage.domain.param.CreateDictItemParam;
 import com.keqi.apihu.manage.domain.param.UpdateDictItemParam;
 import com.keqi.apihu.manage.domain.vo.DictItemVO;
+import com.keqi.apihu.manage.util.DictUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -81,5 +83,12 @@ public class DictController {
     @PostMapping("/page")
     public AjaxEntity<AjaxPageEntity<DictItemVO>> page(@Validated @RequestParam String typeCode) {
         return AjaxEntityBuilder.successList(this.dictItemService.pageDictItem(typeCode));
+    }
+
+    @ApiOperation(value = "4.5 查询系统内全部数据字典")
+    @ApiOperationSupport(order = 5)
+    @GetMapping("/allDictionaryData")
+    public String allDictionaryData() {
+        return JSON.toJSONString(DictUtil.getDictMap());
     }
 }

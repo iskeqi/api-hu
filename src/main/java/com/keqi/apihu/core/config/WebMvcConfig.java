@@ -36,7 +36,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 "/v2/api-docs",
                 "/swagger-ui.html",
                 "/swagger-resources/configuration/ui",
-                "/swagger-resources/configuration/security"
+                "/swagger-resources/configuration/security",
         };
 
         registry.addInterceptor(securityInterceptor).addPathPatterns("/**")

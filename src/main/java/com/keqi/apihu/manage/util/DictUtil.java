@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * 程序启动后读取 sys_dict_item 表中的所数据，存储在内存中
@@ -69,4 +72,12 @@ public class DictUtil implements CommandLineRunner {
         return dictItemVO == null ? null : dictItemVO.getItemValue();
     }
 
+    /**
+     * 查询系统内所有字典数据
+     *
+     * @return r
+     */
+    public static Map<String, List<DictItemVO>> getDictMap() {
+        return dictMap;
+    }
 }
