@@ -158,8 +158,8 @@
         <if test="searchValue != null and searchValue != ''">
             and name like concat('%',replace(replace(#{searchValue},'%','/%'),'_','/_'),'%') escape '/'
         </if>
-        <if test="pageSize >= 0">
-            limit #{offset}, #{pageSize}
+        <if test="size >= 0">
+            limit #{offset}, #{size}
         </if>
     </select>
 

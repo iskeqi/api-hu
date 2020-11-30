@@ -302,8 +302,8 @@
             and api_group_id = #{apiGroupId,jdbcType=BIGINT}
         </if>
         order by order_num
-        <if test="pageSize > 0">
-            limit #{offset}, #{pageSize}
+        <if test="size > 0">
+            limit #{offset}, #{size}
         </if>
     </select>
 

@@ -157,7 +157,7 @@ public class DatasourceServiceImpl implements DatasourceService {
     @Override
     public AjaxPageEntity<PageDatasourceVO> listDataSource(QueryDatasourceParam queryDatasourceParam) {
         queryDatasourceParam.setProjectId(Auth.getProjectId());
-        queryDatasourceParam.setPageSize(-1);
+        queryDatasourceParam.setSize(-1);
         List<PageDatasourceVO> pageDatasourceVOList = this.datasourceMapper.pageDataSource(queryDatasourceParam);
 
         AjaxPageEntity ajaxPageEntity = new AjaxPageEntity();

@@ -16,13 +16,13 @@ public class QueryBaseParam {
      * 当前页数（最小为1）
      */
     @ApiModelProperty(value = "当前页数", example = "1", required = true)
-    protected int pageNum = 1;
+    protected int page = 1;
 
     /**
      * 每页大小（最大为50）
      */
     @ApiModelProperty(value = "每页大小", example = "10", required = true)
-    protected int pageSize = 10;
+    protected int size = 10;
 
     /**
      * 搜索字段名称
@@ -150,30 +150,30 @@ public class QueryBaseParam {
     /**
      * 计算偏移量(使用方式：
      *
-     * <if test="pageSize >= 0">
-     * LIMIT #{offset}, #{pageSize})
+     * <if test="size >= 0">
+     * LIMIT #{offset}, #{size})
      * </if>
      *
      * @return 偏移量
      */
     public int getOffset() {
         // pageSize <= 0 时，即查询所有记录
-        return this.getPageSize() * (this.getPageNum() - 1);
+        return this.getSize() * (this.getPage() - 1);
     }
 
-    public int getPageNum() {
-        return pageNum <= 0 ? 1 : pageNum;
+    public int getPage() {
+        return page <= 0 ? 1 : page;
     }
 
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
+    public void setPage(int page) {
+        this.page = page;
     }
 
-    public int getPageSize() {
-        return Math.min(pageSize, 50);
+    public int getSize() {
+        return Math.min(size, 50);
     }
 
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+    public void setSize(int size) {
+        this.size = size;
     }
 }

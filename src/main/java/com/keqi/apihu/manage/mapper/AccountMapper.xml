@@ -137,8 +137,8 @@
             </if>
         </where>
         order by update_time desc
-        <if test="pageSize >= 0">
-            limit #{offset}, #{pageSize}
+        <if test="size >= 0">
+            limit #{offset}, #{size}
         </if>
     </select>
 
