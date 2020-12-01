@@ -41,7 +41,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         registry.addInterceptor(securityInterceptor).addPathPatterns("/**")
                 .excludePathPatterns(knife4jPaths)
-                .excludePathPatterns("")
                 .excludePathPatterns("/sys/auth/login");
     }
 

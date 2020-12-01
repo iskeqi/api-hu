@@ -25,8 +25,6 @@ public class SecurityInterceptor implements HandlerInterceptor {
         String requestURI = request.getRequestURI();
         String contextPath = request.getContextPath();
 
-        // 只对自己编写的接口拦截，其他全部放行，主要是因为 knife4j 的放行路径仍有问题（生产环境需修改此段逻辑）
-
         String projectIdStr = request.getHeader(CommonConstant.PROJECT_ID);
         if (requestURI.startsWith(contextPath + "/pj/")) {
             // 设置当前请求操作的项目ID（如果 URI 是以 /contextPath/pj/ 开头的，那么必须要包含 projectId）
