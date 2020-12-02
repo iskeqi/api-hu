@@ -8,18 +8,18 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
- * 基础查询实体类（仅用于规范命名，不要求必须继承，可以拷贝需要的属性至自己的Param实体类中）
+ * 基础查询实体类（仅用于统一公共字段命名，不要求必须继承，可以拷贝需要的属性至自己的Param实体类中，且推荐这么做）
  */
 public class QueryBaseParam {
 
     /**
-     * 当前页数（最小为1）
+     * 当前页数（最小为1）（命名和 MyBatisPlus 保持一致）
      */
     @ApiModelProperty(value = "当前页数", example = "1", required = true)
-    protected int page = 1;
+    protected int current = 1;
 
     /**
-     * 每页大小（最大为50）
+     * 每页大小（最大为50）（命名和 MyBatisPlus 保持一致）
      */
     @ApiModelProperty(value = "每页大小", example = "10", required = true)
     protected int size = 10;
@@ -158,15 +158,15 @@ public class QueryBaseParam {
      */
     public int getOffset() {
         // pageSize <= 0 时，即查询所有记录
-        return this.getSize() * (this.getPage() - 1);
+        return this.getSize() * (this.getCurrent() - 1);
     }
 
-    public int getPage() {
-        return page <= 0 ? 1 : page;
+    public int getCurrent() {
+        return current <= 0 ? 1 : current;
     }
 
-    public void setPage(int page) {
-        this.page = page;
+    public void setCurrent(int current) {
+        this.current = current;
     }
 
     public int getSize() {
